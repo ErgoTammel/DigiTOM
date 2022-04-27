@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-04-27 07:42:20.4
+-- Last modification date: 2022-04-27 12:59:58.885
 
 -- tables
 -- Table: company
@@ -7,7 +7,6 @@ CREATE TABLE company (
     id serial  NOT NULL,
     name varchar(255)  NOT NULL,
     reg_number int  NOT NULL,
-    "user" int  NOT NULL,
     CONSTRAINT company_pk PRIMARY KEY (id)
 );
 
