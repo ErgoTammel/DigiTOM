@@ -1,9 +1,9 @@
-package com.example.digitom.domain.role;
+package com.example.digitom.service.login;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/roll")
-public class RoleController {
+@RequestMapping("/login")
+public class LoginController {
 }
