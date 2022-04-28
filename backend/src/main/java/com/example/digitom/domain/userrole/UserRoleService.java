@@ -5,6 +5,7 @@ import com.example.digitom.domain.role.RoleDto;
 import com.example.digitom.domain.role.RoleRepository;
 import com.example.digitom.domain.user.UserDto;
 import com.example.digitom.domain.user.UserMapper;
+import com.example.digitom.service.registration.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,11 +22,11 @@ public class UserRoleService {
     @Resource
     private UserRoleRepository userRoleRepository;
 
-    public void addNewUserRole(UserDto userDto, RoleDto roleDto) {
-        Role foundRole = roleRepository.findByName(roleDto.getName());
+    public void addNewUserRole(RegistrationRequest registrationRequest) {
+        Role foundRole = roleRepository.findByRoleName(registrationRequest.getRoleName());
         UserRole userRole = new UserRole();
         userRole.setRole(foundRole);
-        userRole.setUser(userMapper.toEntity(userDto));
+        userRole.setUser(userMapper.registrationRequestToUser(registrationRequest));
         userRoleRepository.save(userRole);
     }
 }

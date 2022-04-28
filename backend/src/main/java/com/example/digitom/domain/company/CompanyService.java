@@ -1,5 +1,6 @@
 package com.example.digitom.domain.company;
 
+import com.example.digitom.service.registration.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,9 +13,9 @@ public class CompanyService {
     @Resource
     private CompanyRepository companyRepository;
 
-    public void addNewCompany(CompanyDto companyDto) {
+    public void addNewCompany(RegistrationRequest registrationRequest) {
 
-        Company company = companyMapper.toEntity((companyDto));
+        Company company = companyMapper.registrationRequestToCompany(registrationRequest);
         companyRepository.save(company);
 
     }

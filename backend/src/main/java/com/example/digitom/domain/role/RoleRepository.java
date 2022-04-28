@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Query("select r from Role r where upper(r.name) = upper(?1)")
-    Role findByName(String name);
+    Role findByRoleName(String name);
 
 
 }

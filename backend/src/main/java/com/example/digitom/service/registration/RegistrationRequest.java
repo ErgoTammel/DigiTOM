@@ -9,10 +9,14 @@ import lombok.Data;
 @Data
 public class RegistrationRequest {
 
-    private ContactDto contactDto;
-    private CompanyDto companyDto;
-    private UserDto userDto;
-    private RoleDto roleDto;
-
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String companyName;
+    private String companyNumber;
+    private String phoneNumber;
+    private String email;
+    private String password;
+    private String roleName;
 
 }

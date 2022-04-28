@@ -1,5 +1,6 @@
 package com.example.digitom.domain.contact;
 
+import com.example.digitom.service.registration.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,11 +13,9 @@ public class ContactService {
     @Resource
     private ContactRepository contactRepository;
 
-    public void addNewContact(ContactDto contactDto) {
-
-        Contact contact = contactMapper.toEntity(contactDto);
+    public void addNewContact(RegistrationRequest registrationRequest) {
+        Contact contact = contactMapper.registrationRequestToContact(registrationRequest);
         contactRepository.save(contact);
-
     }
 
 }

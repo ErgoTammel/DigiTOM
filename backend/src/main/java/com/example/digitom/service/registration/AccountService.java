@@ -24,16 +24,16 @@ public class AccountService {
 
 
     public void addNewAccount(RegistrationRequest registrationRequest) {
+        contactService.addNewContact(registrationRequest);
+        userService.addNewUser(registrationRequest);
 
-        contactService.addNewContact(registrationRequest.getContactDto());
+        companyService.addNewCompany(registrationRequest);
 
-        companyService.addNewCompany(registrationRequest.getCompanyDto());
 
-        userService.addNewUser(registrationRequest.getUserDto());
 
-        userRoleService.addNewUserRole(registrationRequest.getUserDto(), registrationRequest.getRoleDto());
+        userRoleService.addNewUserRole(registrationRequest);
 
-        validationService.emailAlreadyExists(registrationRequest.getUserDto().getEmail());
+        validationService.emailAlreadyExists(registrationRequest.getEmail());
 
     }
 }

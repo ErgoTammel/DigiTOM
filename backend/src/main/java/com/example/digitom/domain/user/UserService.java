@@ -1,5 +1,6 @@
 package com.example.digitom.domain.user;
 
+import com.example.digitom.service.registration.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,9 +13,9 @@ public class UserService {
     @Resource
     private UserRepository userRepository;
 
-    public void addNewUser(UserDto userDto) {
+    public void addNewUser(RegistrationRequest registrationRequest) {
 
-        User user = userMapper.toEntity(userDto);
+        User user = userMapper.registrationRequestToUser(registrationRequest);
         userRepository.save(user);
     }
 
