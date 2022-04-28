@@ -13,7 +13,7 @@ public class RegistrationRequest {
     private CompanyDto companyDto;
     private UserDto userDto;
     private RoleDto roleDto;
-
+// comment
 
 
 }
