@@ -1,4 +1,4 @@
-package com.example.digitom.service.registration;
+package com.example.digitom.service.account;
 
 import lombok.Data;
 

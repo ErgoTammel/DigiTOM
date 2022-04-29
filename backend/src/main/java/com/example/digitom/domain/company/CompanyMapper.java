@@ -1,7 +1,6 @@
 package com.example.digitom.domain.company;
 
-import com.example.digitom.domain.contact.Contact;
-import com.example.digitom.service.registration.RegistrationRequest;
+import com.example.digitom.service.account.RegistrationRequest;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")

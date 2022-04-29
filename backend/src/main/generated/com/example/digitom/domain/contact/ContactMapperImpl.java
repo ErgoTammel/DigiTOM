@@ -1,7 +1,7 @@
 package com.example.digitom.domain.contact;
 
 import com.example.digitom.domain.user.User;
-import com.example.digitom.service.registration.RegistrationRequest;
+import com.example.digitom.service.account.RegistrationRequest;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 

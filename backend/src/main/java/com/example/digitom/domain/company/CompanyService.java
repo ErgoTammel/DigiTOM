@@ -1,6 +1,6 @@
 package com.example.digitom.domain.company;
 
-import com.example.digitom.service.registration.RegistrationRequest;
+import com.example.digitom.service.account.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

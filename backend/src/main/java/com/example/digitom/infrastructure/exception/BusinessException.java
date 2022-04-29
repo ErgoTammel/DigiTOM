@@ -12,4 +12,5 @@ public class BusinessException extends RuntimeException {
         this.title = title;
         this.detail = detail;
     }
+
 }
