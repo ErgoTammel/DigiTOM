@@ -1,6 +1,7 @@
 package com.example.digitom.validation;
 
 
+import com.example.digitom.domain.user.User;
 import com.example.digitom.domain.user.UserRepository;
 import com.example.digitom.domain.user.UserService;
 import com.example.digitom.infrastructure.exception.BusinessException;
@@ -19,5 +20,10 @@ public class ValidationService {
         if (exists) {
             throw new BusinessException(EMAIL_ALREADY_TAKEN, "Isikukood " + email + " on juba kasutusel");
         }
+    }
+
+    public void userExist (String email){
+        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
+
     }
 }
