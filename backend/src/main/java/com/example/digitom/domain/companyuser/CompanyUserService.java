@@ -5,6 +5,7 @@ import com.example.digitom.domain.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CompanyUserService {
@@ -18,5 +19,9 @@ public class CompanyUserService {
         companyUser.setUser(user);
         companyUserRepository.save(companyUser);
 
+    }
+
+    public List<CompanyUser> getAllUserCompanies(Integer userId) {
+        return companyUserRepository.findByUserId(userId);
     }
 }
