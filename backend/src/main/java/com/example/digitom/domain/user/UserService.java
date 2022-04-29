@@ -13,10 +13,14 @@ public class UserService {
     @Resource
     private UserRepository userRepository;
 
-    public void addNewUser(RegistrationRequest registrationRequest) {
+    public User addNewUser(RegistrationRequest registrationRequest) {
 
         User user = userMapper.registrationRequestToUser(registrationRequest);
         userRepository.save(user);
+        return user;
     }
 
+    public Boolean existsByEmail(String email) {
+       return userRepository.existsByEmail(email);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.digitom.domain.userrole;
 import com.example.digitom.domain.role.Role;
 import com.example.digitom.domain.role.RoleDto;
 import com.example.digitom.domain.role.RoleRepository;
+import com.example.digitom.domain.user.User;
 import com.example.digitom.domain.user.UserDto;
 import com.example.digitom.domain.user.UserMapper;
 import com.example.digitom.service.registration.RegistrationRequest;
@@ -17,16 +18,15 @@ public class UserRoleService {
     private RoleRepository roleRepository;
 
     @Resource
-    private UserMapper userMapper;
-
-    @Resource
     private UserRoleRepository userRoleRepository;
 
-    public void addNewUserRole(RegistrationRequest registrationRequest) {
+    public void addNewUserRole(RegistrationRequest registrationRequest, User user) {
         Role foundRole = roleRepository.findByRoleName(registrationRequest.getRoleName());
         UserRole userRole = new UserRole();
         userRole.setRole(foundRole);
-        userRole.setUser(userMapper.registrationRequestToUser(registrationRequest));
+        userRole.setUser(user);
+
+
         userRoleRepository.save(userRole);
     }
 }

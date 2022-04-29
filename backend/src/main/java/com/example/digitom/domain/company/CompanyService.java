@@ -13,10 +13,10 @@ public class CompanyService {
     @Resource
     private CompanyRepository companyRepository;
 
-    public void addNewCompany(RegistrationRequest registrationRequest) {
+    public Company addNewCompany(RegistrationRequest registrationRequest) {
 
         Company company = companyMapper.registrationRequestToCompany(registrationRequest);
         companyRepository.save(company);
-
+        return company;
     }
 }

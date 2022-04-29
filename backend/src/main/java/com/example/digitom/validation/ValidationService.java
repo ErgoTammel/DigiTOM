@@ -12,15 +12,11 @@ import java.util.Optional;
 @Service
 public class ValidationService {
 
-    @Resource
-    private UserRepository userRepository;
 
     public static final String EMAIL_ALREADY_TAKEN = "Email on kasutusel";
 
-    public void emailAlreadyExists(String email) {
-        boolean accountExists = userRepository.existsByEmail(email);
-
-        if (accountExists) {
+    public void emailAlreadyExists(String email, Boolean exists) {
+        if (exists) {
             throw new BusinessException(EMAIL_ALREADY_TAKEN, "Isikukood " + email + " on juba kasutusel");
         }
     }

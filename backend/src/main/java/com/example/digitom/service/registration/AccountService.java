@@ -1,7 +1,11 @@
 package com.example.digitom.service.registration;
 
+import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyService;
+import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.contact.ContactService;
+import com.example.digitom.domain.user.User;
+import com.example.digitom.domain.user.UserRepository;
 import com.example.digitom.domain.user.UserService;
 import com.example.digitom.domain.userrole.UserRoleService;
 import com.example.digitom.validation.ValidationService;
@@ -21,19 +25,28 @@ public class AccountService {
     private UserRoleService userRoleService;
     @Resource
     private ValidationService validationService;
+    @Resource
+    private CompanyUserService companyUserService;
 
 
     public void addNewAccount(RegistrationRequest registrationRequest) {
-        contactService.addNewContact(registrationRequest);
-        userService.addNewUser(registrationRequest);
 
-        companyService.addNewCompany(registrationRequest);
+        registrationRequest.setEmail(registrationRequest.getEmail().toLowerCase());
 
+        Boolean exists = userService.existsByEmail(registrationRequest.getEmail());
 
+        validationService.emailAlreadyExists(registrationRequest.getEmail(), exists);
 
-        userRoleService.addNewUserRole(registrationRequest);
+        User user = userService.addNewUser(registrationRequest);
 
-        validationService.emailAlreadyExists(registrationRequest.getEmail());
+        contactService.addNewContact(registrationRequest, user);
+
+        userRoleService.addNewUserRole(registrationRequest, user);
+
+        Company company = companyService.addNewCompany(registrationRequest);
+
+        companyUserService.addNewCompanyUser(company, user);
+
 
     }
 }

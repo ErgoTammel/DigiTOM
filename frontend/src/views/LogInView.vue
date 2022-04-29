@@ -33,52 +33,52 @@
         <div class="row">
           <label for="eesnimi">Eesnimi:</label>
           <input type="text" class="form-control" placeholder="Eesnimi" id="eesnimi"
-                 v-model="registerRequest.contactDto.firstName">
+                 v-model="registerRequest.firstName">
         </div>
         <div class="row">
           <label for="keskmineNimi"> Keskmine nimi:</label>
           <input type="text" class="form-control" placeholder="Keskmine nimi" id="keskmineNimi"
-                 v-model="registerRequest.contactDto.middleName">
+                 v-model="registerRequest.middleName">
         </div>
         <div class="row">
           <label for="perekonnanimi">Perekonnanimi:</label>
           <input type="text" class="form-control" placeholder="Perekonnanimi" id="perekonnanimi"
-                 v-model="registerRequest.contactDto.lastName">
+                 v-model="registerRequest.lastName">
         </div>
         <div class="row">
           <label for="ettevõtteNimi">Ettevõtte nimi:</label>
           <input type="text" class="form-control" placeholder="Ettevõtte nimi" id="ettevõtteNimi"
-                 v-model="registerRequest.companyDto.name">
+                 v-model="registerRequest.companyName">
         </div>
         <div class="row">
           <label for="ettevõtteReg">Ettevõtte registreerimisnumber:</label>
           <input type="text" class="form-control" placeholder="Ettevõtte registreerimisnumber" id="ettevõtteReg"
-                 v-model="registerRequest.companyDto.regNumber">
+                 v-model="registerRequest.companyNumber">
         </div>
         <div class="row">
           <label for="telnr">Telefoninumber:</label>
           <input type="text" class="form-control" placeholder="Telefoninumber" id="telnr"
-                 v-model="registerRequest.contactDto.phoneNumber">
+                 v-model="registerRequest.phoneNumber">
         </div>
         <div class="row">
           <label for="emailReg">Email:</label>
           <input type="text" class="form-control" placeholder="Email" id="emailReg"
-                 v-model="registerRequest.userDto.email">
+                 v-model="registerRequest.email">
         </div>
         <div class="row">
           <label for="passwordReg">Password:</label>
           <input type="password" class="form-control" placeholder="Password" id="passwordReg"
-                 v-model="registerRequest.userDto.password">
+                 v-model="registerRequest.password">
         </div>
         <div class="row" id="formRadio">
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input"
-                   value="User" v-model="registerRequest.roleDto.name" checked>
+                   value="User" v-model="registerRequest.roleName" checked>
             <label class="custom-control-label" for="customRadioInline1">Tavakasutaja</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input"
-                   value="Inspector" v-model="registerRequest.roleDto.name">
+                   value="Inspector" v-model="registerRequest.roleName">
             <label class="custom-control-label" for="customRadioInline2">Inspektor</label>
           </div>
         </div>
@@ -93,8 +93,6 @@
           </button>
         </div>
       </div>
-
-
     </div>
     </body>
     <footer>
@@ -108,12 +106,7 @@ export default {
   data: function () {
     return {
       loginScreen: true,
-      registerRequest: {
-        companyDto: {},
-        contactDto: {},
-        userDto: {},
-        roleDto: {}
-      }
+      registerRequest: {}
     }
   },
   methods: {
@@ -126,7 +119,7 @@ export default {
       }
     },
     addNewAccount: function () {
-      this.$http.post("/account/register",this.registerRequest)
+      this.$http.post("/registration/add",this.registerRequest)
           .then(response => {
             console.log(response.status);
             this.toggleLogInWindow();
