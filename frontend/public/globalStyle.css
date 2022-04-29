@@ -1,0 +1,29 @@
+#back {
+    background-image: url("background.jpg");
+    height: 150vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    height: 15vh;
+    width: 100%;
+    background-color: #44b0ff;
+}
+
+header h1 {
+    font-family: 'Akshar', sans-serif;
+    color: white;
+    font-size: 7vh;
+    width: auto;
+    text-align: left;
+    padding-left: 3vw;
+    padding-top: 3.5vh;
+    letter-spacing: 3.5px;
+}
+footer {
+    height: 10vh;
+    width: 100%;
+    background-color: #44b0ff;
+}
