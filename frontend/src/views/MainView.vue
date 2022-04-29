@@ -2,7 +2,7 @@
 <div>
 <div id="window">
   <div id="windowHeader">
-    <h2>Tere, {{logInName.userFirstName}} {{logInName.userMiddleName}} {{logInName.userLastName}}! </h2>
+    <h2>Tere {{logInName.userFirstName}} {{logInName.userMiddleName}} {{logInName.userLastName}}! </h2>
   </div>
   <div class="row">
     <div class="col">
@@ -23,13 +23,12 @@
 </template>
 
 <script>
-import LogInView from "@/views/LogInView";
 
 export default {
   name: "InspectorMainView",
   data:function(){
     return {
-      userId:null,
+      userId:sessionStorage.getItem("userId"),
       logInName:{
       userFirstName:null,
       userMiddleName:null,
@@ -39,17 +38,12 @@ export default {
     }
   },
   methods:{
-    getUserId:function(){
-      this.logInRequest=LogInView.data().logInRequest
-      this.$http.post("/account/login",this.logInRequest)
-      .then(response =>{
-        sessionStorage.setItem("userId",JSON.stringify(response.data));
-        this.userId=sessionStorage.getItem("userId");
-      })
-      .catch(error => console.log(error.response.data))
-    },
     getLogInName:function(){
-      this.$http.get("/account/login/name",this.userId)
+      this.$http.get("/account/login/name",{
+        params:{
+          userId:this.userId
+        }
+      })
       .then(response =>{
         this.logInName=response.data
       })
@@ -57,7 +51,6 @@ export default {
     }
   },
   mounted(){
-    this.getUserId();
     this.getLogInName();
   }
 }

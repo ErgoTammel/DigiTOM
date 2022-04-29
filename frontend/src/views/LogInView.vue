@@ -14,9 +14,9 @@
       </div>
       <div class="row">
         <div class="col" id="loginButton">
-          <router-link to="/main"><button type="button" class="btn btn-primary btn-lg">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogi
+          <button v-on:click="logIn" type="button" class="btn btn-primary btn-lg">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogi
             sisse&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          </button></router-link>
+          </button>
           <button type="button" class="btn btn-dark btn-lg" v-on:click="toggleLogInWindow">Registreeri kasutaja
           </button>
         </div>
@@ -93,6 +93,8 @@
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "LogInView",
   data: function () {
@@ -121,6 +123,14 @@ export default {
             this.toggleLogInWindow();
           })
           .catch(error => alert(error.response.data.toString))
+    },
+    logIn:function(){
+      this.$http.post("/account/login",this.logInRequest)
+          .then(response =>{
+            sessionStorage.setItem("userId",response.data.userId);
+            router.push("/main")
+          })
+          .catch(error => console.log(error.response.data))
     }
   }
 }
