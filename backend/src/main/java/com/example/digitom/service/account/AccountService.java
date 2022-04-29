@@ -2,6 +2,8 @@ package com.example.digitom.service.account;
 
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyService;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
+import com.example.digitom.domain.companyuser.CompanyUser;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.contact.Contact;
 import com.example.digitom.domain.contact.ContactService;
@@ -13,6 +15,7 @@ import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -28,6 +31,8 @@ public class AccountService {
     private ValidationService validationService;
     @Resource
     private CompanyUserService companyUserService;
+    @Resource
+    private CompanyConstructionSiteService companyConstructionSiteService;
 
 
     public void addNewAccount(RegistrationRequest registrationRequest) {
