@@ -21,5 +21,10 @@ public class AccountController {
         return accountService.logIn(loginRequest);
     }
 
+    @GetMapping("/login/name")
+    public UserNameResponse getUserName(@RequestParam Integer userId) {
+        return accountService.getUserName(userId);
+    }
+
 
 }

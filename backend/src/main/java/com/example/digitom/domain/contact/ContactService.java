@@ -20,4 +20,9 @@ public class ContactService {
         contactRepository.save(contact);
     }
 
+
+    public Contact getUserName(Integer userId) {
+        return contactRepository.findByUserId(userId);
+
+    }
 }

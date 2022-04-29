@@ -3,6 +3,7 @@ package com.example.digitom.service.account;
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
+import com.example.digitom.domain.contact.Contact;
 import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.domain.user.UserMapper;
@@ -46,4 +47,14 @@ public class AccountService {
         loginResponse.setUserId(validUser.getId());
         return loginResponse;
     }
+
+    public UserNameResponse getUserName(Integer userId) {
+        Contact contact = contactService.getUserName(userId);
+        UserNameResponse userNameResponse = new UserNameResponse();
+        userNameResponse.setUserFirstName(contact.getFirstName());
+        userNameResponse.setUserMiddleName(contact.getMiddleName());
+        userNameResponse.setUserLastName(contact.getLastName());
+        return userNameResponse;
+    }
+
 }
