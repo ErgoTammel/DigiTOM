@@ -6,6 +6,7 @@ import com.example.digitom.domain.companyuser.CompanyUser;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
+import com.example.digitom.service.account.NewInspectionConstructionSiteResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,15 +23,17 @@ public class InspectionService {
     @Resource
     private ConstructionSiteService constructionSiteService;
 
-    public List<ConstructionSite> getConstructionSites(Integer userId) {
-        List<CompanyUser> allUserCompanies = companyUserService.getAllUserCompanies(userId);
-        List<CompanyConstructionSite> companyConstructionSites=companyConstructionSiteService.getCompanyConstructionSites(allUserCompanies);
-        List<Integer> constructionSiteIDs = new ArrayList<>();
-        for (CompanyConstructionSite companyConstructionSite : companyConstructionSites) {
-
-            constructionSiteIDs.add(companyConstructionSite.getId());
+    public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
+        List<NewInspectionConstructionSiteResponse> responses= new ArrayList<>();
+        List<Integer> allUserCompanyIds = companyUserService.getAllUserCompanyIds(userId);
+        List<ConstructionSite> allCompanyConstructionSiteIds=companyConstructionSiteService.getAllConstructionSites(allUserCompanyIds);
+        for (ConstructionSite allCompanyConstructionSiteId : allCompanyConstructionSiteIds) {
+            NewInspectionConstructionSiteResponse response = new NewInspectionConstructionSiteResponse();
+            response.setConstructionSiteId(allCompanyConstructionSiteId.getId());
+            response.setConstructionSiteName(allCompanyConstructionSiteId.getName());
+            responses.add(response);
         }
 
-        return constructionSiteService.findAllConstructionSitesById(constructionSiteIDs);
+        return responses;
     }
 }

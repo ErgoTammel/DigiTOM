@@ -19,7 +19,7 @@ public class InspectionController {
 
 
     @GetMapping("/objects")
-    public List<ConstructionSite> getConstructionSites(@RequestParam Integer userId) {
+    public List<NewInspectionConstructionSiteResponse> getConstructionSites(@RequestParam Integer userId) {
         return inspectionService.getConstructionSites(userId);
 }
 }

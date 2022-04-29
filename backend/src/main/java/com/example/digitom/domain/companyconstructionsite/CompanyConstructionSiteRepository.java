@@ -8,7 +8,8 @@ import java.util.List;
 public interface CompanyConstructionSiteRepository extends JpaRepository<CompanyConstructionSite, Integer> {
 
     @Query("select c from CompanyConstructionSite c where c.company.id = ?1")
-    List<CompanyConstructionSite> findByCompanyId(List <Integer> id);
+    List<CompanyConstructionSite> findByCompanyId(Integer id);
+
 
 
 }

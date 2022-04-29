@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface CompanyUserRepository extends JpaRepository<CompanyUser, Integer> {
 
+
+
     @Query("select c from CompanyUser c where c.user.id = ?1")
     List<CompanyUser> findByUserId(Integer id);
+
+
 }

@@ -2,7 +2,7 @@
 <div>
 <div id="window">
   <div id="windowHeader">
-    <h2>Tere {{logInName.userFirstName}} {{logInName.userMiddleName}} {{logInName.userLastName}}! </h2>
+    <h2><i class="fa-solid fa-user-shield"></i> Tere {{logInName.userFirstName}} {{logInName.userMiddleName}} {{logInName.userLastName}}! </h2>
   </div>
   <div class="row">
     <div class="col">

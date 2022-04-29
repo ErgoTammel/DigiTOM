@@ -5,6 +5,7 @@ import com.example.digitom.domain.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +22,16 @@ public class CompanyUserService {
 
     }
 
-    public List<CompanyUser> getAllUserCompanies(Integer userId) {
-        return companyUserRepository.findByUserId(userId);
+//    public List<CompanyUser> getAllUserCompanies(Integer userId) {
+//        return companyUserRepository.findByUserId(userId);
+//    }
+
+    public List<Integer> getAllUserCompanyIds(Integer userId) {
+        List<CompanyUser> companyUsers = companyUserRepository.findByUserId(userId);
+        List<Integer> companyUsersIds = new ArrayList<>();
+        for (CompanyUser companyUser : companyUsers) {
+            companyUsersIds.add(companyUser.getId());
+        }
+        return companyUsersIds;
     }
 }
