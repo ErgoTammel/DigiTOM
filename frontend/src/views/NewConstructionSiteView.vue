@@ -17,9 +17,7 @@
           <label for="mainContractorSelect"> Vali objekti peatöövõtja</label>
           <select class="custom-select" id="mainContractorSelect">
             <option selected>Peatöövõtja</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option v-for="company in allCompanyNames"  value="company.companyId">{{company.companyName}}</option>
           </select>
         </div>
         <div class="row" id="submitRow">
