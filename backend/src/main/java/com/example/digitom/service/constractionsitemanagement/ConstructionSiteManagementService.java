@@ -2,6 +2,7 @@ package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyRepository;
+import com.example.digitom.domain.company.CompanyService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
@@ -15,21 +16,21 @@ import java.util.List;
 public class ConstructionSiteManagementService {
 
     @Resource
-    private CompanyRepository companyRepository;
-
-    @Resource
     private ConstructionSiteService constructionSiteService;
 
     @Resource
     private CompanyUserService companyUserService;
 
+    @Resource
+    private CompanyService companyService;
+
     public List<CompanyNameResponse> getAllCompanies() {
-        List<ConstructionSite> allConstructionSites = constructionSiteService.findAllConstructionSites();
+        List<Company> allCompanies = companyService.findAllCompanies();
         List<CompanyNameResponse> companyNameResponses = new ArrayList<>();
-        for (ConstructionSite constructionSite : allConstructionSites) {
+        for (Company company : allCompanies) {
             CompanyNameResponse companyNameResponse = new CompanyNameResponse();
-            companyNameResponse.setCompanyId(constructionSite.getId());
-            companyNameResponse.setCompanyName(constructionSite.getName());
+            companyNameResponse.setCompanyId(company.getId());
+            companyNameResponse.setCompanyName(company.getName());
             companyNameResponses.add(companyNameResponse);
         }
         return companyNameResponses;
@@ -38,4 +39,8 @@ public class ConstructionSiteManagementService {
     public List<CompanyContactResponse> getContactName(Integer companyId) {
         return companyUserService.getCompanyUsersByCompanyId(companyId);
     }
+
+//    public void addNewConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest) {
+//        ConstructionSite constructionSite =
+//    }
 }

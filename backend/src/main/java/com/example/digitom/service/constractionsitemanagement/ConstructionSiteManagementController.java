@@ -1,9 +1,7 @@
 package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,5 +22,10 @@ public class ConstructionSiteManagementController {
     public List<CompanyContactResponse> getContactName(Integer companyId) {
         return constructionSiteManagementService.getContactName(companyId);
     }
+
+//    @PostMapping("/addnew")
+//    public void addNewConstructionSite (@RequestBody NewConstructionSiteRequest newConstructionSiteRequest) {
+//        constructionSiteManagementService.addNewConstructionSite(newConstructionSiteRequest);
+//    }
 
 }
