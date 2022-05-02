@@ -15,19 +15,29 @@
       </div>
       <div class="row">
           <label for="mainContractorSelect"> Vali objekti peatöövõtja</label>
-          <select class="custom-select" id="mainContractorSelect">
+          <select v-model="newConstructionSiteRequest.mainContractorCompanyId" class="custom-select" id="mainContractorSelect">
             <option selected>Peatöövõtja</option>
-            <option v-for="company in allCompanyNames"  value="company.companyId">{{company.companyName}}</option>
+            <option v-for="company in allCompanyNames"  :value="company.companyId">{{company.companyName}}</option>
           </select>
         </div>
         <div class="row" id="submitRow">
           <button type="button" class="btn btn-dark btn-lg" v-on:click="routeNewInspection()">Tagasi</button>
-          <button type="button" class="btn btn-primary btn-lg" v-on:click="toggleSecondConstructionSite">Edasi</button>
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewConstructionSite" >Edasi</button>
         </div>
     </div>
   </div>
         <div id="secondNewConstructionSiteWindow" v-if="!secondConstructionSite" >
-          <h2>Lisa seotud alltöövõtjad</h2>
+          <h2>Lisa objektiga seotud alltöövõtjad</h2>
+          <div class="col" id="subContractorCol">
+            <div class="row">
+            <select v-model="selectedSubContractorId" class="custom-select" id="subContractorSelect">
+              <option selected>Alltöövõtja</option>
+              <option v-for="company in allCompanyNames"  :value="company.companyId">{{company.companyName}}</option>
+            </select>
+              <button type="button" class="btn btn-dark btn-lg" v-on:click="addNewCompanyToList" >Lisa nimekirja</button>
+            </div>
+            <h1 v-for="subCompany in subContractorsList" >{{subCompany.name}}</h1>
+          </div>
 
         </div>
 
@@ -43,34 +53,66 @@ import router from "@/router";
 
 export default {
   name: "NewConstructionSiteView",
-  data:function(){
+  data: function () {
     return {
-      secondConstructionSite:true,
-      allCompanyNames:{},
-      newConstructionSiteRequest:{}
+      secondConstructionSite: true,
+      allCompanyNames: {},
+      newConstructionSiteRequest: {},
+      selectedSubContractorId: 0,
+      subContractorsList:{}
+
     }
   },
-  methods:{
-    toggleSecondConstructionSite:function(){
+  methods: {
+    toggleSecondConstructionSite: function () {
       this.secondConstructionSite = !this.secondConstructionSite;
     },
-    routeNewInspection:function (){
+    routeNewInspection: function () {
       router.push('/inspection/sites');
     },
-    getAllCompanyNames:function(){
+    getAllCompanyNames: function () {
       this.$http.get("construction-site/all")
+          .then(response => {
+            this.allCompanyNames = response.data
+          })
+          .catch(error => {
+            console.log(error.response.data)
+          })
+    },
+    addNewConstructionSite: function () {
+      this.secondConstructionSite = !this.secondConstructionSite;
+      this.$http.post("construction-site/new", this.newConstructionSiteRequest)
       .then(response=>{
-        this.allCompanyNames = response.data
+        sessionStorage.setItem("constructionSiteId", response.data)
       })
-      .catch(error=> {
+      .catch(error=>{
         console.log(error.response.data)
       })
+    },
+    addNewCompanyToList:function(){
+      this.$http.post("/construction-site/new/subcontractor", {
+        params:{
+          companyId:this.selectedSubContractorId,
+          constructionSiteId:sessionStorage.getItem("constructionSiteId")
+        }
+      }).then(response=>{}).catch(error =>{
+        console.log(error.response.data)
+      })
+      this.$http.get("/construction-site/all/companies", {
+        params:{
+          constructionSiteId:sessionStorage.getItem("constructionSiteId")
+        }
+      }).then(response=>{
+        this.subContractorsList=response.data;
+      }).catch(error=> console.log(error.response.data))
     }
-  },
-  mounted() {
-    this.getAllCompanyNames();
+
+    },
+    mounted() {
+      this.getAllCompanyNames();
+    }
   }
-}
+
 </script>
 
 <style scoped>
@@ -117,5 +159,21 @@ h2 {
 }
 #submitRow{
   width: 40vw;
+}
+#subContractorSelect{
+  width: 45%;
+  margin-top: 3vh;
+}
+#subContractorCol{
+  width: 70%;
+}
+#subContractorCol .row{
+ margin-top: 2%;
+}
+#subContractorCol button{
+  width: 40%;
+  height: 7vh;
+  margin-top: 2%;
+  margin-left: 2vw;
 }
 </style>

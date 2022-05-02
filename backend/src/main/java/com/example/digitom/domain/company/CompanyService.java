@@ -26,5 +26,9 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
+    public CompanyDto getCompanyById(Integer companyId) {
 
+
+        return companyMapper.toDto(companyRepository.getById(companyId));
+    }
 }
