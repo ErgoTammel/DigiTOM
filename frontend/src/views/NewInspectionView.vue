@@ -1,29 +1,33 @@
 <template>
 <div>
-  <div id="window">
+  <div  id="window">
     <div id="windowHeader">
       <h2>Vali inspekteeritav ehitusobjekt või loo uus.</h2>
     </div>
     <div id="siteTable">
       <button type="button" v-for="site in constructionSiteRespond" value="site.constructionSiteId" class="btn btn-light btn-lg">{{site.constructionSiteName}}</button>
-      <button type="button" class="btn btn-primary">Loo uus objekt +</button>
-
+      <button type="button" class="btn btn-primary" v-on:click="newConstructionSite()">Loo uus objekt +</button>
     </div>
-
   </div>
+
+
 </div>
 </template>
 <script>
+import router from "@/router";
+
+
 export default {
   name: "NewInspectionView",
   data: function () {
     return {
-      constructionSiteRespond: {}
+      constructionSiteRespond: {},
+      newConstructionSiteRequest:{}
     }
   },
   methods: {
     getConstructionSites: function () {
-      this.$http.get("/inspection/objects", {
+      this.$http.get("/inspection/sites", {
         params: {
           userId: sessionStorage.getItem("userId")
         }
@@ -31,7 +35,10 @@ export default {
         this.constructionSiteRespond = response.data
       })
           .catch(error => console.log(error.response.data))
-    }
+    },
+    newConstructionSite:function(){
+      router.push("/construction-site/new")
+      }
   },
   mounted() {
     this.getConstructionSites();
@@ -50,6 +57,8 @@ export default {
   transform: translate(-50%, 0);
   border: 2px solid black;
 }
+
+
 h2 {
   font-family: 'Akshar', sans-serif;
   color: white;
@@ -68,8 +77,7 @@ h2 {
   margin:2.6%;
   font-size: 1.7em;
 }
-#map{
-  width:40vh;
-  height: 60vw;
-}
+
+
+
 </style>
