@@ -23,7 +23,6 @@ public class UserRoleService {
         userRole.setRole(foundRole);
         userRole.setUser(user);
 
-
         userRoleRepository.save(userRole);
     }
 }
