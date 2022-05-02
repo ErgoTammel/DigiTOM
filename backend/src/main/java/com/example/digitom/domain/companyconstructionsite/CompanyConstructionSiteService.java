@@ -26,14 +26,14 @@ public class CompanyConstructionSiteService {
 //        return companyConstructionSiteRepository.findByCompanyId(companyIDs);
 //    }
 
-    public List<ConstructionSite> getAllConstructionSites(List<Integer> allUserCompanyIds) {
-        List<ConstructionSite> companyConstructionSites = new ArrayList<>();
-        for (Integer allUserCompanyId : allUserCompanyIds) {
-            List<CompanyConstructionSite> found = companyConstructionSiteRepository.findByCompanyId(allUserCompanyId);
+    public List<ConstructionSite> getConstructionSitesByUserCompanyIds(List<Integer> userCompanyIds) {
+        List<ConstructionSite> constructionSites = new ArrayList<>();
+        for (Integer userCompanyId : userCompanyIds) {
+            List<CompanyConstructionSite> found = companyConstructionSiteRepository.findByCompanyId(userCompanyId);
             for (CompanyConstructionSite companyConstructionSite : found) {
-                companyConstructionSites.add(companyConstructionSite.getConstructionSite());
+                constructionSites.add(companyConstructionSite.getConstructionSite());
             }
         }
-        return companyConstructionSites;
+        return constructionSites;
     }
 }

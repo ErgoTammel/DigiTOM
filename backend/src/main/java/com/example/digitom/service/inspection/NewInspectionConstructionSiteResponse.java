@@ -1,4 +1,4 @@
-package com.example.digitom.service.account;
+package com.example.digitom.service.inspection;
 
 import lombok.Data;
 
@@ -7,6 +7,4 @@ public class NewInspectionConstructionSiteResponse {
 
     private Integer constructionSiteId;
     private String constructionSiteName;
-
-
 }

@@ -22,12 +22,8 @@ public class CompanyUserService {
 
     }
 
-//    public List<CompanyUser> getAllUserCompanies(Integer userId) {
-//        return companyUserRepository.findByUserId(userId);
-//    }
-
-    public List<Integer> getAllUserCompanyIds(Integer userId) {
-        List<CompanyUser> companyUsers = companyUserRepository.findByUserId(userId);
+    public List<Integer> getUserCompanyIdsByUserIds(Integer userId) {
+        List<CompanyUser> companyUsers = companyUserRepository.findAllByUserId(userId);
         List<Integer> companyUsersIds = new ArrayList<>();
         for (CompanyUser companyUser : companyUsers) {
             companyUsersIds.add(companyUser.getId());

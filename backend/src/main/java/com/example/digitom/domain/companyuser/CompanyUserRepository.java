@@ -10,7 +10,7 @@ public interface CompanyUserRepository extends JpaRepository<CompanyUser, Intege
 
 
     @Query("select c from CompanyUser c where c.user.id = ?1")
-    List<CompanyUser> findByUserId(Integer id);
+    List<CompanyUser> findAllByUserId(Integer id);
 
 
 }

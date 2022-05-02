@@ -1,7 +1,5 @@
 package com.example.digitom.service.inspection;
 
-import com.example.digitom.domain.constructionsite.ConstructionSite;
-import com.example.digitom.service.account.NewInspectionConstructionSiteResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +16,7 @@ public class InspectionController {
     private InspectionService inspectionService;
 
 
-    @GetMapping("/objects")
+    @GetMapping("/sites")
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(@RequestParam Integer userId) {
         return inspectionService.getConstructionSites(userId);
 }

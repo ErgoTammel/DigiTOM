@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <button type="button" class="btn btn-dark btn-lg">Alusta uut objekti läbivaatust</button>
+      <button type="button" class="btn btn-dark btn-lg" v-on:click="newInspection">Alusta uut objekti läbivaatust</button>
     </div>
     <div class="col">
       <button type="button" class="btn btn-dark btn-lg">Kuva raportite otsing</button>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+
+import router from "@/router";
 
 export default {
   name: "InspectorMainView",
@@ -48,6 +50,9 @@ export default {
         this.logInName=response.data
       })
       .catch(error => console.log(error.response.data))
+    },
+    newInspection:function(){
+      router.push("/inspection/sites")
     }
   },
   mounted(){
