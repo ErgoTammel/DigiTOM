@@ -25,4 +25,10 @@ public class CompanyService {
     public List<Company> findAllCompanies() {
         return companyRepository.findAll();
     }
+
+    public CompanyDto getCompanyById(Integer companyId) {
+
+
+        return companyMapper.toDto(companyRepository.getById(companyId));
+    }
 }
