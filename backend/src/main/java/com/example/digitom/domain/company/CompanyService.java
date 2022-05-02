@@ -4,6 +4,7 @@ import com.example.digitom.service.account.RegistrationRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CompanyService {
@@ -21,5 +22,7 @@ public class CompanyService {
     }
 
 
-
+    public List<Company> findAllCompanies() {
+        return companyRepository.findAll();
+    }
 }
