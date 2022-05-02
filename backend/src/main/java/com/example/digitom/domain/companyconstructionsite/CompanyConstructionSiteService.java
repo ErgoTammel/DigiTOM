@@ -1,20 +1,33 @@
 package com.example.digitom.domain.companyconstructionsite;
 
-import com.example.digitom.domain.companyuser.CompanyUser;
+import com.example.digitom.domain.company.Company;
+import com.example.digitom.domain.company.CompanyDto;
+import com.example.digitom.domain.company.CompanyMapper;
+import com.example.digitom.domain.company.CompanyRepository;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
+import com.example.digitom.domain.constructionsite.ConstructionSiteRepository;
+import com.example.digitom.service.constractionsitemanagement.NewConstructionSiteRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyConstructionSiteService {
 
     @Resource
     private CompanyConstructionSiteRepository companyConstructionSiteRepository;
+
+    @Resource
+    private ConstructionSiteRepository constructionSiteRepository;
+
+    @Resource
+    private CompanyRepository companyRepository;
+
+    @Resource
+    private CompanyMapper companyMapper;
 
 
 //    public List<CompanyConstructionSite> getCompanyConstructionSites(List<CompanyUser> companyUsers) {
@@ -36,4 +49,39 @@ public class CompanyConstructionSiteService {
         }
         return constructionSites;
     }
+
+    public void addNewMainContractorConnection(NewConstructionSiteRequest newConstructionSiteRequest, Integer constructionSiteId) {
+
+        Integer mainContractorCompanyId = newConstructionSiteRequest.getMainContractorCompanyId();
+        CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
+        Optional<ConstructionSite> foundSite = constructionSiteRepository.findById(constructionSiteId);
+        companyConstructionSite.setConstructionSite(foundSite.get());
+        Optional<Company> foundMainCompany = companyRepository.findById(newConstructionSiteRequest.getMainContractorCompanyId());
+        companyConstructionSite.setCompany(foundMainCompany.get());
+        companyConstructionSite.setMainContractor(true);
+        companyConstructionSiteRepository.save(companyConstructionSite);
+
+    }
+
+    public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
+        CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
+        companyConstructionSite.setCompany(companyRepository.getById(companyId));
+        companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
+        companyConstructionSite.setMainContractor(false);
+        companyConstructionSiteRepository.save(companyConstructionSite);
+
+    }
+
+    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+        List<CompanyConstructionSite> constructionSiteCompanies = companyConstructionSiteRepository.findByConstructionSiteId(constructionSiteId, false);
+        List<Integer> constructionSiteCompanyIds = new ArrayList<>();
+        for (CompanyConstructionSite constructionSiteCompany : constructionSiteCompanies) {
+            Integer constructionSiteCompanyId = (constructionSiteCompany.getId());
+            constructionSiteCompanyIds.add(constructionSiteCompanyId);
+        }
+
+        return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
+
+    }
 }
+

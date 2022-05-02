@@ -1,10 +1,10 @@
 package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyRepository;
+import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.company.CompanyService;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
-import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,10 @@ public class ConstructionSiteManagementService {
     @Resource
     private CompanyService companyService;
 
+    @Resource
+    private CompanyConstructionSiteService companyConstructionSiteService;
+
+
     public List<CompanyNameResponse> getAllCompanies() {
         List<Company> allCompanies = companyService.findAllCompanies();
         List<CompanyNameResponse> companyNameResponses = new ArrayList<>();
@@ -40,7 +44,17 @@ public class ConstructionSiteManagementService {
         return companyUserService.getCompanyUsersByCompanyId(companyId);
     }
 
-//    public void addNewConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest) {
-//        ConstructionSite constructionSite =
-//    }
+    public Integer addNewConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest) {
+        Integer constructionSiteId = constructionSiteService.addNewConstructionSite(newConstructionSiteRequest);
+        companyConstructionSiteService.addNewMainContractorConnection(newConstructionSiteRequest, constructionSiteId);
+        return constructionSiteId;
+    }
+
+    public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
+        companyConstructionSiteService.addNewSubContractor(companyId, constructionSiteId);
+    }
+
+    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+        return companyConstructionSiteService.getAllCompaniesFromSite(constructionSiteId);
+    }
 }

@@ -10,6 +10,5 @@ public class NewConstructionSiteRequest {
     private String siteName;
     private String siteAddress;
     private Integer mainContractorCompanyId;
-    private List<Company> subContractorsCompanyId;
 
 }
