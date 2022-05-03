@@ -76,7 +76,7 @@ public class CompanyConstructionSiteService {
         List<CompanyConstructionSite> constructionSiteCompanies = companyConstructionSiteRepository.findByConstructionSiteId(constructionSiteId, false);
         List<Integer> constructionSiteCompanyIds = new ArrayList<>();
         for (CompanyConstructionSite constructionSiteCompany : constructionSiteCompanies) {
-            Integer constructionSiteCompanyId = (constructionSiteCompany.getId());
+            Integer constructionSiteCompanyId = (constructionSiteCompany.getCompany().getId());
             constructionSiteCompanyIds.add(constructionSiteCompanyId);
         }
 
