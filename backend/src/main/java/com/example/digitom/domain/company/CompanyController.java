@@ -1,16 +1,18 @@
 package com.example.digitom.domain.company;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.digitom.service.account.RegistrationRequest;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RequestMapping("/company")
 @RestController
 public class CompanyController {
+
+//    todo: teha 4 meetodit, kus 1 lisab uue company, 1 muudab olemasolevat companyt ja 1 kustutab company,
+//    need kõik käivad id järgi. Lisaks teha 1, mis tagastab kõik companyd andmebaasist üldse.
 
 
     @Resource
@@ -21,4 +23,26 @@ public class CompanyController {
    public CompanyDto getCompanyById(@RequestParam Integer companyId){
        return companyService.getCompanyById(companyId);
    }
+
+
+    @PostMapping("/new")
+    public CompanyDto addNewCompany(@RequestBody CompanyDto companyDto) {
+        return companyService.addNewCompany(RegistrationRequest);
+
+    }
+// meetod, mis muudab olemasolevat companyt
+    @PostMapping("/company")
+    public CompanyDto changeCompanyById()
+
+    //    meetod, mis tagastab kõik companyd andmebaasist üldse
+    @GetMapping("/all")
+    public List<CompanyDto> getAllCompanies() {
+        return companyService.getAllCompanies();
+    }
+
+    @DeleteMapping("/id")
+    public void removeCompanyById(@RequestParam Integer companyId) {
+        companyService.removeCompanyById(companyId);
+    }
+
 }
