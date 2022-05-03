@@ -1,12 +1,12 @@
 package com.example.digitom.domain.companyconstructionsite;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.company.CompanyMapper;
 import com.example.digitom.domain.company.CompanyRepository;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteRepository;
 import com.example.digitom.service.constractionsitemanagement.NewConstructionSiteRequest;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +31,8 @@ public class CompanyConstructionSiteService {
 
     @Resource
     private CompanyConstructionSiteMapper companyConstructionSiteMapper;
+    @Resource
+    private ValidationService validationService;
 
 
 //    public List<CompanyConstructionSite> getCompanyConstructionSites(List<CompanyUser> companyUsers) {
@@ -67,6 +69,11 @@ public class CompanyConstructionSiteService {
     }
 
     public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
+        String companyName = companyRepository.findById(companyId).get().getName();
+        Boolean exist = companyConstructionSiteRepository.existByCompanyIdAndConstructionSiteId(companyId, constructionSiteId);
+        validationService.companyConstructionSiteExist(companyName, exist);
+
+
         CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
         companyConstructionSite.setCompany(companyRepository.getById(companyId));
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
@@ -75,20 +82,9 @@ public class CompanyConstructionSiteService {
 
     }
 
-    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite(Integer constructionSiteId) {
         List<CompanyConstructionSite> constructionSiteCompanies = companyConstructionSiteRepository.findByConstructionSiteId(constructionSiteId, false);
-        List<Integer> constructionSiteCompanyIds = new ArrayList<>();
-        for (CompanyConstructionSite constructionSiteCompany : constructionSiteCompanies) {
-            Integer constructionSiteCompanyId = (constructionSiteCompany.getCompany().getId());
-            constructionSiteCompanyIds.add(constructionSiteCompanyId);
-        }
-        List<CompanyConstructionSiteDto> companyConstructionSiteDtos = companyConstructionSiteMapper.toDtos(companyConstructionSiteRepository.findAllById(constructionSiteCompanyIds));
-        for (CompanyConstructionSiteDto companyConstructionSiteDto : companyConstructionSiteDtos) {
-
-        }
-        return null;
-//        return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
-
+        return companyConstructionSiteMapper.toCCSListResponses(constructionSiteCompanies);
     }
 
 

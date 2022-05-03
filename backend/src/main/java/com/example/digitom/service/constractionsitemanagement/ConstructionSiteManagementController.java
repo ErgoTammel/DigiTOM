@@ -1,7 +1,7 @@
 package com.example.digitom.service.constractionsitemanagement;
 
-import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyDto;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteDto;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteListResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,7 +35,7 @@ public class ConstructionSiteManagementController {
     }
 
     @GetMapping ("/all/companies")
-    public List<CompanyDto> getAllCompaniesFromSite (@RequestParam Integer constructionSiteId) {
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite (@RequestParam Integer constructionSiteId) {
         return constructionSiteManagementService.getAllCompaniesFromSite(constructionSiteId);
     }
 
