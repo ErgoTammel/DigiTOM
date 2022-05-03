@@ -63,7 +63,6 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setCompany(foundMainCompany.get());
         companyConstructionSite.setMainContractor(true);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
     public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
@@ -72,13 +71,11 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
         companyConstructionSite.setMainContractor(false);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
     public List<CompanyConstructionSiteDto> getAllCompaniesFromSite(Integer constructionSiteId) {
         List<CompanyConstructionSite> constructionSiteCompanies = companyConstructionSiteRepository.findByConstructionSiteId(constructionSiteId, false);
         return companyConstructionSiteMapper.toDtos(constructionSiteCompanies);
-
     }
 
 
