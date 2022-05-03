@@ -18,7 +18,7 @@ public class CompanyController {
 
 
     @GetMapping("/name")
-   public CompanyDto getCompanyById(@RequestParam Integer companyId){
-       return companyService.getCompanyById(companyId);
-   }
+    public CompanyDto getCompanyById(@RequestParam Integer companyId) {
+        return companyService.getCompanyById(companyId);
+    }
 }

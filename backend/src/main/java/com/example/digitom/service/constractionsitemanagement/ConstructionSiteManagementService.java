@@ -57,4 +57,8 @@ public class ConstructionSiteManagementService {
     public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
         return companyConstructionSiteService.getAllCompaniesFromSite(constructionSiteId);
     }
+
+    public void removeSubcontractorFromSiteByIds(Integer companyId, Integer siteId) {
+        companyConstructionSiteService.removeSubcontractorFromSiteByIds(companyId, siteId);
+    }
 }

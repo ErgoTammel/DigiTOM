@@ -39,4 +39,9 @@ public class ConstructionSiteManagementController {
         return constructionSiteManagementService.getAllCompaniesFromSite(constructionSiteId);
     }
 
+    @DeleteMapping ("/delete")
+    public void removeSubcontractorFromSiteByIds (@RequestParam Integer companyId, @RequestParam Integer siteId) {
+        constructionSiteManagementService.removeSubcontractorFromSiteByIds(companyId, siteId);
+    }
+
 }

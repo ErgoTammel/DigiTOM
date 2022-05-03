@@ -12,5 +12,9 @@ public interface ConstructionSiteRepository extends JpaRepository<ConstructionSi
     @Query("select c from ConstructionSite c where c.id = ?1")
     List<ConstructionSite> findById(List <Integer> integer);
 
+    @Query("select c from ConstructionSite c where c.id = ?1")
+    ConstructionSite findConstructionSiteById(Integer id);
+
+
 
 }

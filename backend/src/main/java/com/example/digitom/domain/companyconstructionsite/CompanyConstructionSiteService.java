@@ -52,7 +52,7 @@ public class CompanyConstructionSiteService {
 
     public void addNewMainContractorConnection(NewConstructionSiteRequest newConstructionSiteRequest, Integer constructionSiteId) {
 
-        Integer mainContractorCompanyId = newConstructionSiteRequest.getMainContractorCompanyId();
+        newConstructionSiteRequest.getMainContractorCompanyId();
         CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
         Optional<ConstructionSite> foundSite = constructionSiteRepository.findById(constructionSiteId);
         companyConstructionSite.setConstructionSite(foundSite.get());
@@ -80,7 +80,12 @@ public class CompanyConstructionSiteService {
             constructionSiteCompanyIds.add(constructionSiteCompanyId);
         }
         return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
+    }
 
+
+    public void removeSubcontractorFromSiteByIds(Integer companyId, Integer siteId) {
+        CompanyConstructionSite companyConstructionSite = companyConstructionSiteRepository.findByCompanyIdAndConstructionSiteId(companyId, siteId);
+        companyConstructionSiteRepository.delete(companyConstructionSite);
     }
 }
 
