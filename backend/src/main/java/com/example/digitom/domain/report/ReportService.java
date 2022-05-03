@@ -1,6 +1,5 @@
 package com.example.digitom.domain.report;
 
-import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import org.springframework.stereotype.Service;
 

@@ -29,6 +29,9 @@ public class CompanyConstructionSiteService {
     @Resource
     private CompanyMapper companyMapper;
 
+    @Resource
+    private CompanyConstructionSiteMapper companyConstructionSiteMapper;
+
 
 //    public List<CompanyConstructionSite> getCompanyConstructionSites(List<CompanyUser> companyUsers) {
 //        List<Integer> companyIDs = new ArrayList<>();
@@ -79,7 +82,13 @@ public class CompanyConstructionSiteService {
             Integer constructionSiteCompanyId = (constructionSiteCompany.getCompany().getId());
             constructionSiteCompanyIds.add(constructionSiteCompanyId);
         }
-        return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
+        List<CompanyConstructionSiteDto> companyConstructionSiteDtos = companyConstructionSiteMapper.toDtos(companyConstructionSiteRepository.findAllById(constructionSiteCompanyIds));
+        for (CompanyConstructionSiteDto companyConstructionSiteDto : companyConstructionSiteDtos) {
+
+        }
+        return null;
+//        return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
+
     }
 
 
