@@ -40,4 +40,11 @@ public class ValidationService {
             throw new BusinessException("Viga sisenemisel", "Sisesta õiged andmed või registreeri konto");
         }
     }
+
+    public void companyConstructionSiteExist(String companyName, Boolean exist) {
+        if(exist){
+            throw new BusinessException("Alltöövõtja "+ companyName+" on juba objektile lisatud!", "Proovi uuesti!");
+        }
+    }
+
 }
