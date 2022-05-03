@@ -33,10 +33,18 @@
             <select v-model="selectedSubContractorId" class="custom-select" id="subContractorSelect">
               <option selected>Alltöövõtja</option>
               <option v-for="company in allCompanyNames"  :value="company.companyId">{{company.companyName}}</option>
+
             </select>
               <button type="button" class="btn btn-dark btn-lg" v-on:click="addNewCompanyToList" >Lisa nimekirja</button>
             </div>
-            <h1 v-for="subCompany in subContractorsList" >{{subCompany.name}}</h1>
+          </div>
+            <div id="listWindow">
+
+              <h3 v-for="subCompany in subContractorsList" >{{subCompany.name}}<i class="fa-solid fa-square-xmark"></i></h3>
+            </div>
+          <div class="row" id="saveButtonRow">
+          <button type="button" class="btn btn-dark btn-lg" v-on:click="toggleSecondConstructionSite">Tagasi</button>
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="routeNewInspection" >Salvesta objekt</button>
           </div>
 
         </div>
@@ -80,7 +88,6 @@ export default {
           })
     },
     addNewConstructionSite: function () {
-      this.secondConstructionSite = !this.secondConstructionSite;
       this.$http.post("construction-site/new", this.newConstructionSiteRequest)
       .then(response=>{
         sessionStorage.setItem("constructionSiteId", response.data)
@@ -88,23 +95,24 @@ export default {
       .catch(error=>{
         console.log(error.response.data)
       })
+      this.secondConstructionSite = !this.secondConstructionSite;
     },
-    addNewCompanyToList:function(){
-      this.$http.post("/construction-site/new/subcontractor", {
-        params:{
-          companyId:this.selectedSubContractorId,
-          constructionSiteId:sessionStorage.getItem("constructionSiteId")
+    addNewCompanyToList:async function () {
+      await this.$http.post("/construction-site/new/subcontractor", null, {
+        params: {
+          companyId: this.selectedSubContractorId,
+          constructionSiteId: sessionStorage.getItem("constructionSiteId")
         }
-      }).then(response=>{}).catch(error =>{
+      }).then().catch(error => {
         console.log(error.response.data)
       })
-      this.$http.get("/construction-site/all/companies", {
-        params:{
-          constructionSiteId:sessionStorage.getItem("constructionSiteId")
+       this.$http.get("/construction-site/all/companies", {
+        params: {
+          constructionSiteId: sessionStorage.getItem("constructionSiteId")
         }
-      }).then(response=>{
-        this.subContractorsList=response.data;
-      }).catch(error=> console.log(error.response.data))
+      }).then(response => {
+        this.subContractorsList = response.data;
+      }).catch(error => console.log(error.response.data))
     }
 
     },
@@ -129,7 +137,7 @@ export default {
 #secondNewConstructionSiteWindow{
   position: absolute;
   width: 70vw;
-  height: 75vh;
+  height: 80vh;
   margin-top: 13vh;
   background-color: #44b0ff;
   left: 50%;
@@ -151,10 +159,20 @@ h2 {
   margin-left: 6.2%;
   margin-top: 5%;
 }
+h3{
+  font-family: 'Akshar', sans-serif;
+  color:black;
+  font-size: 1.7em;
+  margin-left: 3%;
+  margin-top: 2%;
+}
+h3 i{
+  margin-left: 1vw;
+
+}
 .row button{
   width: 40%;
-  height: 8vh;
-  margin-top: 5%;
+  height: 6vh;
   margin-right: 10%;
 }
 #submitRow{
@@ -162,18 +180,37 @@ h2 {
 }
 #subContractorSelect{
   width: 45%;
-  margin-top: 3vh;
+  height: 6.2vh;
 }
 #subContractorCol{
   width: 70%;
 }
 #subContractorCol .row{
- margin-top: 2%;
+ margin-top: 4%;
 }
 #subContractorCol button{
   width: 40%;
-  height: 7vh;
-  margin-top: 2%;
+  height: 6.2vh;
   margin-left: 2vw;
 }
+#listWindow{
+  height: 40%;
+  width: 60%;
+  margin-left: 6.2%;
+  margin-top: 4%;
+  background-color: rgb(214, 214, 214);
+  border: white 2px solid;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+#saveButtonRow{
+  margin-top: 5%;
+  width: 70%;
+  margin-left: 6.2%;
+}
+#saveButtonRow button{
+  margin-right: 1vw;
+  margin-top: 0%;
+}
+
 </style>
