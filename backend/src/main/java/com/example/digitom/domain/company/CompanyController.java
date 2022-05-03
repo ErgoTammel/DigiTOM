@@ -27,12 +27,16 @@ public class CompanyController {
 
     @PostMapping("/new")
     public CompanyDto addNewCompany(@RequestBody CompanyDto companyDto) {
-        return companyService.addNewCompany(RegistrationRequest);
+        return companyService.addNewCompany(companyDto);
 
     }
-// meetod, mis muudab olemasolevat companyt
-    @PostMapping("/company")
-    public CompanyDto changeCompanyById()
+
+    // meetod, mis muudab olemasolevat companyt
+    @PutMapping("/company")
+    public void updateCompanyById(@RequestParam Integer companyId, @RequestParam CompanyDto companyDto) {
+        companyService.getCompanyById(companyId, companyDto);
+
+    }
 
     //    meetod, mis tagastab kõik companyd andmebaasist üldse
     @GetMapping("/all")

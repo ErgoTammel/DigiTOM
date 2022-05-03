@@ -45,4 +45,12 @@ public class CompanyService {
     public List<CompanyDto> getAllCompanies() {
         return null;
     }
+
+    public void getCompanyById(Integer companyId, CompanyDto companyDto) {
+
+        Company company = findAllCompanies(companyId);
+        company.setId(companyDto.getId());
+        company.setName(companyDto.getName());
+        company.setRegNumber(companyDto.getRegNumber());
+    }
 }
