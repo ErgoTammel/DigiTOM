@@ -1,8 +1,8 @@
 package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.company.CompanyService;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteDto;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ConstructionSiteManagementService {
+public class
+ConstructionSiteManagementService {
 
     @Resource
     private ConstructionSiteService constructionSiteService;
@@ -54,7 +55,7 @@ public class ConstructionSiteManagementService {
         companyConstructionSiteService.addNewSubContractor(companyId, constructionSiteId);
     }
 
-    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+    public List<CompanyConstructionSiteDto> getAllCompaniesFromSite(Integer constructionSiteId) {
         return companyConstructionSiteService.getAllCompaniesFromSite(constructionSiteId);
     }
 

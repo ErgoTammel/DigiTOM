@@ -25,6 +25,12 @@ public interface CompanyConstructionSiteMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateCompanyConstructionSiteFromCompanyConstructionSiteDto(CompanyConstructionSiteDto companyConstructionSiteDto, @MappingTarget CompanyConstructionSite companyConstructionSite);
 
+
     List<CompanyConstructionSiteDto> toDtos(List<CompanyConstructionSite> companyConstructionSites);
+
+
+    @Mapping(source = "companyConstructionSite.company.name", target = "name")
+    @Mapping(target = "id", ignore = true)
+    List<CompanyDto> toCompanyDto(List<CompanyConstructionSite> companyConstructionSites);
 
 }

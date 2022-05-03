@@ -63,7 +63,6 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setCompany(foundMainCompany.get());
         companyConstructionSite.setMainContractor(true);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
     public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
@@ -72,23 +71,11 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
         companyConstructionSite.setMainContractor(false);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
-    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+    public List<CompanyConstructionSiteDto> getAllCompaniesFromSite(Integer constructionSiteId) {
         List<CompanyConstructionSite> constructionSiteCompanies = companyConstructionSiteRepository.findByConstructionSiteId(constructionSiteId, false);
-        List<Integer> constructionSiteCompanyIds = new ArrayList<>();
-        for (CompanyConstructionSite constructionSiteCompany : constructionSiteCompanies) {
-            Integer constructionSiteCompanyId = (constructionSiteCompany.getCompany().getId());
-            constructionSiteCompanyIds.add(constructionSiteCompanyId);
-        }
-        List<CompanyConstructionSiteDto> companyConstructionSiteDtos = companyConstructionSiteMapper.toDtos(companyConstructionSiteRepository.findAllById(constructionSiteCompanyIds));
-        for (CompanyConstructionSiteDto companyConstructionSiteDto : companyConstructionSiteDtos) {
-
-        }
-        return null;
-//        return companyMapper.toDtos(companyRepository.findAllById(constructionSiteCompanyIds));
-
+        return companyConstructionSiteMapper.toDtos(constructionSiteCompanies);
     }
 
 
