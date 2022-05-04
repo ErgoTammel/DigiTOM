@@ -45,8 +45,8 @@ public class ConstructionSiteManagementController {
     }
 
     @GetMapping ("/name")
-    public ReportConstructionSiteInfo getReportConstructionSiteInfo (@RequestParam Integer ConstructionSiteId, @RequestParam Integer reportId) {
-        return constructionSiteManagementService.getReportConstructionSiteInfo(ConstructionSiteId, reportId);
+    public ReportConstructionSiteInfo getReportConstructionSiteInfo (@RequestParam Integer constructionSiteId, @RequestParam Integer reportId) {
+        return constructionSiteManagementService.getReportConstructionSiteInfo(constructionSiteId, reportId);
     }
 
     @GetMapping("/all/company")
