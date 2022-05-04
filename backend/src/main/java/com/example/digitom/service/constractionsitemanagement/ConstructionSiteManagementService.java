@@ -1,8 +1,9 @@
 package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.company.CompanyService;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteDto;
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteListResponse;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
@@ -54,7 +55,11 @@ public class ConstructionSiteManagementService {
         companyConstructionSiteService.addNewSubContractor(companyId, constructionSiteId);
     }
 
-    public List<CompanyDto> getAllCompaniesFromSite(Integer constructionSiteId) {
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite(Integer constructionSiteId) {
         return companyConstructionSiteService.getAllCompaniesFromSite(constructionSiteId);
+    }
+
+    public void removeSubcontractorFromSiteByIds(Integer companyId, Integer siteId) {
+        companyConstructionSiteService.removeSubcontractorFromSiteByIds(companyId, siteId);
     }
 }

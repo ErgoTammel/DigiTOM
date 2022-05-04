@@ -26,8 +26,8 @@ public class CompanyController {
 
 
     @PostMapping("/new")
-    public CompanyDto addNewCompany(@RequestBody CompanyDto companyDto) {
-        return companyService.addNewCompany(companyDto);
+    public Company addNewCompany(@RequestBody RegistrationRequest registrationRequest) {
+        return companyService.addNewCompany(registrationRequest);
 
     }
 

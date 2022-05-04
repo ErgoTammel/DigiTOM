@@ -1,12 +1,14 @@
 package com.example.digitom.domain.company;
 
 import com.example.digitom.service.account.RegistrationRequest;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-29T19:02:07+0300",
+    date = "2022-05-03T09:49:55+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -77,5 +79,19 @@ public class CompanyMapperImpl implements CompanyMapper {
         }
 
         return company;
+    }
+
+    @Override
+    public List<CompanyDto> toDtos(List<Company> companies) {
+        if ( companies == null ) {
+            return null;
+        }
+
+        List<CompanyDto> list = new ArrayList<CompanyDto>( companies.size() );
+        for ( Company company : companies ) {
+            list.add( toDto( company ) );
+        }
+
+        return list;
     }
 }

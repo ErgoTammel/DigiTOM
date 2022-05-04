@@ -43,14 +43,25 @@ public class CompanyService {
         }
 
     public List<CompanyDto> getAllCompanies() {
+        List<Company> companies = companyRepository.getById();
+        List<CompanyDto> companyDtos = new ArrayList<>();
+        for (Company company : companies) {
+            CompanyDto companyDto = (company);
+        }
+
+
         return null;
     }
 
     public void getCompanyById(Integer companyId, CompanyDto companyDto) {
 
-        Company company = findAllCompanies(companyId);
-        company.setId(companyDto.getId());
+        Company company =  companyRepository.findById(companyId).get();
         company.setName(companyDto.getName());
         company.setRegNumber(companyDto.getRegNumber());
+    }
+
+    private CompanyDto toDto(Company company) {
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setId(company.getId());
     }
 }

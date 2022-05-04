@@ -26,8 +26,8 @@ export default {
     }
   },
   methods: {
-    getConstructionSites: function () {
-      this.$http.get("/inspection/sites", {
+    getConstructionSites: async function () {
+      await this.$http.get("/inspection/sites", {
         params: {
           userId: sessionStorage.getItem("userId")
         }

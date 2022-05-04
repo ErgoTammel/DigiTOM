@@ -31,4 +31,8 @@ public class ConstructionSiteService {
         constructionSiteRepository.save(constructionSite);
         return constructionSite.getId();
     }
+
+    public ConstructionSite findConstructionSiteById (Integer siteId){
+        return constructionSiteRepository.findConstructionSiteById(siteId);
+    }
 }
