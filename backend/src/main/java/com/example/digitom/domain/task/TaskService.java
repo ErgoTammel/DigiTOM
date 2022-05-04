@@ -1,7 +1,6 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.domain.report.ReportRepository;
-import com.example.digitom.domain.safetyfield.SafetyField;
 import com.example.digitom.domain.safetyfield.SafetyFieldRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +15,21 @@ public class TaskService {
     @Resource
     private SafetyFieldRepository safetyFieldRepository;
 
-    public Task addNewTask (Integer safetyFiledId, Integer reportId) {
-        Task task = new Task();
-        task.setReport(reportRepository.findById(reportId).get());
+    @Resource
+    private TaskRepository taskRepository;
+
+    @Resource
+    private TaskMapper taskMapper;
+
+    public void addNewTask(Integer safetyFiledId, Integer reportId, TaskRequest taskRequest) {
+        Task task = taskMapper.taskRequestToTask(taskRequest);
         task.setSafetyField(safetyFieldRepository.findById(safetyFiledId).get());
-return null;
+        task.setReport(reportRepository.findById(reportId).get());
+
+        task.setDescription(taskRequest.getDescription());
+        task.setDeadline(taskRequest.getDeadline());
+        taskRepository.save(task);
+
     }
 
 }

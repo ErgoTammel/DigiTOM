@@ -34,7 +34,7 @@ public class ConstructionSiteManagementController {
         constructionSiteManagementService.addNewSubContractor(companyId, constructionSiteId);
     }
 
-    @GetMapping ("/all/companies")
+    @GetMapping ("/all/subcontractor")
     public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite (@RequestParam Integer constructionSiteId) {
         return constructionSiteManagementService.getAllCompaniesFromSite(constructionSiteId);
     }
@@ -47,6 +47,11 @@ public class ConstructionSiteManagementController {
     @GetMapping ("/name")
     public ReportConstructionSiteInfo getReportConstructionSiteInfo (@RequestParam Integer ConstructionSiteId, @RequestParam Integer reportId) {
         return constructionSiteManagementService.getReportConstructionSiteInfo(ConstructionSiteId, reportId);
+    }
+
+    @GetMapping("/all/company")
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor (@RequestParam Integer constructionSiteId) {
+        return constructionSiteManagementService.getAllCompaniesWithMainContractor(constructionSiteId);
     }
 
 

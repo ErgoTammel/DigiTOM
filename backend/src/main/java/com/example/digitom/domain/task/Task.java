@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -30,7 +30,7 @@ public class Task {
     private String description;
 
     @Column(name = "deadline", nullable = false)
-    private LocalDate deadline;
+    private Date deadline;
 
     @Column(name = "is_done", nullable = false)
     private Boolean isDone = false;

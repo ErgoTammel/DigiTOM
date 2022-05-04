@@ -76,4 +76,7 @@ public class ConstructionSiteManagementService {
         return reportConstructionSiteInfo;
     }
 
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor(Integer constructionSiteId) {
+        return companyConstructionSiteService.getAllCompaniesWithMainContractor(constructionSiteId);
+    }
 }

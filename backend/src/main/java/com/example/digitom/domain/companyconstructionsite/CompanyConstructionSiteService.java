@@ -65,7 +65,6 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setCompany(foundMainCompany.get());
         companyConstructionSite.setMainContractor(true);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
     public void addNewSubContractor(Integer companyId, Integer constructionSiteId) {
@@ -79,7 +78,6 @@ public class CompanyConstructionSiteService {
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
         companyConstructionSite.setMainContractor(false);
         companyConstructionSiteRepository.save(companyConstructionSite);
-
     }
 
     public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite(Integer constructionSiteId) {
@@ -95,6 +93,11 @@ public class CompanyConstructionSiteService {
 
     public Company getMainContractor (Integer siteId, Boolean mainContractor) {
        return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
+    }
+
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor(Integer constructionSiteId) {
+        List<CompanyConstructionSite> companies = companyConstructionSiteRepository.findByConstructionSiteIdOrderByCompanyNameAsc(constructionSiteId);
+        return companyConstructionSiteMapper.toCCSListResponses(companies);
     }
 }
 
