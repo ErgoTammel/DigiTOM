@@ -92,5 +92,9 @@ public class CompanyConstructionSiteService {
         CompanyConstructionSite companyConstructionSite = companyConstructionSiteRepository.findByCompanyIdAndConstructionSiteId(companyId, siteId);
         companyConstructionSiteRepository.delete(companyConstructionSite);
     }
+
+    public Company getMainContractor (Integer siteId, Boolean mainContractor) {
+       return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
+    }
 }
 

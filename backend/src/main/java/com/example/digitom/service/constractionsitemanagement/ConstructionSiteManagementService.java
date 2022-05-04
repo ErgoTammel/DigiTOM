@@ -7,6 +7,7 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
+import com.example.digitom.domain.report.ReportService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +28,9 @@ public class ConstructionSiteManagementService {
 
     @Resource
     private CompanyConstructionSiteService companyConstructionSiteService;
+
+    @Resource
+    private ReportService reportService;
 
 
     public List<CompanyNameResponse> getAllCompanies() {
@@ -62,4 +66,14 @@ public class ConstructionSiteManagementService {
     public void removeSubcontractorFromSiteByIds(Integer companyId, Integer siteId) {
         companyConstructionSiteService.removeSubcontractorFromSiteByIds(companyId, siteId);
     }
+
+    public ReportConstructionSiteInfo getReportConstructionSiteInfo(Integer siteId, Integer reportId) {
+        ReportConstructionSiteInfo reportConstructionSiteInfo = new ReportConstructionSiteInfo();
+        reportConstructionSiteInfo.setSiteName(constructionSiteService.findConstructionSiteById(siteId).getName());
+        reportConstructionSiteInfo.setSiteAddress(constructionSiteService.findConstructionSiteById(siteId).getAddress());
+        reportConstructionSiteInfo.setCompanyName(companyConstructionSiteService.getMainContractor(siteId, true).getName());
+        reportConstructionSiteInfo.setReportDate(reportService.getReportById(reportId).getDate());
+        return reportConstructionSiteInfo;
+    }
+
 }

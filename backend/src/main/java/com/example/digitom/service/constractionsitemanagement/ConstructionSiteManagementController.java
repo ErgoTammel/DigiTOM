@@ -44,4 +44,10 @@ public class ConstructionSiteManagementController {
         constructionSiteManagementService.removeSubcontractorFromSiteByIds(companyId, siteId);
     }
 
+    @GetMapping ("/name")
+    public ReportConstructionSiteInfo getReportConstructionSiteInfo (@RequestParam Integer ConstructionSiteId, @RequestParam Integer reportId) {
+        return constructionSiteManagementService.getReportConstructionSiteInfo(ConstructionSiteId, reportId);
+    }
+
+
 }

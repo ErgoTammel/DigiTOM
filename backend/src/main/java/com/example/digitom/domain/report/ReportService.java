@@ -22,4 +22,9 @@ public class ReportService {
         reportRepository.save(report);
         return report.getId();
     }
+
+    public Report getReportById (Integer reportId) {
+       return reportRepository.findById(reportId).get();
+    }
+
 }
