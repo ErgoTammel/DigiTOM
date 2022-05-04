@@ -1,10 +1,10 @@
 <template>
-<div>
+<div id="all">
   <div id="window">
-    <h2>Ülevaatus ehitusobjektil {{constructionSiteInfo.siteName}} </h2>
-    <h3>Kuupäev: {{constructionSiteInfo.reportDate}}</h3>
-    <h3>Aadress: {{constructionSiteInfo.siteAddress}}</h3>
-    <h3>Peatöövõtja:{{constructionSiteInfo.companyName}}</h3>
+    <h2 class="uppercase">Ülevaatus ehitusobjektil {{constructionSiteInfo.siteName}} </h2>
+    <h3><strong>Kuupäev:</strong> {{constructionSiteInfo.reportDate}}</h3>
+    <h3><strong>Aadress:</strong> {{constructionSiteInfo.siteAddress}}</h3>
+    <h3><strong>Peatöövõtja:</strong> {{constructionSiteInfo.companyName}}</h3>
     <table class="table table-light table-bordered table-responsive" id="incidentTable" >
       <thead class="thead-dark">
       <tr>
@@ -15,6 +15,8 @@
       </thead>
       <tbody>
       <tr>
+
+<!--        toggleWindowBlur function-->
         <th scope="row"><h4 class="rowHeading">1. Kukkumisohu vältimine, varinguoht, uppumisoht</h4></th>
       <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field1.safe}}</h4></h4></td>
       <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field1.notsafe}}</h4></h4></td>
@@ -51,6 +53,9 @@
     <button type="button" class="btn btn-primary btn-lg">Vaata üle ja kinnita</button>
     </div>
   </div>
+  <div id="newTaskWindow" v-if="newTaskWindow">
+<h2 id="newTaskWindowHeading">Sisesta leitud vea kirjeldus</h2>
+  </div>
 </div>
 </template>
 
@@ -59,6 +64,7 @@ export default {
   name: "NewReportView",
   data:function(){
     return{
+      newTaskWindow:false,
       constructionSiteInfo:{},
       counter:{
         field1:{
@@ -98,10 +104,31 @@ export default {
           .then(response=>{
               sessionStorage.setItem("reportId", response.data)
           })
+    },
+    getConstructionSiteName: function(){
+      this.$http.get("/construction-site/name", {
+        params:{
+          constructionSiteId:sessionStorage.getItem("constructionSiteId"),
+          reportId:sessionStorage.getItem("reportId")
+        }
+      })
+      .then(response=>{
+        this.constructionSiteInfo=response.data
+      }).catch(error=>error.response.data)
+    },
+    toggleWindowBlur:function(){
+      if(document.getElementById("all").classList.contains("blur")){
+        document.getElementById("all").classList.remove("blur");
+      }else{
+        document.getElementById("all").classList.add("blur");
+
+      }
+
     }
   },
   mounted(){
-    this.newReport()
+    this.getConstructionSiteName();
+    this.newReport();
   }
 }
 </script>
@@ -118,14 +145,15 @@ export default {
   border: 2px solid black;
 }
 
-
+.uppercase{
+  text-transform: uppercase;
+}
 h2 {
   font-family: 'Akshar', sans-serif;
   color: white;
   font-size: 3.5em;
   margin-left: 10%;
   margin-top: 5%;
-  text-transform: uppercase;
 }
 h3{
   margin-left: 10%;
@@ -175,11 +203,7 @@ h4 i{
   font-size: 1em;
   font-weight: bold;
 }
-#incidentTableHeading{
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  font-size: 2.8em;
-  text-transform:unset;}
+
 .submitRow{
   width: 100%;
   margin-left: 46%;
@@ -191,4 +215,21 @@ button{
   height: 3em;
   font-size: 1.5em;
 }
+#newTaskWindow{
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  background-color:#44b0ff;
+  border: 4px solid black;
+  transform: translate(-50%,-50%);
+  width: 60vw;
+  height: 70vh;
+  z-index: 1000;
+}
+
+
+ .blur {
+  filter: blur(3px);
+}
+
 </style>
