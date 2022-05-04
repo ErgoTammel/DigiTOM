@@ -20,7 +20,7 @@ public class TaskService {
         Task task = new Task();
         task.setReport(reportRepository.findById(reportId).get());
         task.setSafetyField(safetyFieldRepository.findById(safetyFiledId).get());
-
+return null;
     }
 
 }
