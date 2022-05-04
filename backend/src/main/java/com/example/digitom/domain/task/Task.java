@@ -1,12 +1,13 @@
 package com.example.digitom.domain.task;
 
+import com.example.digitom.domain.company.Company;
+import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.report.Report;
-import com.example.digitom.domain.safetyfield.SafetyField;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,18 +20,22 @@ public class Task {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "safety_field_id", nullable = false)
-    private SafetyField safetyField;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "report_id", nullable = false)
     private Report report;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "incident_id", nullable = false)
+    private Incident incident;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 
     @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "deadline", nullable = false)
-    private Date deadline;
+    private LocalDate deadline;
 
     @Column(name = "is_done", nullable = false)
     private Boolean isDone = false;

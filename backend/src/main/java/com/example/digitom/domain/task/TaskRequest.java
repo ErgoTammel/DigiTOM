@@ -2,11 +2,11 @@ package com.example.digitom.domain.task;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class TaskRequest {
     private String description;
-    private Date deadline;
+    private LocalDate deadline;
 
 }
