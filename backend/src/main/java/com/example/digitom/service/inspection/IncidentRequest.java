@@ -1,4 +1,4 @@
-package com.example.digitom.domain.incident;
+package com.example.digitom.service.inspection;
 
 import lombok.Data;
 

@@ -1,23 +1,14 @@
-INSERT INTO digi_tom.role (name)
-VALUES ('Admin');
-INSERT INTO digi_tom.role (name)
-VALUES ('Inspector');
-INSERT INTO digi_tom.role (name)
-VALUES ('User');
+INSERT INTO digi_tom.role (id, name) VALUES (DEFAULT, 'Admin');
+INSERT INTO digi_tom.role (id, name) VALUES (DEFAULT, 'Inspector');
+INSERT INTO digi_tom.role (id, name) VALUES (DEFAULT, 'User');
 
-INSERT INTO digi_tom.user (email, password)
-VALUES ('kirillp1988@gmail.com', '123');
-INSERT INTO digi_tom.user (email, password)
-VALUES ('ergotammel@gmail.com', '456');
-INSERT INTO digi_tom.user (email, password)
-VALUES ('silversomma@gmail.com', '789');
+INSERT INTO digi_tom.user (id, email, password) VALUES (DEFAULT, 'kirillp1988@gmail.com', '123');
+INSERT INTO digi_tom.user (id, email, password) VALUES (DEFAULT, 'ergotammel@gmail.com', '456');
+INSERT INTO digi_tom.user (id, email, password) VALUES (DEFAULT, 'silversomma@gmail.com', '789');
 
-INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name)
-VALUES (DEFAULT, 1, '5656', 'Kirill', null, 'Pavlov');
-INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name)
-VALUES (DEFAULT, 2, '5757', 'Silver', 'Tiit', 'Somma');
-INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name)
-VALUES (DEFAULT, 3, '5858', 'Ergo', null, 'Tammel');
+INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name) VALUES (DEFAULT, 1, '5656', 'Kirill', null, 'Pavlov');
+INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name) VALUES (DEFAULT, 2, '5757', 'Silver', 'Tiit', 'Somma');
+INSERT INTO digi_tom.contact (id, user_id, phone_number, first_name, middle_name, last_name) VALUES (DEFAULT, 3, '5858', 'Ergo', null, 'Tammel');
 
 INSERT INTO digi_tom.company (id, name, reg_number)
 VALUES (DEFAULT, 'Merko Ehitus', 1400001);
@@ -69,8 +60,8 @@ INSERT INTO digi_tom.incident (id, safe, safety_field_id, report_id) VALUES (DEF
 INSERT INTO digi_tom.incident (id, safe, safety_field_id, report_id) VALUES (DEFAULT, true, 6, 4);
 INSERT INTO digi_tom.incident (id, safe, safety_field_id, report_id) VALUES (DEFAULT, false, 6, 5);
 
-INSERT INTO digi_tom.task (id, safety_field_id, report_id, description, deadline, is_done) VALUES (DEFAULT, 5, 3, 'Ekskavaator ripub kolmanda korruse aknast välja', '2022-04-29', false);
-INSERT INTO digi_tom.task (id, safety_field_id, report_id, description, deadline, is_done) VALUES (DEFAULT, 6, 5, 'Inimväljaheited kolmandas trepikojas igal trepiastmel', '2022-04-28', false);
+INSERT INTO digi_tom.task (id, report_id, incident_id, company_id, description, deadline, is_done) VALUES (DEFAULT, 3, 1, 2, 'Ekskavaator ripub kolmanda korruse aknast välja', '2022-04-29', false);
+INSERT INTO digi_tom.task (id, report_id, incident_id, company_id, description, deadline, is_done) VALUES (DEFAULT, 5, 2, 1,  'Inimväljaheited kolmandas trepikojas igal trepiastmel', '2022-04-28', false);
 
 INSERT INTO digi_tom.report_picture (id, report_id, task_id, description, base64) VALUES (DEFAULT, 3, 1, 'Koristage ära', 'Bytea siia panna');
 INSERT INTO digi_tom.report_picture (id, report_id, task_id, description, base64) VALUES (DEFAULT, 5, 2, 'Koristage ära', 'Bytea siia panna');
