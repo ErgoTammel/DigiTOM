@@ -4,35 +4,41 @@ import LogInView from "@/views/LogInView";
 import MainView from "@/views/MainView";
 import NewInspectionView from "@/views/NewInspectionView";
 import NewConstructionSiteView from "@/views/NewConstructionSiteView";
+import NewReportView from "@/views/NewReportView";
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'logInRoute',
-    component: LogInView
-  },
-  {
-    path: '/main',
-    name: 'mainRoute',
-    component: MainView
-  },
-  {
-    path:'/inspection/sites',
-    name:'newInspectionRoute',
-    component: NewInspectionView
-  },
-  {
-    path:'/construction-site/new',
-    name:'newConstructionSiteRoute',
-    component: NewConstructionSiteView
-  }
+    {
+        path: '/',
+        name: 'logInRoute',
+        component: LogInView
+    },
+    {
+        path: '/main',
+        name: 'mainRoute',
+        component: MainView
+    },
+    {
+        path: '/inspection/sites',
+        name: 'newInspectionRoute',
+        component: NewInspectionView
+    },
+    {
+        path: '/construction-site/new',
+        name: 'newConstructionSiteRoute',
+        component: NewConstructionSiteView
+    },
+    {
+        path:'/report/new',
+        name: 'newReportViewRoute',
+        component: NewReportView
+    }
 
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router

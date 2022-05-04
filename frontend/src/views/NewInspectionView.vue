@@ -5,7 +5,7 @@
       <h2>Vali inspekteeritav ehitusobjekt või loo uus.</h2>
     </div>
     <div id="siteTable">
-      <button type="button" v-for="site in constructionSiteRespond" value="site.constructionSiteId" class="btn btn-light btn-lg">{{site.constructionSiteName}}</button>
+      <button type="button" v-for="site in constructionSiteRespond" v-on:click="newReport(site.constructionSiteId)" class="btn btn-light btn-lg">{{site.constructionSiteName}}</button>
       <button type="button" class="btn btn-primary" v-on:click="newConstructionSite()">Loo uus objekt +</button>
     </div>
   </div>
@@ -22,7 +22,8 @@ export default {
   data: function () {
     return {
       constructionSiteRespond: {},
-      newConstructionSiteRequest:{}
+      newConstructionSiteRequest:{},
+      newReportRequest:0
     }
   },
   methods: {
@@ -38,7 +39,11 @@ export default {
     },
     newConstructionSite:function(){
       router.push("/construction-site/new")
-      }
+      },
+    newReport:function(id){
+        sessionStorage.setItem("constructionSiteId", id)
+        router.push('/report/new')
+    }
   },
   mounted() {
     this.getConstructionSites();
