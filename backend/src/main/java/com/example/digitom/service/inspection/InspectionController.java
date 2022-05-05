@@ -30,6 +30,12 @@ public class InspectionController {
         inspectionService.addNewTask(taskRequest);
     }
 
+    @GetMapping("/counter/incident")
+    public Integer incidentCounter(@RequestBody IncidentCounterResponse incidentCounterResponse) {
+        return inspectionService.incidentCounter(incidentCounterResponse);
+    }
+
+
 //    @PostMapping("/new/picture")
 //    public void addNewReportPicture()
 }

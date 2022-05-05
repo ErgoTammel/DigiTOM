@@ -47,5 +47,9 @@ public class InspectionService {
     public void addNewTask(TaskRequest taskRequest) {
         taskService.addNewTask(taskRequest);
     }
+
+    public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
+        return incidentService.incidentCounter(incidentCounterResponse);
+    }
 }
 

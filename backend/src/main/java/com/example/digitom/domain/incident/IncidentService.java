@@ -1,9 +1,11 @@
 package com.example.digitom.domain.incident;
 
+import com.example.digitom.service.inspection.IncidentCounterResponse;
 import com.example.digitom.service.inspection.IncidentRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class IncidentService {
@@ -20,4 +22,11 @@ public class IncidentService {
         return incident.getId();
     }
 
+    public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
+        List<Incident> incidents = incidentRepository.findByReportIdAndSafetyFieldIdAndSafe
+                (incidentCounterResponse.getReportId(), incidentCounterResponse.getSafetyFieldId(),
+                        incidentCounterResponse.getSafe());
+
+        return incidents.size();
+    }
 }
