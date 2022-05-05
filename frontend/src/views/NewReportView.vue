@@ -1,6 +1,6 @@
 <template>
 <div id="all">
-  <div id="window">
+  <div id="window" v-if="!newTaskWindow">
     <h2 class="uppercase">Ülevaatus ehitusobjektil {{constructionSiteInfo.siteName}} </h2>
     <h3><strong>Kuupäev:</strong> {{constructionSiteInfo.reportDate}}</h3>
     <h3><strong>Aadress:</strong> {{constructionSiteInfo.siteAddress}}</h3>
@@ -15,36 +15,34 @@
       </thead>
       <tbody>
       <tr>
-
-<!--        toggleWindowBlur function-->
         <th scope="row"><h4 class="rowHeading">1. Kukkumisohu vältimine, varinguoht, uppumisoht</h4></th>
       <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field1.safe}}</h4></h4></td>
-      <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field1.notsafe}}</h4></h4></td>
+      <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(1)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field1.notsafe}}</h4></h4></td>
       </tr>
       <tr>
         <th scope="row"><h4 class="rowHeading">2. Tellingud, redelid, liikumisteed</h4></th>
         <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field2.safe}}</h4></h4></td>
-        <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field2.notsafe}}</h4></h4></td>
+        <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field2.notsafe}}</h4></h4></td>
       </tr>
       <tr>
         <th scope="row"><h4 class="rowHeading">3. Ehitusmasinad tõsteseadmed ja käsitööriistad</h4></th>
         <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field3.safe}}</h4></h4></td>
-        <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field3.notsafe}}</h4></h4></td>
+        <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field3.notsafe}}</h4></h4></td>
       </tr>
       <tr>
         <th scope="row"><h4 class="rowHeading">4. Elekter ja valgustus</h4></th>
         <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field4.safe}}</h4></h4></td>
-        <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field4.notsafe}}</h4></h4></td>
+        <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field4.notsafe}}</h4></h4></td>
       </tr>
       <tr>
         <th scope="row"><h4 class="rowHeading">5. Üldine kord, olme- ja jäätmekäitlus</h4></th>
         <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field5.safe}}</h4></h4></td>
-        <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field5.notsafe}}</h4></h4></td>
+        <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field5.notsafe}}</h4></h4></td>
       </tr>
       <tr>
         <th scope="row"><h4 class="rowHeading">6. Ehitustöölised</h4></th>
         <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field6.safe}}</h4></h4></td>
-        <td><h4><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field6.notsafe}}</h4></h4></td>
+        <td><h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus"></i><h4 class="counter">{{counter.field6.notsafe}}</h4></h4></td>
       </tr>
       </tbody>
     </table>
@@ -65,6 +63,7 @@ export default {
   data:function(){
     return{
       newTaskWindow:false,
+      safetyField:0,
       constructionSiteInfo:{},
       counter:{
         field1:{
@@ -116,15 +115,24 @@ export default {
         this.constructionSiteInfo=response.data
       }).catch(error=>error.response.data)
     },
-    toggleWindowBlur:function(){
-      if(document.getElementById("all").classList.contains("blur")){
-        document.getElementById("all").classList.remove("blur");
-      }else{
-        document.getElementById("all").classList.add("blur");
+    newNegativeIncident:function(safetyField){
+      this.toggleNewTaskWindow()
+      this.$http.post("/inspection/incident/new",{
+        safe:false,
+        safetyFieldId:safetyField,
+        reportId:sessionStorage.getItem("reportId")
+      }).then(response=>{
 
-      }
+      })
 
+    },
+    newPositiveIncident:function(){
+
+    },
+    toggleNewTaskWindow:function(){
+      this.newTaskWindow=!this.newTaskWindow;
     }
+
   },
   mounted(){
     this.getConstructionSiteName();
@@ -218,7 +226,7 @@ button{
 #newTaskWindow{
   position: absolute;
   left: 50%;
-  top: 90%;
+  top: 70%;
   background-color:#44b0ff;
   border: 4px solid black;
   transform: translate(-50%,-50%);
@@ -228,8 +236,5 @@ button{
 }
 
 
- .blur {
-  filter: blur(3px);
-}
 
 </style>

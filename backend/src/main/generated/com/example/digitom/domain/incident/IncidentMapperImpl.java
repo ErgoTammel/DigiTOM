@@ -2,13 +2,14 @@ package com.example.digitom.domain.incident;
 
 import com.example.digitom.domain.report.Report;
 import com.example.digitom.domain.safetyfield.SafetyField;
+import com.example.digitom.service.inspection.IncidentRequest;
 import java.time.LocalDate;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-04T14:20:04+0300",
+    date = "2022-05-05T09:45:27+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
