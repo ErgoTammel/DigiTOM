@@ -1,6 +1,7 @@
 package com.example.digitom.domain.report;
 
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
+import com.example.digitom.domain.task.TaskService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +15,8 @@ public class ReportService {
 
     @Resource
     private ReportRepository reportRepository;
+    @Resource
+    private TaskService taskService;
 
     public Integer addNewReport(Integer siteId) {
         Report report = new Report();
@@ -27,4 +30,7 @@ public class ReportService {
        return reportRepository.findById(reportId).get();
     }
 
+    public void removeReport(Integer reportId) {
+        taskService.removeTasksByReportId(reportRepository.findById(reportId).get());
+    }
 }

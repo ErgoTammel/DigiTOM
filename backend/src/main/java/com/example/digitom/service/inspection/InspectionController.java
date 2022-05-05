@@ -44,4 +44,10 @@ public class InspectionController {
     public void addNewReportPicture(@RequestBody ReportPictureRequest reportPictureRequest) {
         inspectionService.addNewReportPicture(reportPictureRequest);
     }
+
+    @DeleteMapping("/report")
+    public void removeReport(@RequestParam Integer reportId) {
+        inspectionService.removeReport(reportId);
+    }
+
 }

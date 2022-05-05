@@ -4,6 +4,8 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.incident.IncidentService;
+import com.example.digitom.domain.report.Report;
+import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
@@ -27,6 +29,9 @@ public class InspectionService {
     private TaskService taskService;
     @Resource
     private ReportPictureService reportPictureService;
+    @Resource
+    private ReportService reportService;
+
 
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
@@ -58,9 +63,12 @@ public class InspectionService {
         incidentService.removeTrueIncident(incidentCounterResponse);
     }
 
-
     public void addNewReportPicture(ReportPictureRequest reportPictureRequest) {
         reportPictureService.addNewReportPicture(reportPictureRequest);
+    }
+
+    public void removeReport(Integer reportId) {
+        reportService.removeReport(reportId);
     }
 }
 
