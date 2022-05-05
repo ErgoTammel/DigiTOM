@@ -31,7 +31,8 @@ public class IncidentService {
 
     public void removeTrueIncident(IncidentCounterResponse incidentCounterResponse) {
 
-        Incident lastById = incidentRepository.findLastById(incidentCounterResponse.getReportId(),
+        Incident lastById = incidentRepository.findFirstByReport_IdAndSafetyField_IdAndSafeOrderByIdDesc
+                (incidentCounterResponse.getReportId(),
                 incidentCounterResponse.getSafetyFieldId(),
                 incidentCounterResponse.getSafe());
         incidentRepository.delete(lastById);
