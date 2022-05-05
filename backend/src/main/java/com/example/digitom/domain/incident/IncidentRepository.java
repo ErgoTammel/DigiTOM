@@ -9,7 +9,10 @@ public interface IncidentRepository extends JpaRepository<Incident, Integer> {
     @Query("select i from Incident i where i.report.id = ?1 and i.safetyField.id = ?2 and i.safe = ?3")
     List<Incident> findByReportIdAndSafetyFieldIdAndSafe(Integer id, Integer id1, Boolean safe);
 
+    @Query("select i from Incident i where i.report.id = ?1 and i.safetyField.id = ?2 and i.safe = ?3 order by i.id")
+    List<Incident> incidents(Integer id, Integer id1, Boolean safe);
 
+    Incident findLastById(Integer id, Integer id1, Boolean safe);
 
 
 }

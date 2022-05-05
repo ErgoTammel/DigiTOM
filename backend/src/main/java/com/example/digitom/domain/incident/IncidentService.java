@@ -26,7 +26,16 @@ public class IncidentService {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafetyFieldIdAndSafe
                 (incidentCounterResponse.getReportId(), incidentCounterResponse.getSafetyFieldId(),
                         incidentCounterResponse.getSafe());
-
         return incidents.size();
+    }
+
+    public void removeTrueIncident(IncidentCounterResponse incidentCounterResponse) {
+
+        Incident lastById = incidentRepository.findLastById(incidentCounterResponse.getReportId(),
+                incidentCounterResponse.getSafetyFieldId(),
+                incidentCounterResponse.getSafe()
+        );
+
+
     }
 }

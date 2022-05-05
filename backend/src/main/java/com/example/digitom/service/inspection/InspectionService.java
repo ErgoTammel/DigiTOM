@@ -3,11 +3,11 @@ package com.example.digitom.service.inspection;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
-import com.example.digitom.domain.constructionsite.ConstructionSiteService;
-import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.incident.IncidentService;
+import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
+import com.example.digitom.service.image.ReportPictureRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +25,8 @@ public class InspectionService {
     private IncidentService incidentService;
     @Resource
     private TaskService taskService;
+    @Resource
+    private ReportPictureService reportPictureService;
 
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
@@ -41,7 +43,7 @@ public class InspectionService {
     }
 
     public Integer addNewIncident(IncidentRequest incidentRequest) {
-       return incidentService.addNewIncident(incidentRequest);
+        return incidentService.addNewIncident(incidentRequest);
     }
 
     public void addNewTask(TaskRequest taskRequest) {
@@ -50,6 +52,15 @@ public class InspectionService {
 
     public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
         return incidentService.incidentCounter(incidentCounterResponse);
+    }
+
+    public void removeTrueIncident(IncidentCounterResponse incidentCounterResponse) {
+        incidentService.removeTrueIncident(incidentCounterResponse);
+    }
+
+
+    public void addNewReportPicture(ReportPictureRequest reportPictureRequest) {
+        reportPictureService.addNewReportPicture(reportPictureRequest);
     }
 }
 

@@ -1,7 +1,7 @@
 package com.example.digitom.service.inspection;
 
-import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.task.TaskRequest;
+import com.example.digitom.service.image.ReportPictureRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,7 +22,7 @@ public class InspectionController {
 
     @PostMapping("/incident/new")
     public Integer addNewIncident(@RequestBody IncidentRequest incidentRequest) {
-       return inspectionService.addNewIncident(incidentRequest);
+        return inspectionService.addNewIncident(incidentRequest);
     }
 
     @PostMapping("/task/new")
@@ -35,7 +35,14 @@ public class InspectionController {
         return inspectionService.incidentCounter(incidentCounterResponse);
     }
 
+    @DeleteMapping("/counter/incident")
+    public void removeTrueIncident(@RequestBody IncidentCounterResponse incidentCounterResponse) {
+        inspectionService.removeTrueIncident(incidentCounterResponse);
+    }
 
-//    @PostMapping("/new/picture")
-//    public void addNewReportPicture()
+
+    @PostMapping("/new/picture")
+    public void addNewReportPicture(@RequestBody ReportPictureRequest reportPictureRequest) {
+        inspectionService.addNewReportPicture(reportPictureRequest);
+    }
 }

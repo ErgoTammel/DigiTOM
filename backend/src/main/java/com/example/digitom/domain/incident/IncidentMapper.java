@@ -22,5 +22,5 @@ public interface IncidentMapper {
     @Mapping(target = "safetyField.id", source = "safetyFieldId")
     @Mapping(target = "report.id", source = "reportId")
     @Mapping(target = "safe", source = "safe")
-    Incident incidentRequestToIncident (IncidentRequest incidentRequest);
+    Incident incidentRequestToIncident(IncidentRequest incidentRequest);
 }
