@@ -33,9 +33,7 @@ public class IncidentService {
 
         Incident lastById = incidentRepository.findLastById(incidentCounterResponse.getReportId(),
                 incidentCounterResponse.getSafetyFieldId(),
-                incidentCounterResponse.getSafe()
-        );
-
-
+                incidentCounterResponse.getSafe());
+        incidentRepository.delete(lastById);
     }
 }
