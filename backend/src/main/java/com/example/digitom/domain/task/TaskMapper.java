@@ -2,9 +2,13 @@ package com.example.digitom.domain.task;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
+import java.time.LocalDate;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+
 public interface TaskMapper {
 //    @Mapping(source = "reportId", target = "report.id")
 //    @Mapping(source = "reportConstructionSiteId", target = "constructionSite.id")
@@ -33,5 +37,12 @@ public interface TaskMapper {
     @Mapping(target = "report.id", source = "reportId")
     @Mapping(target = "incident.id", source = "incidentId")
     @Mapping(target = "company.id", source = "companyId")
+    @Mapping(target = "deadline", source = "deadline", qualifiedByName = "addDays")
     Task taskRequestToTask(TaskRequest taskRequest);
+
+    @Named("addDays")
+    default LocalDate addDays (Integer deadline) {
+        return LocalDate.now().plusDays(deadline);
+
+    }
 }

@@ -40,7 +40,6 @@ public class InspectionController {
         inspectionService.removeTrueIncident(incidentCounterResponse);
     }
 
-
     @PostMapping("/new/picture")
     public void addNewReportPicture(@RequestBody ReportPictureRequest reportPictureRequest) {
         inspectionService.addNewReportPicture(reportPictureRequest);

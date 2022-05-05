@@ -35,7 +35,7 @@ public class Task {
     private String description;
 
     @Column(name = "deadline", nullable = false)
-    private Integer deadline;
+    private LocalDate deadline;
 
     @Column(name = "is_done", nullable = false)
     private Boolean isDone = false;
