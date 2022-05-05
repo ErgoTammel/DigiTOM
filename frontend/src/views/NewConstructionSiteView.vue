@@ -106,7 +106,7 @@ export default {
       }).then().catch(error => {
         console.log(error.response.data)
       })
-       await this.$http.get("/construction-site/all/companies", {
+       await this.$http.get("/construction-site/all/subcontractor", {
         params: {
           constructionSiteId: sessionStorage.getItem("constructionSiteId")
         }
@@ -124,7 +124,7 @@ export default {
           .catch(error => console.log(error.response.data)
           )
 
-      this.$http.get("/construction-site/all/companies", {
+      this.$http.get("/construction-site/all/subcontractor", {
         params: {
           constructionSiteId: sessionStorage.getItem("constructionSiteId")
         }

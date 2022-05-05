@@ -19,7 +19,7 @@ public class InspectionController {
         return inspectionService.getConstructionSites(userId);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/incident/new")
     public void addNewIncident(@RequestBody IncidentRequest incidentRequest) {
          inspectionService.addNewIncident(incidentRequest);
     }
