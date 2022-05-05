@@ -6,6 +6,8 @@ import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.incident.IncidentService;
+import com.example.digitom.domain.task.TaskRequest;
+import com.example.digitom.domain.task.TaskService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,9 +22,9 @@ public class InspectionService {
     @Resource
     private CompanyConstructionSiteService companyConstructionSiteService;
     @Resource
-    private ConstructionSiteService constructionSiteService;
-    @Resource
     private IncidentService incidentService;
+    @Resource
+    private TaskService taskService;
 
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
@@ -38,9 +40,12 @@ public class InspectionService {
         return responses;
     }
 
-    public void addNewIncident(IncidentRequest incidentRequest) {
+    public Integer addNewIncident(IncidentRequest incidentRequest) {
+       return incidentService.addNewIncident(incidentRequest);
+    }
 
-        incidentService.addNewIncident(incidentRequest);
+    public void addNewTask(TaskRequest taskRequest) {
+        taskService.addNewTask(taskRequest);
     }
 }
 
