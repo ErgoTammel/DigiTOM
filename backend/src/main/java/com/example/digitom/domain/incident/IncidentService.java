@@ -14,10 +14,10 @@ public class IncidentService {
     @Resource
     private IncidentRepository incidentRepository;
 
-
-    public void addNewIncident(IncidentRequest incidentRequest) {
+    public Integer addNewIncident(IncidentRequest incidentRequest) {
         Incident incident = incidentMapper.incidentRequestToIncident(incidentRequest);
         incidentRepository.save(incident);
+        return incident.getId();
     }
 
 }

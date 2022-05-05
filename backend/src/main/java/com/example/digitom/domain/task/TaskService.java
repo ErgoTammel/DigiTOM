@@ -1,6 +1,5 @@
 package com.example.digitom.domain.task;
 
-import com.example.digitom.domain.report.ReportRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -9,10 +8,13 @@ import javax.annotation.Resource;
 public class TaskService {
 
     @Resource
-    private ReportRepository reportRepository;
-
+    private TaskMapper taskMapper;
     @Resource
     private TaskRepository taskRepository;
 
 
+    public void addNewTask(TaskRequest taskRequest) {
+        Task task = taskMapper.taskRequestToTask(taskRequest);
+        taskRepository.save(task);
+    }
 }
