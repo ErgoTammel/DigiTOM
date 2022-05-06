@@ -26,8 +26,8 @@ public class InspectionController {
     }
 
     @PostMapping("/task/new")
-    public void addNewTask(@RequestBody TaskRequest taskRequest) {
-        inspectionService.addNewTask(taskRequest);
+    public Integer addNewTask(@RequestBody TaskRequest taskRequest) {
+        return inspectionService.addNewTask(taskRequest);
     }
 
     @PostMapping("/counter/incident")
