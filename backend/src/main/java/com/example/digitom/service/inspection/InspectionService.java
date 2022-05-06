@@ -75,6 +75,7 @@ public class InspectionService {
         List<RemoveFalseIncidentList> responseList = new ArrayList<>();
         for (Task task : tasks) {
             RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();
+            removeFalseIncidentList.setTaskId(task.getId());
             removeFalseIncidentList.setDescription(task.getDescription());
             removeFalseIncidentList.setCompanyName(task.getCompany().getName());
             removeFalseIncidentList.setDeadline(task.getDeadline());
