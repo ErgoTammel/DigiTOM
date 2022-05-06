@@ -95,5 +95,10 @@ public class InspectionService {
         List<Task> tasks = taskService.getTasksByReportId(reportId);
         return taskService.toResponses(tasks);
     }
+
+    public ReportResultResponse getReportResult(Integer reportId) {
+        reportService.getReportResult(reportId);
+        return null;
+    }
 }
 

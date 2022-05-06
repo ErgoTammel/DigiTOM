@@ -2,6 +2,7 @@ package com.example.digitom.service.inspection;
 
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.service.image.ReportPictureRequest;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -63,6 +64,12 @@ public class InspectionController {
     @PostMapping("/report/overview")
     public List<ReportOverviewResponse> getReportOverview(@RequestParam Integer reportId) {
         return inspectionService.getReportOverview(reportId);
+    }
+
+    @GetMapping("/report/result")
+    @Operation(summary = "Get report result TOM")
+    public ReportResultResponse getReportResult(Integer reportId) {
+        return inspectionService.getReportResult(reportId);
     }
 
 }

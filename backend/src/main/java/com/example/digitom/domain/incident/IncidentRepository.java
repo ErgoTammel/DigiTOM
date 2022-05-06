@@ -20,4 +20,8 @@ public interface IncidentRepository extends JpaRepository<Incident, Integer> {
     @Query("select count(i) from Incident i where i.safetyField.id = ?1 and i.report.id = ?2 and i.safe = ?3")
     long countBySafetyField_IdAndReport_IdAndSafe(Integer id, Integer id1, Boolean safe);
 
+    @Query("select count(i) from Incident i where i.report.id = ?1")
+    long countAllIncidentsByReportId(Integer id);
+
+
 }

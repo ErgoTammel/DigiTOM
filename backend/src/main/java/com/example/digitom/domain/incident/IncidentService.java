@@ -49,5 +49,9 @@ public class IncidentService {
     public void removeById(Integer id) {
         incidentRepository.deleteById(id);
     }
+
+    public long countAllIncidents(Integer reportId) {
+        return incidentRepository.countAllIncidentsByReportId(reportId);
+    }
 }
 

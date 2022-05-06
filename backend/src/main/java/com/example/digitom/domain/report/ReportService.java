@@ -4,6 +4,7 @@ import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
+import com.example.digitom.service.inspection.ReportResultResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,5 +43,11 @@ public class ReportService {
         reportPictureService.removePicturesByReportId(reportId);
         incidentService.removeByReportId(reportId);
         reportRepository.deleteById(reportId);
+    }
+
+    public ReportResultResponse getReportResult(Integer reportId) {
+        incidentService.countAllIncidents(reportId);
+
+        return null;
     }
 }
