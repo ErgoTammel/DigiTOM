@@ -17,7 +17,7 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">1. Kukkumisohu vältimine, varinguoht, uppumisoht</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(1)" ></i><h4
                 class="counter">{{ counter.field1.safe }}</h4></h4>
           </td>
           <td>
@@ -355,7 +355,15 @@ export default {
     },
     toggleDeleteTaskWindow: function () {
       this.deleteTaskWindow = !this.deleteTaskWindow;
-    }
+    },
+    deleteTaskWindow:function(){
+
+
+
+
+      this.toggleDeleteTaskWindow();
+
+    },
   },
   mounted() {
     this.getConstructionSiteName();
