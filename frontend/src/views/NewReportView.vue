@@ -17,12 +17,12 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">1. Kukkumisohu vältimine, varinguoht, uppumisoht</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(1)" ></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus" ></i><h4
                 class="counter">{{ counter.field1.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(1)"></i><i class="fa-solid fa-minus"
-                                                                                       v-on:click="toggleDeleteTaskWindow"></i>
+                                                                                       v-on:click="deleteTaskWindow(1)"></i>
               <h4
                   class="counter">{{ counter.field1.notSafe }}</h4></h4>
           </td>
@@ -34,7 +34,7 @@
                 class="counter">{{ counter.field2.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(2)"></i><h4
                 class="counter">{{ counter.field2.notSafe }}</h4></h4>
           </td>
         </tr>
@@ -45,7 +45,7 @@
                 class="counter">{{ counter.field3.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(3)"></i><h4
                 class="counter">{{ counter.field3.notSafe }}</h4></h4>
           </td>
         </tr>
@@ -56,7 +56,7 @@
                 class="counter">{{ counter.field4.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(4)"></i><h4
                 class="counter">{{ counter.field4.notSafe }}</h4></h4>
           </td>
         </tr>
@@ -67,7 +67,7 @@
                 class="counter">{{ counter.field5.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(5)"></i><h4
                 class="counter">{{ counter.field5.notSafe }}</h4></h4>
           </td>
         </tr>
@@ -78,7 +78,7 @@
                 class="counter">{{ counter.field6.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus"></i><h4
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus" v-on:click="deleteTaskWindow(6)"></i><h4
                 class="counter">{{ counter.field6.notSafe }}</h4></h4>
           </td>
         </tr>
@@ -141,11 +141,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>Sittus põrandale</td>
-          <td>Merko Ehitus OÜ</td>
-          <td>12-05-21</td>
-          <td><i id="deleteButton" class="fa-solid fa-xmark"></i></td>
+        <tr v-for="task in removeTaskListResponse">
+          <td>{{task.description}}</td>
+          <td>{{task.companyName}}</td>
+          <td>{{task.deadline}}</td>
+          <td><i id="deleteButton" class="fa-solid fa-xmark" v-on:click="deleteIncident(task.taskId)"></i></td>
         </tr>
         </tbody>
       </div>
@@ -198,7 +198,8 @@ export default {
           notSafe: 0
         }
       },
-      newTaskSafetyField: 0
+      newTaskSafetyField: 0,
+      removeTaskListResponse:{}
     }
   },
   methods: {
@@ -356,14 +357,19 @@ export default {
     toggleDeleteTaskWindow: function () {
       this.deleteTaskWindow = !this.deleteTaskWindow;
     },
-    deleteTaskWindow:function(){
-
-
-
-
-      this.toggleDeleteTaskWindow();
-
+    deleteTaskWindow:function(safetyField){
+        this.$http.post("/inspection/incident/false", {
+          reportId:sessionStorage.getItem("reportId"),
+          safetyFieldId:safetyField,
+          safe:false
+        }).then(response=>{
+          this.removeTaskListResponse=response.data;
+          this.toggleDeleteTaskWindow();
+        }).catch(error=>console.log(error.response.data))
     },
+    deleteIncident: function(taskId){
+      console.log("hello")
+    }
   },
   mounted() {
     this.getConstructionSiteName();
