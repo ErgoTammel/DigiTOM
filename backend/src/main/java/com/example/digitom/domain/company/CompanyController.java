@@ -30,13 +30,13 @@ public class CompanyController {
         companyService.getCompanyById(companyId, companyDto);
     }
 
-    //    meetod, mis tagastab kõik companyd andmebaasist üldse
+
     @GetMapping("/all")
     public List<CompanyDto> getAllCompanies() {
         return companyService.getAllCompanies();
     }
 
-//    Meetod, mis kustutab 1 company
+
     @DeleteMapping("/id")
     public void removeCompanyById(@RequestParam Integer companyId) {
         companyService.removeCompanyById(companyId);
