@@ -59,4 +59,9 @@ public class InspectionController {
         inspectionService.removeFalseIncident(taskId);
     }
 
+    @PostMapping("/report/overview")
+    public List<ReportOverviewResponse> getReportOverview (@RequestParam Integer reportId) {
+        return inspectionService.getReportOverview(reportId);
+    }
+
 }

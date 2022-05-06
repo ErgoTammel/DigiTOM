@@ -1,7 +1,5 @@
 package com.example.digitom.domain.reportpicture;
 
-import com.example.digitom.domain.report.Report;
-import com.example.digitom.domain.task.Task;
 import com.example.digitom.service.image.ReportPictureRequest;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;

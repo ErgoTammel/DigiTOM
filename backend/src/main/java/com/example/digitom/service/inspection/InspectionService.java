@@ -51,7 +51,7 @@ public class InspectionService {
     }
 
     public Integer addNewTask(TaskRequest taskRequest) {
-       return taskService.addNewTask(taskRequest);
+        return taskService.addNewTask(taskRequest);
     }
 
     public Integer incidentCounter(IncidentCounterRequest incidentCounterResponse) {
@@ -89,6 +89,11 @@ public class InspectionService {
         Integer incidentId = taskService.findIncidentIdByTaskId(taskId);
         taskService.removeTaskByTaskId(taskId);
         incidentService.removeById(incidentId);
+    }
+
+    public List<ReportOverviewResponse> getReportOverview(Integer reportId) {
+        List<Task> tasks = taskService.getTasksByReportId(reportId);
+        return taskService.toResponses(tasks);
     }
 }
 

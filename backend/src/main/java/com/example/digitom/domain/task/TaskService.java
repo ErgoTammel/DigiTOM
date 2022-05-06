@@ -1,6 +1,7 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.IncidentCounterRequest;
+import com.example.digitom.service.inspection.ReportOverviewResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,5 +41,13 @@ public class TaskService {
     public Integer findIncidentIdByTaskId(Integer taskId) {
         Task task  = taskRepository.getById(taskId);
         return task.getIncident().getId();
+    }
+
+    public List<Task> getTasksByReportId(Integer reportId) {
+        return taskRepository.findByReportId(reportId);
+    }
+
+    public List<ReportOverviewResponse> toResponses(List<Task> tasks) {
+        return taskMapper.taskToReportOverviewResponses(tasks);
     }
 }

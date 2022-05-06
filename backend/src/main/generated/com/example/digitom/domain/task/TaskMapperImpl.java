@@ -1,8 +1,7 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.incident.Incident;
-import com.example.digitom.domain.report.Report;
+
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 

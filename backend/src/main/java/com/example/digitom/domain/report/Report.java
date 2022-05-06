@@ -24,4 +24,7 @@ public class Report {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @Column(name = "tom")
+    private Integer tom;
+
 }
