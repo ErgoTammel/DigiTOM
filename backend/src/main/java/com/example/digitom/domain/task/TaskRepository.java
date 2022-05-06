@@ -20,6 +20,13 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("select t from Task t where t.report.id = ?1")
     List<Task> findByReportId(Integer id);
 
+    @Query("select t from Task t " +
+            "where t.incident.report.id = ?1 and t.incident.safetyField.id = ?2 and t.incident.safe = ?3 " +
+            "order by t.id DESC")
+    List<Task> findByReportIdAndSafetyFieldIdAndSafe(Integer id, Integer id1, Boolean safe);
+
+
+
 
 
 

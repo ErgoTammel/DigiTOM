@@ -1,6 +1,6 @@
 package com.example.digitom.domain.task;
 
-import com.example.digitom.domain.report.Report;
+import com.example.digitom.service.inspection.IncidentCounterRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,5 +23,11 @@ public class TaskService {
 
     public void removeTasksByReportId(Integer reportId) {
         taskRepository.deleteAll(taskRepository.findByReportId(reportId));
+    }
+
+    public List<Task> findByReportIdAndSafetyFieldIdAndSafe(IncidentCounterRequest incidentCounterRequest) {
+        return taskRepository.findByReportIdAndSafetyFieldIdAndSafe(
+                incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
+                incidentCounterRequest.getSafe());
     }
 }
