@@ -8,6 +8,7 @@ import com.example.digitom.service.inspection.ReportResultResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public class ReportService {
         ReportResultResponse result = new ReportResultResponse();
         result.setSafeSum(incidentService.countTrueIncidents(reportId, true));
         result.setNotSafeSum(incidentService.countFalseIncidents(reportId, false));
-        result.setTom(Double.valueOf(result.getSafeSum()/(result.getSafeSum()+result.getNotSafeSum())));
+        result.setTom(BigDecimal.valueOf(result.getSafeSum()/(result.getSafeSum()+result.getNotSafeSum())));
         Report report = reportRepository.findById(reportId).get();
         report.setTom(result.getTom());
         return result;
