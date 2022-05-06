@@ -11,10 +11,6 @@ import java.util.List;
 @RestController
 public class CompanyController {
 
-//    todo: teha 4 meetodit, kus 1 lisab uue company, 1 muudab olemasolevat companyt ja 1 kustutab company,
-//    need kõik käivad id järgi. Lisaks teha 1, mis tagastab kõik companyd andmebaasist üldse.
-
-
     @Resource
     private CompanyService companyService;
 
@@ -24,18 +20,14 @@ public class CompanyController {
        return companyService.getCompanyById(companyId);
    }
 
-
     @PostMapping("/new")
     public Company addNewCompany(@RequestBody RegistrationRequest registrationRequest) {
         return companyService.addNewCompany(registrationRequest);
-
     }
 
-    // meetod, mis muudab olemasolevat companyt
-    @PutMapping("/company")
+     @PutMapping("/company")
     public void updateCompanyById(@RequestParam Integer companyId, @RequestParam CompanyDto companyDto) {
         companyService.getCompanyById(companyId, companyDto);
-
     }
 
     //    meetod, mis tagastab kõik companyd andmebaasist üldse
@@ -44,6 +36,7 @@ public class CompanyController {
         return companyService.getAllCompanies();
     }
 
+//    Meetod, mis kustutab 1 company
     @DeleteMapping("/id")
     public void removeCompanyById(@RequestParam Integer companyId) {
         companyService.removeCompanyById(companyId);

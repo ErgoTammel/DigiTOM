@@ -16,41 +16,9 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     public Company addNewCompany(RegistrationRequest registrationRequest) {
-
         Company company = companyMapper.registrationRequestToCompany(registrationRequest);
         companyRepository.save(company);
         return company;
-    }
-
-    public List<Company> findAllCompanies() {
-        List<Company> companies = companyRepository.getById();
-        List<CompanyDto> companyDtos = new ArrayList<>();
-        for (Company company : companies) {
-            CompanyDto companyDto = company(company);
-
-        }
-        return companyRepository.findAll();
-    }
-
-    public CompanyDto getCompanyById(Integer companyId) {
-
-
-        return companyMapper.toDto(companyRepository.getById(companyId));
-    }
-
-        public void removeCompanyById(Integer companyId) {
-            companyRepository.deleteById(companyId);
-        }
-
-    public List<CompanyDto> getAllCompanies() {
-        List<Company> companies = companyRepository.getById();
-        List<CompanyDto> companyDtos = new ArrayList<>();
-        for (Company company : companies) {
-            CompanyDto companyDto = (company);
-        }
-
-
-        return null;
     }
 
     public void getCompanyById(Integer companyId, CompanyDto companyDto) {
@@ -60,8 +28,16 @@ public class CompanyService {
         company.setRegNumber(companyDto.getRegNumber());
     }
 
-    private CompanyDto toDto(Company company) {
-        CompanyDto companyDto = new CompanyDto();
-        companyDto.setId(company.getId());
+    public CompanyDto getCompanyById(Integer companyId) {
+                return companyMapper.toDto(companyRepository.getById(companyId));
     }
+
+    public void removeCompanyById(Integer companyId) {
+            companyRepository.deleteById(companyId);
+        }
+
+    public List<CompanyDto> getAllCompanies() {
+        List<Company> all = companyRepository.findAll();
+        return companyMapper.toDtos(all);
+        }
 }
