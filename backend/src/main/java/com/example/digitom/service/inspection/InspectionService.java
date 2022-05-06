@@ -3,7 +3,6 @@ package com.example.digitom.service.inspection;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
-import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;

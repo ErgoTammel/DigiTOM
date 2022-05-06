@@ -30,6 +30,10 @@ public class IncidentService {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafetyFieldIdAndSafe
                 (incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
                         incidentCounterRequest.getSafe());
+
+//        incidentRepository.countBySafetyField_IdAndReport_IdAndSafe(incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
+//                incidentCounterRequest.getSafe());
+
         return incidents.size();
     }
 
