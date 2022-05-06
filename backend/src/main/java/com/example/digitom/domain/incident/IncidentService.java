@@ -50,8 +50,14 @@ public class IncidentService {
         incidentRepository.deleteById(id);
     }
 
-    public long countAllIncidents(Integer reportId) {
-        return incidentRepository.countAllIncidentsByReportId(reportId);
+    public Integer countTrueIncidents(Integer reportId, Boolean safe) {
+        List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
+        return incidents.size();
+    }
+
+    public Integer countFalseIncidents(Integer reportId, Boolean safe) {
+        List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
+        return incidents.size();
     }
 }
 

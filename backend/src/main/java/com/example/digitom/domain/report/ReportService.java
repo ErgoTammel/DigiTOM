@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class ReportService {
@@ -46,8 +47,14 @@ public class ReportService {
     }
 
     public ReportResultResponse getReportResult(Integer reportId) {
-        incidentService.countAllIncidents(reportId);
+        ReportResultResponse result = new ReportResultResponse();
+        result.setSafeSum(incidentService.countTrueIncidents(reportId, true));
+        result.setNotSafeSum(incidentService.countFalseIncidents(reportId, false));
+        result.setTom(Double.valueOf(result.getSafeSum()/(result.getSafeSum()+result.getNotSafeSum())));
+        Report report = reportRepository.findById(reportId).get();
+        report.setTom(result.getTom());
+        return result;
 
-        return null;
     }
+
 }

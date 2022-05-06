@@ -68,7 +68,7 @@ public class InspectionController {
 
     @GetMapping("/report/result")
     @Operation(summary = "Get report result TOM")
-    public ReportResultResponse getReportResult(Integer reportId) {
+    public ReportResultResponse getReportResult(@RequestParam Integer reportId) {
         return inspectionService.getReportResult(reportId);
     }
 
