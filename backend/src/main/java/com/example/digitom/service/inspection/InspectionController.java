@@ -31,13 +31,13 @@ public class InspectionController {
     }
 
     @PostMapping("/counter/incident")
-    public Integer incidentCounter(@RequestBody IncidentCounterResponse incidentCounterResponse) {
-        return inspectionService.incidentCounter(incidentCounterResponse);
+    public Integer incidentCounter(@RequestBody IncidentCounterRequest incidentCounterRequest) {
+        return inspectionService.incidentCounter(incidentCounterRequest);
     }
 
     @DeleteMapping("/counter/incident")
-    public void removeTrueIncident(@RequestBody IncidentCounterResponse incidentCounterResponse) {
-        inspectionService.removeTrueIncident(incidentCounterResponse);
+    public void removeTrueIncident(@RequestBody IncidentCounterRequest incidentCounterRequest) {
+        inspectionService.removeTrueIncident(incidentCounterRequest);
     }
 
     @PostMapping("/new/picture")
@@ -48,6 +48,11 @@ public class InspectionController {
     @DeleteMapping("/report")
     public void removeReport(@RequestParam Integer reportId) {
         inspectionService.removeReport(reportId);
+    }
+
+    @PostMapping ("/incident/false")
+    public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(@RequestBody IncidentCounterRequest incidentCounterRequest) {
+        return inspectionService.getRemoveFalseIncidentList(incidentCounterRequest);
     }
 
 }
