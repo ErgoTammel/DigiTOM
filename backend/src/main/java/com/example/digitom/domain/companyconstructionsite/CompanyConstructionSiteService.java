@@ -34,16 +34,6 @@ public class CompanyConstructionSiteService {
     @Resource
     private ValidationService validationService;
 
-
-//    public List<CompanyConstructionSite> getCompanyConstructionSites(List<CompanyUser> companyUsers) {
-//        List<Integer> companyIDs = new ArrayList<>();
-//        for (CompanyUser companyUser : companyUsers) {
-//            Integer companyID = companyUser.getId();
-//            companyIDs.add(companyID);
-//        }
-//        return companyConstructionSiteRepository.findByCompanyId(companyIDs);
-//    }
-
     public List<ConstructionSite> getConstructionSitesByUserCompanyIds(List<Integer> userCompanyIds) {
         List<ConstructionSite> constructionSites = new ArrayList<>();
         for (Integer userCompanyId : userCompanyIds) {
@@ -91,8 +81,8 @@ public class CompanyConstructionSiteService {
         companyConstructionSiteRepository.delete(companyConstructionSite);
     }
 
-    public Company getMainContractor (Integer siteId, Boolean mainContractor) {
-       return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
+    public Company getMainContractor(Integer siteId, Boolean mainContractor) {
+        return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
     }
 
     public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor(Integer constructionSiteId) {

@@ -16,16 +16,16 @@ public class CompanyController {
 
 
     @GetMapping("/name")
-   public CompanyDto getCompanyById(@RequestParam Integer companyId){
-       return companyService.getCompanyById(companyId);
-   }
+    public CompanyDto getCompanyById(@RequestParam Integer companyId) {
+        return companyService.getCompanyById(companyId);
+    }
 
     @PostMapping("/new")
     public Company addNewCompany(@RequestBody RegistrationRequest registrationRequest) {
         return companyService.addNewCompany(registrationRequest);
     }
 
-     @PutMapping("/company")
+    @PutMapping("/company")
     public void updateCompanyById(@RequestParam Integer companyId, @RequestParam CompanyDto companyDto) {
         companyService.getCompanyById(companyId, companyDto);
     }

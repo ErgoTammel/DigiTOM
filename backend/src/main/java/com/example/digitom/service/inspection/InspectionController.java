@@ -50,17 +50,18 @@ public class InspectionController {
         inspectionService.removeReport(reportId);
     }
 
-    @PostMapping ("/incident/false")
+    @PostMapping("/incident/false")
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(@RequestBody IncidentCounterRequest incidentCounterRequest) {
         return inspectionService.getRemoveFalseIncidentList(incidentCounterRequest);
     }
+
     @DeleteMapping("/incident")
     public void removeFalseIncident(@RequestParam Integer taskId) {
         inspectionService.removeFalseIncident(taskId);
     }
 
     @PostMapping("/report/overview")
-    public List<ReportOverviewResponse> getReportOverview (@RequestParam Integer reportId) {
+    public List<ReportOverviewResponse> getReportOverview(@RequestParam Integer reportId) {
         return inspectionService.getReportOverview(reportId);
     }
 

@@ -39,7 +39,7 @@ public class TaskService {
     }
 
     public Integer findIncidentIdByTaskId(Integer taskId) {
-        Task task  = taskRepository.getById(taskId);
+        Task task = taskRepository.getById(taskId);
         return task.getIncident().getId();
     }
 

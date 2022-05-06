@@ -33,8 +33,8 @@ public class ReportService {
         return report.getId();
     }
 
-    public Report getReportById (Integer reportId) {
-       return reportRepository.findById(reportId).get();
+    public Report getReportById(Integer reportId) {
+        return reportRepository.findById(reportId).get();
     }
 
     public void removeReport(Integer reportId) {

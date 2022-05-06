@@ -30,18 +30,14 @@ public class IncidentService {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafetyFieldIdAndSafe
                 (incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
                         incidentCounterRequest.getSafe());
-
-//        incidentRepository.countBySafetyField_IdAndReport_IdAndSafe(incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
-//                incidentCounterRequest.getSafe());
-
         return incidents.size();
     }
 
     public void removeTrueIncident(IncidentCounterRequest incidentCounterRequest) {
         Incident lastById = incidentRepository.findFirstByReport_IdAndSafetyField_IdAndSafeOrderByIdDesc
                 (incidentCounterRequest.getReportId(),
-                incidentCounterRequest.getSafetyFieldId(),
-                incidentCounterRequest.getSafe());
+                        incidentCounterRequest.getSafetyFieldId(),
+                        incidentCounterRequest.getSafe());
         incidentRepository.delete(lastById);
     }
 
@@ -50,7 +46,7 @@ public class IncidentService {
     }
 
 
-    public void removeById (Integer id) {
+    public void removeById(Integer id) {
         incidentRepository.deleteById(id);
     }
 }
