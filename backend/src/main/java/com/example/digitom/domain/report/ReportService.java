@@ -1,6 +1,8 @@
 package com.example.digitom.domain.report;
 
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
+import com.example.digitom.domain.incident.IncidentService;
+import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class ReportService {
     private ReportRepository reportRepository;
     @Resource
     private TaskService taskService;
+    @Resource
+    private ReportPictureService reportPictureService;
+    @Resource
+    private IncidentService incidentService;
+
 
     public Integer addNewReport(Integer siteId) {
         Report report = new Report();
@@ -31,6 +38,9 @@ public class ReportService {
     }
 
     public void removeReport(Integer reportId) {
-        taskService.removeTasksByReportId(reportRepository.findById(reportId).get());
+        taskService.removeTasksByReportId(reportId);
+        reportPictureService.removePicturesByReportId(reportId);
+        incidentService.removeByReportId(reportId);
+        reportRepository.deleteById(reportId);
     }
 }

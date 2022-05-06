@@ -17,6 +17,9 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("delete from Task t where t.report = ?1")
     void deleteTasksByReportId(Report report);
 
+    @Query("select t from Task t where t.report.id = ?1")
+    List<Task> findByReportId(Integer id);
+
 
 
 

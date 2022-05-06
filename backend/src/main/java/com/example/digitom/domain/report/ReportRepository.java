@@ -9,4 +9,6 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
 
     @Override
     Optional<Report> findById(Integer integer);
+
+
 }

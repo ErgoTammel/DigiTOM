@@ -4,6 +4,7 @@ import com.example.digitom.domain.report.Report;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -19,7 +20,7 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public void removeTasksByReportId(Report report) {
-        taskRepository.deleteTasksByReportId(report);
+    public void removeTasksByReportId(Integer reportId) {
+        taskRepository.deleteAll(taskRepository.findByReportId(reportId));
     }
 }

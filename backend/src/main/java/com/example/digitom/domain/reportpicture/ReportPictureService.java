@@ -21,4 +21,8 @@ public class ReportPictureService {
         reportPicture.setBase64(base64);
         reportPictureRepository.save(reportPicture);
     }
+
+    public void removePicturesByReportId(Integer reportId) {
+        reportPictureRepository.deleteAll(reportPictureRepository.findByReportId(reportId));
+    }
 }
