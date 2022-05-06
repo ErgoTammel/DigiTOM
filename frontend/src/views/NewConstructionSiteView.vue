@@ -134,8 +134,8 @@ export default {
 
     }
   },
-  mounted() {
-    this.getAllCompanyNames();
+  async mounted() {
+    await this.getAllCompanyNames();
   }
 }
 
