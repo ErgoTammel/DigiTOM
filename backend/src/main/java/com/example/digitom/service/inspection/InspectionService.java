@@ -4,9 +4,9 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.incident.IncidentService;
-import com.example.digitom.domain.report.Report;
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
+import com.example.digitom.domain.task.Task;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.image.ReportPictureRequest;
@@ -33,7 +33,6 @@ public class InspectionService {
     private ReportService reportService;
 
 
-
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
         List<NewInspectionConstructionSiteResponse> responses = new ArrayList<>();
         List<Integer> allUserCompanyIds = companyUserService.getUserCompanyIdsByUserIds(userId);
@@ -55,11 +54,11 @@ public class InspectionService {
         taskService.addNewTask(taskRequest);
     }
 
-    public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
+    public Integer incidentCounter(IncidentCounterRequest incidentCounterResponse) {
         return incidentService.incidentCounter(incidentCounterResponse);
     }
 
-    public void removeTrueIncident(IncidentCounterResponse incidentCounterResponse) {
+    public void removeTrueIncident(IncidentCounterRequest incidentCounterResponse) {
         incidentService.removeTrueIncident(incidentCounterResponse);
     }
 
@@ -69,6 +68,19 @@ public class InspectionService {
 
     public void removeReport(Integer reportId) {
         reportService.removeReport(reportId);
+    }
+
+    public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(IncidentCounterRequest incidentCounterRequest) {
+        List<Task> tasks = taskService.findByReportIdAndSafetyFieldIdAndSafe(incidentCounterRequest);
+        List<RemoveFalseIncidentList> responseList = new ArrayList<>();
+        for (Task task : tasks) {
+            RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();
+            removeFalseIncidentList.setDescription(task.getDescription());
+            removeFalseIncidentList.setCompanyName(task.getCompany().getName());
+            removeFalseIncidentList.setDeadline(task.getDeadline());
+            responseList.add(removeFalseIncidentList);
+        }
+        return responseList;
     }
 }
 

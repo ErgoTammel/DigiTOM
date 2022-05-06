@@ -1,6 +1,6 @@
 package com.example.digitom.domain.incident;
 
-import com.example.digitom.service.inspection.IncidentCounterResponse;
+import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.IncidentRequest;
 import org.springframework.stereotype.Service;
 
@@ -22,22 +22,27 @@ public class IncidentService {
         return incident.getId();
     }
 
-    public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
+    public Integer incidentCounter(IncidentCounterRequest incidentCounterRequest) {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafetyFieldIdAndSafe
-                (incidentCounterResponse.getReportId(), incidentCounterResponse.getSafetyFieldId(),
-                        incidentCounterResponse.getSafe());
+                (incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
+                        incidentCounterRequest.getSafe());
         return incidents.size();
     }
 
-    public void removeTrueIncident(IncidentCounterResponse incidentCounterResponse) {
+    public void removeTrueIncident(IncidentCounterRequest incidentCounterRequest) {
         Incident lastById = incidentRepository.findFirstByReport_IdAndSafetyField_IdAndSafeOrderByIdDesc
-                (incidentCounterResponse.getReportId(),
-                incidentCounterResponse.getSafetyFieldId(),
-                incidentCounterResponse.getSafe());
+                (incidentCounterRequest.getReportId(),
+                incidentCounterRequest.getSafetyFieldId(),
+                incidentCounterRequest.getSafe());
         incidentRepository.delete(lastById);
     }
 
     public void removeByReportId(Integer reportId) {
         incidentRepository.deleteAll(incidentRepository.findByReportId(reportId));
     }
+
+    public void removeTaskFromReport(IncidentCounterRequest incidentCounterResponse) {
+
+    }
 }
+
