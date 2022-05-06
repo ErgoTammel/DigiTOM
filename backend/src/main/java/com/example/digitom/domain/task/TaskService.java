@@ -15,9 +15,10 @@ public class TaskService {
     private TaskRepository taskRepository;
 
 
-    public void addNewTask(TaskRequest taskRequest) {
+    public Integer addNewTask(TaskRequest taskRequest) {
         Task task = taskMapper.taskRequestToTask(taskRequest);
         taskRepository.save(task);
+        return task.getId();
     }
 
     public void removeTasksByReportId(Integer reportId) {

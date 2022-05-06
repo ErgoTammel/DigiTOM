@@ -51,8 +51,8 @@ public class InspectionService {
         return incidentService.addNewIncident(incidentRequest);
     }
 
-    public void addNewTask(TaskRequest taskRequest) {
-        taskService.addNewTask(taskRequest);
+    public Integer addNewTask(TaskRequest taskRequest) {
+       return taskService.addNewTask(taskRequest);
     }
 
     public Integer incidentCounter(IncidentCounterResponse incidentCounterResponse) {
