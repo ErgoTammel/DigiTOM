@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("select t from Task t where t.report.id = ?1")
@@ -26,10 +27,11 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findByReportIdAndSafetyFieldIdAndSafe(Integer id, Integer id1, Boolean safe);
 
 
+    @Override
+    Optional<Task> findById(Integer integer);
 
-
-
-
+    @Override
+    void deleteById(Integer integer);
 
 
 }

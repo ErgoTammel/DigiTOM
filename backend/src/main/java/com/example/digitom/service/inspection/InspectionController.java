@@ -54,5 +54,9 @@ public class InspectionController {
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(@RequestBody IncidentCounterRequest incidentCounterRequest) {
         return inspectionService.getRemoveFalseIncidentList(incidentCounterRequest);
     }
+    @DeleteMapping("/incident")
+    public void removeFalseIncident(@RequestParam Integer taskId) {
+        inspectionService.removeFalseIncident(taskId);
+    }
 
 }
