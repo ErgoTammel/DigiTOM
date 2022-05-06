@@ -1,5 +1,6 @@
 package com.example.digitom.domain.incident;
 
+import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.IncidentRequest;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class IncidentService {
 
     @Resource
     private IncidentRepository incidentRepository;
+    @Resource
+    private TaskService taskService;
+
 
     public Integer addNewIncident(IncidentRequest incidentRequest) {
         Incident incident = incidentMapper.incidentRequestToIncident(incidentRequest);
@@ -41,8 +45,9 @@ public class IncidentService {
         incidentRepository.deleteAll(incidentRepository.findByReportId(reportId));
     }
 
-    public void removeTaskFromReport(IncidentCounterRequest incidentCounterResponse) {
 
+    public void removeById (Integer id) {
+        incidentRepository.deleteById(id);
     }
 }
 

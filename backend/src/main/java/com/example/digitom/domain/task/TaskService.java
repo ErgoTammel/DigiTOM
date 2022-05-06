@@ -30,4 +30,15 @@ public class TaskService {
                 incidentCounterRequest.getReportId(), incidentCounterRequest.getSafetyFieldId(),
                 incidentCounterRequest.getSafe());
     }
+
+
+    public void removeTaskByTaskId(Integer taskId) {
+
+        taskRepository.deleteById(taskId);
+    }
+
+    public Integer findIncidentIdByTaskId(Integer taskId) {
+        Task task  = taskRepository.getById(taskId);
+        return task.getIncident().getId();
+    }
 }

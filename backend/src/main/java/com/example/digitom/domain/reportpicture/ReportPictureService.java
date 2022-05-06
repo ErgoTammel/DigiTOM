@@ -25,4 +25,11 @@ public class ReportPictureService {
     public void removePicturesByReportId(Integer reportId) {
         reportPictureRepository.deleteAll(reportPictureRepository.findByReportId(reportId));
     }
+
+    public void removeByTaskId(Integer taskId) {
+
+        ReportPicture picture = reportPictureRepository.findByTaskId(taskId);
+        reportPictureRepository.delete(picture);
+
+    }
 }
