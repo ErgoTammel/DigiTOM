@@ -56,19 +56,19 @@ public class ValidationService {
     }
 
     public void taskCompanyExists(Integer companyId) {
-        if (companyId == 0) {
+        if (companyId == null) {
             throw new DataNotFoundException(NO_COMPANY_RESPONSIBLE, "Sisesta vastutav ettevõte!");
         }
     }
 
     public void checkFormCompletion(String description) {
-        if (description.equals("string")) {
+        if (description.isEmpty()) {
             throw new DataNotFoundException(NO_DESCRIPTION, "Lisa leitud puuduse kirjeldus!");
         }
     }
 
     public void taskDeadlineExists(Integer deadline) {
-        if (deadline == 0) {
+        if (deadline == null) {
             throw new DataNotFoundException(DEADLINE_NOT_EXISTS, "Sisesta korrastamisülesande tähtaeg!");
         }
     }
