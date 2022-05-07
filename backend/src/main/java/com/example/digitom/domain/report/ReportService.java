@@ -53,10 +53,12 @@ public class ReportService {
         result.setNotSafeSum(incidentService.countFalseIncidents(reportId, false));
         Integer x = result.getSafeSum();
         Integer y = result.getNotSafeSum();
-        result.setTom((double) x/(x+y)*100);
-//        double resultTom = result.getTom();
-//
-//        reportRepository.findById(reportId).get().setTom(resultTom);
+        Double tomResult = (double) x/(x+y)*100;
+        result.setTom(BigDecimal.valueOf(tomResult));
+        BigDecimal resultTom = result.getTom();
+        Report report = reportRepository.findById(reportId).get();
+        report.setTom(resultTom);
+        reportRepository.save(report);
         return result;
 
     }

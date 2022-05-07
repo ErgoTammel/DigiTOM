@@ -26,6 +26,6 @@ public class Report {
     private LocalDate date;
 
     @Column(name = "tom", precision = 5, scale = 2)
-    private double tom;
+    private BigDecimal tom;
 
 }
