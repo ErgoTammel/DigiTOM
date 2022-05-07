@@ -97,8 +97,7 @@ public class InspectionService {
     }
 
     public ReportResultResponse getReportResult(Integer reportId) {
-        reportService.getReportResult(reportId);
-        return null;
+        return reportService.getReportResult(reportId);
     }
 }
 

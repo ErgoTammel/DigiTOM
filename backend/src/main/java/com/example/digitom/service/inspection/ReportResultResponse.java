@@ -10,6 +10,6 @@ public class ReportResultResponse {
     private Integer safeSum;
     private Integer notSafeSum;
     @Column(name = "tom", precision = 5, scale = 2)
-    private BigDecimal tom;
+    private double tom;
 
 }
