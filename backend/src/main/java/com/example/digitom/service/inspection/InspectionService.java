@@ -10,6 +10,7 @@ import com.example.digitom.domain.task.Task;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.image.ReportPictureRequest;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +32,8 @@ public class InspectionService {
     private ReportPictureService reportPictureService;
     @Resource
     private ReportService reportService;
+    @Resource
+    private ValidationService validationService;
 
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
@@ -72,6 +75,7 @@ public class InspectionService {
 
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(IncidentCounterRequest incidentCounterRequest) {
         List<Task> tasks = taskService.findByReportIdAndSafetyFieldIdAndSafe(incidentCounterRequest);
+        validationService.incidentListExists(tasks);
         List<RemoveFalseIncidentList> responseList = new ArrayList<>();
         for (Task task : tasks) {
             RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();

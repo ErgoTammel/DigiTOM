@@ -1,12 +1,14 @@
 package com.example.digitom.validation;
 
 
+import com.example.digitom.domain.task.Task;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.infrastructure.exception.BusinessException;
 import com.example.digitom.infrastructure.exception.DataNotFoundException;
 import com.example.digitom.service.account.LoginRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ public class ValidationService {
     public static final String NO_COMPANY_RESPONSIBLE = "Vastutav ettevõte puudub";
     public static final String NO_DESCRIPTION = "Kirjeldus puudub";
     public static final String DEADLINE_NOT_EXISTS = "Tähtaeg puudub";
+    public static final String TASKS_NOT_FOUND = "Korrastamisülesandeid ei leitud";
 
 
     public void emailAlreadyExists(String email, Boolean exists) {
@@ -69,5 +72,11 @@ public class ValidationService {
             throw new DataNotFoundException(DEADLINE_NOT_EXISTS, "Sisesta korrastamisülesande tähtaeg!");
         }
 
+    }
+
+    public void incidentListExists(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            throw new DataNotFoundException(TASKS_NOT_FOUND, "Lisa uus korrastamisülesanne!");
+        }
     }
 }
