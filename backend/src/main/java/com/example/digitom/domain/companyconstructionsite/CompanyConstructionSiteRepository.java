@@ -18,13 +18,6 @@ public interface CompanyConstructionSiteRepository extends JpaRepository<Company
     @Query("select c from CompanyConstructionSite c where c.company.id = ?1 and c.constructionSite.id = ?2")
     CompanyConstructionSite findByCompanyIdAndConstructionSiteId(Integer id, Integer id1);
 
-    @Query("select c from CompanyConstructionSite c " +
-            "where c.constructionSite.id = ?1 and c.mainContractor = ?2 " +
-            "order by c.id")
-    List<CompanyConstructionSite> findByConstructionSiteIdAndMainContractorOrderByIdAsc(Integer id, Boolean mainContractor);
-
-    List<CompanyConstructionSite> findByIdOrderByIdAsc(Integer id);
-
     @Query("select c from CompanyConstructionSite c where c.constructionSite.id = ?1 and c.mainContractor = ?2")
     CompanyConstructionSite findByConstructionSiteIdAndMainContractor(Integer id, Boolean mainContractor);
 

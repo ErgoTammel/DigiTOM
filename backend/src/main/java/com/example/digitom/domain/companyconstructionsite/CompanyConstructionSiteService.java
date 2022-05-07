@@ -1,7 +1,6 @@
 package com.example.digitom.domain.companyconstructionsite;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyMapper;
 import com.example.digitom.domain.company.CompanyRepository;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteRepository;
@@ -25,9 +24,6 @@ public class CompanyConstructionSiteService {
 
     @Resource
     private CompanyRepository companyRepository;
-
-    @Resource
-    private CompanyMapper companyMapper;
 
     @Resource
     private CompanyConstructionSiteMapper companyConstructionSiteMapper;
