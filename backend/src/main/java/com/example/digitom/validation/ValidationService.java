@@ -17,6 +17,8 @@ public class ValidationService {
     public static final String EMAIL_ALREADY_TAKEN = "Email on kasutusel";
     public static final String USER_DOES_NOT_EXISTS = "Kasutajanimi või parool on vale";
     public static final String NO_COMPANY_RESPONSIBLE = "Vastutav ettevõte puudub";
+    public static final String NO_DESCRIPTION = "Kirjeldus puudub";
+    public static final String DEADLINE_NOT_EXISTS = "Tähtaeg puudub";
 
 
     public void emailAlreadyExists(String email, Boolean exists) {
@@ -53,8 +55,19 @@ public class ValidationService {
         if (companyId == 0) {
             throw new DataNotFoundException(NO_COMPANY_RESPONSIBLE, "Sisesta vastutav ettevõte!");
         }
-
     }
 
 
+    public void taskDescriptionExists(String description) {
+        if (description.equals("string")) {
+            throw new DataNotFoundException(NO_DESCRIPTION, "Lisa leitud puuduse kirjeldus!");
+        }
+    }
+
+    public void taskDeadlineExists(Integer deadline) {
+        if (deadline == 0) {
+            throw new DataNotFoundException(DEADLINE_NOT_EXISTS, "Sisesta korrastamisülesande tähtaeg!");
+        }
+
+    }
 }

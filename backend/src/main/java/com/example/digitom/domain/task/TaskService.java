@@ -20,8 +20,11 @@ public class TaskService {
 
 
     public Integer addNewTask(TaskRequest taskRequest) {
+
+        validationService.taskCompanyExists(taskRequest.getCompanyId());
+        validationService.taskDescriptionExists(taskRequest.getDescription());
+        validationService.taskDeadlineExists(taskRequest.getDeadline());
         Task task = taskMapper.taskRequestToTask(taskRequest);
-        validationService.taskCompanyExists(task.getCompany().getId());
         taskRepository.save(task);
         return task.getId();
     }
