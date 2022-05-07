@@ -1,7 +1,6 @@
 package com.example.digitom.validation;
 
 
-import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.infrastructure.exception.BusinessException;
 import com.example.digitom.infrastructure.exception.DataNotFoundException;
