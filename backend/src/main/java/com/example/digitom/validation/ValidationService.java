@@ -75,7 +75,7 @@ public class ValidationService {
     }
 
     public void incidentListExists(List<Task> tasks) {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             throw new DataNotFoundException(TASKS_NOT_FOUND, "Lisa uus korrastamisülesanne!");
         }
     }
