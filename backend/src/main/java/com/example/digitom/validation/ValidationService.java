@@ -22,6 +22,7 @@ public class ValidationService {
     public static final String NO_DESCRIPTION = "Kirjeldus puudub";
     public static final String DEADLINE_NOT_EXISTS = "Tähtaeg puudub";
     public static final String TASKS_NOT_FOUND = "Korrastamisülesandeid ei leitud";
+    public static final String FORM_NOT_FILLED = "Väli jäi täitmata";
 
 
     public void emailAlreadyExists(String email, Boolean exists) {
@@ -60,8 +61,7 @@ public class ValidationService {
         }
     }
 
-
-    public void taskDescriptionExists(String description) {
+    public void checkFormCompletion(String description) {
         if (description.equals("string")) {
             throw new DataNotFoundException(NO_DESCRIPTION, "Lisa leitud puuduse kirjeldus!");
         }
@@ -71,7 +71,6 @@ public class ValidationService {
         if (deadline == 0) {
             throw new DataNotFoundException(DEADLINE_NOT_EXISTS, "Sisesta korrastamisülesande tähtaeg!");
         }
-
     }
 
     public void incidentListExists(List<Task> tasks) {
@@ -79,4 +78,12 @@ public class ValidationService {
             throw new DataNotFoundException(TASKS_NOT_FOUND, "Lisa uus korrastamisülesanne!");
         }
     }
+
+    public void checkRegistrationFormCompletion(String details) {
+        if (details.isEmpty()) {
+            throw new DataNotFoundException(FORM_NOT_FILLED, "Palun täida kõik väljad!");
+        }
+
+    }
+
 }

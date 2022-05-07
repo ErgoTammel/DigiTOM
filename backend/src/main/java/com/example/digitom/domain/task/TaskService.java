@@ -22,7 +22,7 @@ public class TaskService {
     public Integer addNewTask(TaskRequest taskRequest) {
 
         validationService.taskCompanyExists(taskRequest.getCompanyId());
-        validationService.taskDescriptionExists(taskRequest.getDescription());
+        validationService.checkFormCompletion(taskRequest.getDescription());
         validationService.taskDeadlineExists(taskRequest.getDeadline());
         Task task = taskMapper.taskRequestToTask(taskRequest);
         taskRepository.save(task);
