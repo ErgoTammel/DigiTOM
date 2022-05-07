@@ -2,6 +2,7 @@ package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,10 +15,13 @@ public class TaskService {
     private TaskMapper taskMapper;
     @Resource
     private TaskRepository taskRepository;
+    @Resource
+    private ValidationService validationService;
 
 
     public Integer addNewTask(TaskRequest taskRequest) {
         Task task = taskMapper.taskRequestToTask(taskRequest);
+        validationService.taskCompanyExists(task.getCompany().getId());
         taskRepository.save(task);
         return task.getId();
     }

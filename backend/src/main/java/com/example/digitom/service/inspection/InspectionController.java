@@ -29,7 +29,7 @@ public class InspectionController {
     }
 
     @PostMapping("/task/new")
-    @Operation(summary = "Ass new task into report")
+    @Operation(summary = "Add new task into report")
     public Integer addNewTask(@RequestBody TaskRequest taskRequest) {
         return inspectionService.addNewTask(taskRequest);
     }

@@ -58,7 +58,6 @@ public class CompanyConstructionSiteService {
         Boolean exist = companyConstructionSiteRepository.existByCompanyIdAndConstructionSiteId(companyId, constructionSiteId);
         validationService.companyConstructionSiteExist(companyName, exist);
 
-
         CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
         companyConstructionSite.setCompany(companyRepository.getById(companyId));
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));

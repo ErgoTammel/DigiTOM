@@ -34,4 +34,10 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     void deleteById(Integer integer);
 
 
+
+
+
+
+
+
 }
