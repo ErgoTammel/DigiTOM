@@ -83,7 +83,6 @@ public class ValidationService {
         if (details.isEmpty()) {
             throw new DataNotFoundException(FORM_NOT_FILLED, "Palun täida kõik väljad!");
         }
-
     }
 
 }
