@@ -103,5 +103,6 @@ public class InspectionService {
     public ReportResultResponse getReportResult(Integer reportId) {
         return reportService.getReportResult(reportId);
     }
+
 }
 
