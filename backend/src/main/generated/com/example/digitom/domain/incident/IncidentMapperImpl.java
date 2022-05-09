@@ -1,6 +1,5 @@
 package com.example.digitom.domain.incident;
 
-import com.example.digitom.domain.report.Report;
 import com.example.digitom.domain.safetyfield.SafetyField;
 import com.example.digitom.service.inspection.IncidentRequest;
 import java.time.LocalDate;

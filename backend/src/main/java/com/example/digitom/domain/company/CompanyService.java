@@ -15,20 +15,31 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     public Company addNewCompany(RegistrationRequest registrationRequest) {
-
         Company company = companyMapper.registrationRequestToCompany(registrationRequest);
         companyRepository.save(company);
         return company;
     }
 
-
-    public List<Company> findAllCompanies() {
-        return companyRepository.findAll();
+    public void getCompanyById(Integer companyId, CompanyDto companyDto) {
+        Company company = companyRepository.findById(companyId).get();
+        company.setName(companyDto.getName());
+        company.setRegNumber(companyDto.getRegNumber());
     }
 
     public CompanyDto getCompanyById(Integer companyId) {
-
-
         return companyMapper.toDto(companyRepository.getById(companyId));
+    }
+
+    public void removeCompanyById(Integer companyId) {
+        companyRepository.deleteById(companyId);
+    }
+
+    public List<CompanyDto> getAllCompanies() {
+        List<Company> all = companyRepository.findAll();
+        return companyMapper.toDtos(all);
+    }
+
+    public List<Company> findAllCompanies() {
+        return companyRepository.findAll();
     }
 }

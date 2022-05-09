@@ -7,7 +7,6 @@ import com.example.digitom.service.constractionsitemanagement.CompanyContactResp
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 

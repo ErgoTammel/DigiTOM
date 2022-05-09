@@ -20,14 +20,13 @@ public class UserService {
     private ValidationService validationService;
 
     public User addNewUser(RegistrationRequest registrationRequest) {
-
         User user = userMapper.registrationRequestToUser(registrationRequest);
         userRepository.save(user);
         return user;
     }
 
     public Boolean existsByEmail(String email) {
-       return userRepository.existsByEmail(email);
+        return userRepository.existsByEmail(email);
     }
 
     public User getValidUser(LoginRequest loginRequest) {

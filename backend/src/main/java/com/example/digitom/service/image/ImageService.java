@@ -15,8 +15,6 @@ public class ImageService {
         reportPictureService.addNewReportPicture(reportPictureRequest);
 
 
-
-
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.IncidentCounterRequest;
+import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,9 +15,15 @@ public class TaskService {
     private TaskMapper taskMapper;
     @Resource
     private TaskRepository taskRepository;
+    @Resource
+    private ValidationService validationService;
 
 
     public Integer addNewTask(TaskRequest taskRequest) {
+
+        validationService.taskCompanyExists(taskRequest.getCompanyId());
+        validationService.checkFormCompletion(taskRequest.getDescription());
+        validationService.taskDeadlineExists(taskRequest.getDeadline());
         Task task = taskMapper.taskRequestToTask(taskRequest);
         taskRepository.save(task);
         return task.getId();
@@ -38,7 +46,17 @@ public class TaskService {
     }
 
     public Integer findIncidentIdByTaskId(Integer taskId) {
-        Task task  = taskRepository.getById(taskId);
+        Task task = taskRepository.getById(taskId);
         return task.getIncident().getId();
     }
+
+    public List<Task> getTasksByReportId(Integer reportId) {
+        return taskRepository.findByReportId(reportId);
+    }
+
+    public List<ReportOverviewResponse> toResponses(List<Task> tasks) {
+        return taskMapper.taskToReportOverviewResponses(tasks);
+    }
+
+
 }

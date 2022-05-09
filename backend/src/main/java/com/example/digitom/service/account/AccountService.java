@@ -2,7 +2,6 @@ package com.example.digitom.service.account;
 
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyService;
-import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.contact.Contact;
 import com.example.digitom.domain.contact.ContactService;
@@ -28,12 +27,19 @@ public class AccountService {
     private ValidationService validationService;
     @Resource
     private CompanyUserService companyUserService;
-    @Resource
-    private CompanyConstructionSiteService companyConstructionSiteService;
 
 
     public void addNewAccount(RegistrationRequest registrationRequest) {
         registrationRequest.setEmail(registrationRequest.getEmail().toLowerCase());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getFirstName());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getMiddleName());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getLastName());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getCompanyName());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getCompanyNumber());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getPhoneNumber());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getEmail());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getPassword());
+        validationService.checkRegistrationFormCompletion(registrationRequest.getRoleName());
         Boolean exists = userService.existsByEmail(registrationRequest.getEmail());
         validationService.emailAlreadyExists(registrationRequest.getEmail(), exists);
         User user = userService.addNewUser(registrationRequest);

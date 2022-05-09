@@ -2,12 +2,12 @@ package com.example.digitom.service.constractionsitemanagement;
 
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.company.CompanyService;
-import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteDto;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteListResponse;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import com.example.digitom.domain.report.ReportService;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,18 +19,16 @@ public class ConstructionSiteManagementService {
 
     @Resource
     private ConstructionSiteService constructionSiteService;
-
     @Resource
     private CompanyUserService companyUserService;
-
     @Resource
     private CompanyService companyService;
-
     @Resource
     private CompanyConstructionSiteService companyConstructionSiteService;
-
     @Resource
     private ReportService reportService;
+    @Resource
+    private ValidationService validationService;
 
 
     public List<CompanyNameResponse> getAllCompanies() {
@@ -50,6 +48,9 @@ public class ConstructionSiteManagementService {
     }
 
     public Integer addNewConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest) {
+        validationService.checkRegistrationFormCompletion(newConstructionSiteRequest.getSiteAddress());
+        validationService.checkRegistrationFormCompletion(newConstructionSiteRequest.getSiteName());
+        validationService.taskCompanyExists(newConstructionSiteRequest.getMainContractorCompanyId());
         Integer constructionSiteId = constructionSiteService.addNewConstructionSite(newConstructionSiteRequest);
         companyConstructionSiteService.addNewMainContractorConnection(newConstructionSiteRequest, constructionSiteId);
         return constructionSiteId;

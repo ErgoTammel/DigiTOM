@@ -1,7 +1,6 @@
 package com.example.digitom.domain.companyconstructionsite;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyMapper;
 import com.example.digitom.domain.company.CompanyRepository;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteRepository;
@@ -27,22 +26,9 @@ public class CompanyConstructionSiteService {
     private CompanyRepository companyRepository;
 
     @Resource
-    private CompanyMapper companyMapper;
-
-    @Resource
     private CompanyConstructionSiteMapper companyConstructionSiteMapper;
     @Resource
     private ValidationService validationService;
-
-
-//    public List<CompanyConstructionSite> getCompanyConstructionSites(List<CompanyUser> companyUsers) {
-//        List<Integer> companyIDs = new ArrayList<>();
-//        for (CompanyUser companyUser : companyUsers) {
-//            Integer companyID = companyUser.getId();
-//            companyIDs.add(companyID);
-//        }
-//        return companyConstructionSiteRepository.findByCompanyId(companyIDs);
-//    }
 
     public List<ConstructionSite> getConstructionSitesByUserCompanyIds(List<Integer> userCompanyIds) {
         List<ConstructionSite> constructionSites = new ArrayList<>();
@@ -72,7 +58,6 @@ public class CompanyConstructionSiteService {
         Boolean exist = companyConstructionSiteRepository.existByCompanyIdAndConstructionSiteId(companyId, constructionSiteId);
         validationService.companyConstructionSiteExist(companyName, exist);
 
-
         CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
         companyConstructionSite.setCompany(companyRepository.getById(companyId));
         companyConstructionSite.setConstructionSite(constructionSiteRepository.getById(constructionSiteId));
@@ -91,8 +76,8 @@ public class CompanyConstructionSiteService {
         companyConstructionSiteRepository.delete(companyConstructionSite);
     }
 
-    public Company getMainContractor (Integer siteId, Boolean mainContractor) {
-       return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
+    public Company getMainContractor(Integer siteId, Boolean mainContractor) {
+        return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
     }
 
     public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor(Integer constructionSiteId) {

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -23,5 +24,8 @@ public class Report {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
+
+    @Column(name = "tom", precision = 5, scale = 2)
+    private BigDecimal tom;
 
 }

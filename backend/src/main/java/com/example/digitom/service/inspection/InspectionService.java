@@ -3,7 +3,6 @@ package com.example.digitom.service.inspection;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
-import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
@@ -11,6 +10,7 @@ import com.example.digitom.domain.task.Task;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.image.ReportPictureRequest;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,6 +32,8 @@ public class InspectionService {
     private ReportPictureService reportPictureService;
     @Resource
     private ReportService reportService;
+    @Resource
+    private ValidationService validationService;
 
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
@@ -52,7 +54,7 @@ public class InspectionService {
     }
 
     public Integer addNewTask(TaskRequest taskRequest) {
-       return taskService.addNewTask(taskRequest);
+        return taskService.addNewTask(taskRequest);
     }
 
     public Integer incidentCounter(IncidentCounterRequest incidentCounterResponse) {
@@ -73,6 +75,7 @@ public class InspectionService {
 
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(IncidentCounterRequest incidentCounterRequest) {
         List<Task> tasks = taskService.findByReportIdAndSafetyFieldIdAndSafe(incidentCounterRequest);
+        validationService.incidentListExists(tasks);
         List<RemoveFalseIncidentList> responseList = new ArrayList<>();
         for (Task task : tasks) {
             RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();
@@ -90,6 +93,15 @@ public class InspectionService {
         Integer incidentId = taskService.findIncidentIdByTaskId(taskId);
         taskService.removeTaskByTaskId(taskId);
         incidentService.removeById(incidentId);
+    }
+
+    public List<ReportOverviewResponse> getReportOverview(Integer reportId) {
+        List<Task> tasks = taskService.getTasksByReportId(reportId);
+        return taskService.toResponses(tasks);
+    }
+
+    public ReportResultResponse getReportResult(Integer reportId) {
+        return reportService.getReportResult(reportId);
     }
 }
 

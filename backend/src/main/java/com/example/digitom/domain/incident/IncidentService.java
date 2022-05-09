@@ -36,8 +36,8 @@ public class IncidentService {
     public void removeTrueIncident(IncidentCounterRequest incidentCounterRequest) {
         Incident lastById = incidentRepository.findFirstByReport_IdAndSafetyField_IdAndSafeOrderByIdDesc
                 (incidentCounterRequest.getReportId(),
-                incidentCounterRequest.getSafetyFieldId(),
-                incidentCounterRequest.getSafe());
+                        incidentCounterRequest.getSafetyFieldId(),
+                        incidentCounterRequest.getSafe());
         incidentRepository.delete(lastById);
     }
 
@@ -46,8 +46,18 @@ public class IncidentService {
     }
 
 
-    public void removeById (Integer id) {
+    public void removeById(Integer id) {
         incidentRepository.deleteById(id);
+    }
+
+    public Integer countTrueIncidents(Integer reportId, Boolean safe) {
+        List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
+        return incidents.size();
+    }
+
+    public Integer countFalseIncidents(Integer reportId, Boolean safe) {
+        List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
+        return incidents.size();
     }
 }
 
