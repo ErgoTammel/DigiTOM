@@ -13,6 +13,8 @@ public class ImageService {
 
     public void addNewReportPicture(ReportPictureRequest reportPictureRequest) {
         reportPictureService.addNewReportPicture(reportPictureRequest);
+
+
     }
 
 }
