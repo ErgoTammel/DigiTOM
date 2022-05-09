@@ -1,10 +1,10 @@
 package com.example.digitom.domain.company;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 @Getter
 @Setter
 @Entity
@@ -20,5 +20,5 @@ public class Company {
 
     @Column(name = "reg_number", nullable = false)
     private Integer regNumber;
-
+    
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RequestMapping("/company")
 @RestController
@@ -21,4 +22,5 @@ public class CompanyController {
     public CompanyDto getCompanyById(@RequestParam Integer companyId) {
         return companyService.getCompanyById(companyId);
     }
+
 }

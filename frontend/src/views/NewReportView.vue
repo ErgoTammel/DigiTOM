@@ -321,8 +321,6 @@ export default {
         safe: isSafe
       })
           .then(response => {
-            console.log("Data: " + response.data)
-            console.log("safetyField: " + safetyField)
             switch (Number(safetyField)) {
               case 1:
                 if (isSafe) {
