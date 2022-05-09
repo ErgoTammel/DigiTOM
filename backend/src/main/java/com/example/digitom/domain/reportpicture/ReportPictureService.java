@@ -27,9 +27,7 @@ public class ReportPictureService {
     }
 
     public void removeByTaskId(Integer taskId) {
-
         ReportPicture picture = reportPictureRepository.findByTaskId(taskId);
         reportPictureRepository.delete(picture);
-
     }
 }
