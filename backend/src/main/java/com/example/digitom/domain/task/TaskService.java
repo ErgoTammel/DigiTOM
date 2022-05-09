@@ -61,8 +61,8 @@ public class TaskService {
     }
 
 
-    public List<TaskOverviewResponse> getOpenTasks(Integer companyId) {
-        List<Task> tasks = taskRepository.findByCompany_Id(companyId);
+    public List<TaskOverviewResponse> getOpenTasks(Integer companyId, Boolean isDone) {
+        List<Task> tasks = taskRepository.findByCompany_IdAndIsDone(companyId, false);
         List<TaskOverviewResponse> responses = new ArrayList<>();
         for (Task task : tasks) {
             TaskOverviewResponse taskResponse = new TaskOverviewResponse();
