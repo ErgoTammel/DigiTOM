@@ -5,6 +5,7 @@ import MainView from "@/views/MainView";
 import NewInspectionView from "@/views/NewInspectionView";
 import NewConstructionSiteView from "@/views/NewConstructionSiteView";
 import NewReportView from "@/views/NewReportView";
+import ReportOverviewView from "@/views/ReportOverviewView";
 
 Vue.use(VueRouter)
 
@@ -30,11 +31,15 @@ const routes = [
         component: NewConstructionSiteView
     },
     {
-        path:'/report/new',
+        path: '/report/new',
         name: 'newReportViewRoute',
         component: NewReportView
+    },
+    {
+        path: '/report/overview',
+        name: 'ReportOverviewRoute',
+        component: ReportOverviewView
     }
-
 ]
 
 const router = new VueRouter({
