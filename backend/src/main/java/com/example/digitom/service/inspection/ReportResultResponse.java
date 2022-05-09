@@ -12,4 +12,5 @@ public class ReportResultResponse {
     @Column(name = "tom", precision = 5, scale = 2)
     private BigDecimal tom;
 
+
 }
