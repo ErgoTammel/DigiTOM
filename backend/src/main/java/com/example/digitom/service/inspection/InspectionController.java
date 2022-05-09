@@ -40,7 +40,7 @@ public class InspectionController {
         return inspectionService.incidentCounter(incidentCounterRequest);
     }
 
-    @DeleteMapping("/counter/incident")
+    @PostMapping("/counter/incident/delete")
     @Operation(summary = "Delete the TRUE incident")
     public void removeTrueIncident(@RequestBody IncidentCounterRequest incidentCounterRequest) {
         inspectionService.removeTrueIncident(incidentCounterRequest);
