@@ -22,7 +22,7 @@
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(1)"></i><i class="fa-solid fa-minus"
-                                                                                       v-on:click="toggleDeleteTaskWindow"></i>
+                                                                                       v-on:click="openDeleteTaskWindow(1)"></i>
               <h4
                   class="counter">{{ counter.field1.notSafe }}</h4></h4>
           </td>
@@ -34,8 +34,10 @@
                 class="counter">{{ counter.field2.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus"></i><h4
-                class="counter">{{ counter.field2.notSafe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="openDeleteTaskWindow(2)"></i>
+              <h4
+                  class="counter">{{ counter.field2.notSafe }}</h4></h4>
           </td>
         </tr>
         <tr>
@@ -45,8 +47,10 @@
                 class="counter">{{ counter.field3.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus"></i><h4
-                class="counter">{{ counter.field3.notSafe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="openDeleteTaskWindow(3)"></i>
+              <h4
+                  class="counter">{{ counter.field3.notSafe }}</h4></h4>
           </td>
         </tr>
         <tr>
@@ -56,8 +60,10 @@
                 class="counter">{{ counter.field4.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus"></i><h4
-                class="counter">{{ counter.field4.notSafe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="openDeleteTaskWindow(4)"></i>
+              <h4
+                  class="counter">{{ counter.field4.notSafe }}</h4></h4>
           </td>
         </tr>
         <tr>
@@ -67,8 +73,10 @@
                 class="counter">{{ counter.field5.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus"></i><h4
-                class="counter">{{ counter.field5.notSafe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="openDeleteTaskWindow(5)"></i>
+              <h4
+                  class="counter">{{ counter.field5.notSafe }}</h4></h4>
           </td>
         </tr>
         <tr>
@@ -78,14 +86,16 @@
                 class="counter">{{ counter.field6.safe }}</h4></h4>
           </td>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus"></i><h4
-                class="counter">{{ counter.field6.notSafe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="openDeleteTaskWindow(6)"></i>
+              <h4
+                  class="counter">{{ counter.field6.notSafe }}</h4></h4>
           </td>
         </tr>
         </tbody>
       </table>
       <div class="submitRow">
-        <button type="button" class="btn btn-danger btn-lg">Tühista ülevaatus</button>
+        <button type="button" class="btn btn-danger btn-lg" v-on:click="discardReport">Tühista ülevaatus</button>
         <button type="button" class="btn btn-primary btn-lg">Vaata üle ja kinnita</button>
       </div>
     </div>
@@ -141,23 +151,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>Sittus põrandale</td>
-          <td>Merko Ehitus OÜ</td>
-          <td>12-05-21</td>
-          <td><i id="deleteButton" class="fa-solid fa-xmark"></i></td>
+        <tr v-for="task in removeTaskListResponse">
+          <td>{{ task.description }}</td>
+          <td>{{ task.companyName }}</td>
+          <td>{{ task.deadline }}</td>
+          <td><i id="deleteButton" class="fa-solid fa-xmark" v-on:click="deleteIncident(task.taskId)"></i></td>
         </tr>
         </tbody>
       </div>
       <div id="deleteTaskSubmit">
-        <button type="button" class="btn btn-dark btn-lg" id="cancelTaskDeleteButton">Tühista</button>
-        <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewTask" id="saveTaskDeleteButton">Jätka</button>
+        <button type="button" class="btn btn-primary btn-lg" v-on:click="updateCounterAfterIncidentDelete"
+                id="saveTaskDeleteButton">Jätka
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "NewReportView",
   data: function () {
@@ -198,7 +211,8 @@ export default {
           notSafe: 0
         }
       },
-      newTaskSafetyField: 0
+      newTaskSafetyField: 0,
+      removeTaskListResponse: {}
     }
   },
   methods: {
@@ -300,13 +314,14 @@ export default {
       reader.readAsDataURL(fileObject);
     },
     updateCounter: function (safetyField, isSafe) {
+      console.log("Update counter " + isSafe)
       this.$http.post("/inspection/counter/incident", {
         reportId: sessionStorage.getItem("reportId"),
         safetyFieldId: safetyField,
         safe: isSafe
       })
           .then(response => {
-            switch (safetyField) {
+            switch (Number(safetyField)) {
               case 1:
                 if (isSafe) {
                   this.counter.field1.safe = response.data;
@@ -355,6 +370,51 @@ export default {
     },
     toggleDeleteTaskWindow: function () {
       this.deleteTaskWindow = !this.deleteTaskWindow;
+    },
+    updateDeleteTaskWindow: function (safetyField) {
+      this.$http.post("/inspection/incident/false", {
+        reportId: sessionStorage.getItem("reportId"),
+        safetyFieldId: safetyField,
+        safe: false
+      }).then(response => {
+        this.removeTaskListResponse = response.data;
+      }).catch(error => console.log(error.response.data))
+    },
+    deleteIncident: async function (taskIdParam) {
+      await this.$http.delete("/inspection/incident", {
+        params: {
+          taskId: taskIdParam
+        }
+      }).then()
+          .catch(error => error.response.data)
+      this.updateDeleteTaskWindow(sessionStorage.getItem("safetyField"));
+
+    },
+    openDeleteTaskWindow: async function (safetyField) {
+      sessionStorage.setItem("safetyField", safetyField);
+      this.updateDeleteTaskWindow(safetyField);
+      this.toggleDeleteTaskWindow();
+    },
+    updateCounterAfterIncidentDelete: function () {
+      this.updateCounter(sessionStorage.getItem("safetyField"), false);
+      this.toggleDeleteTaskWindow();
+
+
+    },
+    discardReport: function () {
+      this.$http.delete("/inspection/report", {
+        params: {
+          reportId: sessionStorage.getItem("reportId")
+        }
+      })
+          .then()
+          .catch(error => error.response.data)
+      sessionStorage.removeItem("taskId");
+      sessionStorage.removeItem("reportId");
+      sessionStorage.removeItem("safetyField");
+      sessionStorage.removeItem("constructionSiteId");
+      sessionStorage.removeItem("incidentId");
+      router.push('/main');
     }
   },
   mounted() {
@@ -438,24 +498,28 @@ h4 i {
 #incidentTable th {
   border: 1px solid grey;
 }
-#taskTable{
+
+#taskTable {
   width: 700px;
   margin: 3% auto auto;
   border: 4px solid black;
 }
-#taskTable thead{
+
+#taskTable thead {
   font-size: 1.2em;
 }
-#taskTable tbody{
+
+#taskTable tbody {
   font-size: 0.9em;
 }
-#taskTable td{
-  border: 1px solid grey;
- }
-#taskTable th{
+
+#taskTable td {
   border: 1px solid grey;
 }
 
+#taskTable th {
+  border: 1px solid grey;
+}
 
 
 .rowHeading {
@@ -472,9 +536,10 @@ h4 i {
   width: 54%;
   margin-left: 46%;
 }
-#deleteTaskSubmit{
+
+#deleteTaskSubmit {
   width: 54%;
-  margin-left: 46%;
+  margin-left: 58%;
 }
 
 button {
@@ -508,12 +573,13 @@ button {
   height: 88vh;
   z-index: 1000;
 }
-#deleteButton{
-  margin-left:23%;
+
+#deleteButton {
+  margin-left: 23%;
   font-size: 2.1em;
   border: 2px solid black;
   border-radius: 10%;
-  padding:3% 13% 3% 10%;
+  padding: 3% 13% 3% 10%;
 }
 
 .col {
