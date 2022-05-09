@@ -2,11 +2,14 @@ package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.service.inspectionresponse.TaskOverviewResponse;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -41,7 +44,6 @@ public class TaskService {
 
 
     public void removeTaskByTaskId(Integer taskId) {
-
         taskRepository.deleteById(taskId);
     }
 
@@ -59,4 +61,16 @@ public class TaskService {
     }
 
 
+    public List<TaskOverviewResponse> getOpenTasks(Integer companyId) {
+        List<Task> tasks = taskRepository.findByCompany_Id(companyId);
+        List<TaskOverviewResponse> responses = new ArrayList<>();
+        for (Task task : tasks) {
+            TaskOverviewResponse taskResponse = new TaskOverviewResponse();
+            taskResponse.setConstructionSiteName(task.getReport().getConstructionSite().getName());
+            taskResponse.setDeadline(task.getDeadline());
+            taskResponse.setDescription(task.getDescription());
+            responses.add(taskResponse);
+        }
+        return responses;
+    }
 }
