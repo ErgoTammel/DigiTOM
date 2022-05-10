@@ -18,6 +18,8 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -99,6 +101,11 @@ public class ReportService {
                 reportResponses.add(response);
             }
             }
+        Comparator<ReportResponse> reverseComparator = (c1, c2) -> {
+            return
+                    Math.toIntExact(c2.getDate().compareTo(c1.getDate()));
+        };
+        Collections.sort(reportResponses, reverseComparator);
         return reportResponses;
     }
 }
