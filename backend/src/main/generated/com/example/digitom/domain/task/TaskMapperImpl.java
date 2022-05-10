@@ -1,17 +1,50 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.domain.company.Company;
-
+import com.example.digitom.domain.incident.Incident;
+import com.example.digitom.domain.report.Report;
+import com.example.digitom.service.inspection.ReportOverviewResponse;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-08T22:38:44+0300",
+    date = "2022-05-09T13:29:17+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
 public class TaskMapperImpl implements TaskMapper {
+
+    @Override
+    public ReportOverviewResponse taskToReportOverviewResponse(Task task) {
+        if ( task == null ) {
+            return null;
+        }
+
+        ReportOverviewResponse reportOverviewResponse = new ReportOverviewResponse();
+
+        reportOverviewResponse.setCompanyName( taskCompanyName( task ) );
+        reportOverviewResponse.setDescription( task.getDescription() );
+        reportOverviewResponse.setDeadline( task.getDeadline() );
+
+        return reportOverviewResponse;
+    }
+
+    @Override
+    public List<ReportOverviewResponse> taskToReportOverviewResponses(List<Task> tasks) {
+        if ( tasks == null ) {
+            return null;
+        }
+
+        List<ReportOverviewResponse> list = new ArrayList<ReportOverviewResponse>( tasks.size() );
+        for ( Task task : tasks ) {
+            list.add( taskToReportOverviewResponse( task ) );
+        }
+
+        return list;
+    }
 
     @Override
     public Task taskRequestToTask(TaskRequest taskRequest) {
@@ -28,6 +61,21 @@ public class TaskMapperImpl implements TaskMapper {
         task.setDescription( taskRequest.getDescription() );
 
         return task;
+    }
+
+    private String taskCompanyName(Task task) {
+        if ( task == null ) {
+            return null;
+        }
+        Company company = task.getCompany();
+        if ( company == null ) {
+            return null;
+        }
+        String name = company.getName();
+        if ( name == null ) {
+            return null;
+        }
+        return name;
     }
 
     protected Report taskRequestToReport(TaskRequest taskRequest) {

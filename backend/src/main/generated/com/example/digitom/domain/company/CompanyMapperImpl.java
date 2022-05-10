@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-08T22:38:44+0300",
+    date = "2022-05-09T13:29:17+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -22,7 +22,6 @@ public class CompanyMapperImpl implements CompanyMapper {
 
         Company company = new Company();
 
-        company.setId( companyDto.getId() );
         company.setName( companyDto.getName() );
         company.setRegNumber( companyDto.getRegNumber() );
 
@@ -35,17 +34,29 @@ public class CompanyMapperImpl implements CompanyMapper {
             return null;
         }
 
-        Integer id = null;
         String name = null;
         Integer regNumber = null;
 
-        id = company.getId();
         name = company.getName();
         regNumber = company.getRegNumber();
 
-        CompanyDto companyDto = new CompanyDto( id, name, regNumber );
+        CompanyDto companyDto = new CompanyDto( name, regNumber );
 
         return companyDto;
+    }
+
+    @Override
+    public List<CompanyDto> toDtos(List<Company> companies) {
+        if ( companies == null ) {
+            return null;
+        }
+
+        List<CompanyDto> list = new ArrayList<CompanyDto>( companies.size() );
+        for ( Company company : companies ) {
+            list.add( toDto( company ) );
+        }
+
+        return list;
     }
 
     @Override
@@ -54,9 +65,6 @@ public class CompanyMapperImpl implements CompanyMapper {
             return;
         }
 
-        if ( companyDto.getId() != null ) {
-            company.setId( companyDto.getId() );
-        }
         if ( companyDto.getName() != null ) {
             company.setName( companyDto.getName() );
         }
@@ -79,19 +87,5 @@ public class CompanyMapperImpl implements CompanyMapper {
         }
 
         return company;
-    }
-
-    @Override
-    public List<CompanyDto> toDtos(List<Company> companies) {
-        if ( companies == null ) {
-            return null;
-        }
-
-        List<CompanyDto> list = new ArrayList<CompanyDto>( companies.size() );
-        for ( Company company : companies ) {
-            list.add( toDto( company ) );
-        }
-
-        return list;
     }
 }

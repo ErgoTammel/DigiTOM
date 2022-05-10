@@ -75,7 +75,7 @@ public class InspectionService {
 
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(IncidentCounterRequest incidentCounterRequest) {
         List<Task> tasks = taskService.findByReportIdAndSafetyFieldIdAndSafe(incidentCounterRequest);
-        validationService.incidentListExists(tasks);
+//        validationService.incidentListExists(tasks);
         List<RemoveFalseIncidentList> responseList = new ArrayList<>();
         for (Task task : tasks) {
             RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();
