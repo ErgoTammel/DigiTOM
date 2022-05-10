@@ -6,6 +6,7 @@ import NewInspectionView from "@/views/NewInspectionView";
 import NewConstructionSiteView from "@/views/NewConstructionSiteView";
 import NewReportView from "@/views/NewReportView";
 import ReportOverviewView from "@/views/ReportOverviewView";
+import InspectorAllTasksView from "@/views/InspectorAllTasksView";
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
         path: '/report/overview',
         name: 'ReportOverviewRoute',
         component: ReportOverviewView
+    },
+    {
+        path: 'inspector/alltasks',
+        name: 'InspectorAllTasksView',
+        component: InspectorAllTasksView
     }
 ]
 

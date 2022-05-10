@@ -12,7 +12,7 @@
       <button type="button" class="btn btn-dark btn-lg">Kuva raportite otsing</button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-dark btn-lg">Kuva kinnitamata korrastusülesanded</button>
+      <button type="button" class="btn btn-dark btn-lg" v-on:click="allTasks">Kuva kinnitamata korrastusülesanded</button>
     </div>
   </div>
   <div id="tableTitle">
@@ -53,6 +53,9 @@ export default {
     },
     newInspection:function(){
       router.push("/inspection/sites")
+    },
+    allTasks:function (){
+      router.push("/inspector/alltasks")
     }
   },
   mounted(){
