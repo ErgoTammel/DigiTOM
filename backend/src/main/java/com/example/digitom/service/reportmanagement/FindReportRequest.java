@@ -6,7 +6,8 @@ import java.time.LocalDate;
 
 @Data
 public class FindReportRequest {
-    private Integer id;
+    private Integer reportId;
     private String constructionSiteName;
     private LocalDate date;
+
 }

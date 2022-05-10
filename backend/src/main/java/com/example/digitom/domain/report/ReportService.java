@@ -28,6 +28,8 @@ public class ReportService {
     private ReportPictureService reportPictureService;
     @Resource
     private IncidentService incidentService;
+    @Resource
+    private ReportMapper reportMapper;
 
 
     public Integer addNewReport(Integer siteId) {
@@ -66,8 +68,8 @@ public class ReportService {
     }
 
     public List<ReportResponse> searchReports(FindReportRequest findReportRequest) {
-
-
-        return null;
+        Report report = reportMapper.requestToReport(findReportRequest);
+        List<Report> reports = reportRepository.reportSearch(report.getId(), report.getConstructionSite().getName(), report.getDate());
+        return reportMapper.reportToResponses(reports);
     }
 }

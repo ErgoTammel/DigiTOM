@@ -33,7 +33,7 @@ public class InspectionResponseController {
 
     @PostMapping("/task/search")
     @Operation(summary = "Search reports")
-    public List<ReportResponse> searchReports(@RequestParam FindReportRequest findReportRequest) {
+    public List<ReportResponse> searchReports(@RequestBody FindReportRequest findReportRequest) {
         return inspectionResponseService.searchReports(findReportRequest);
     }
 
