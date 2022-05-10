@@ -31,10 +31,23 @@ public class InspectionResponseController {
         return inspectionResponseService.getOpenTasksByUserId(userId);
     }
 
-    @PostMapping("/task/search")
+    @PostMapping("/report/search")
     @Operation(summary = "Search reports")
     public List<ReportResponse> searchReports(@RequestBody FindReportRequest findReportRequest) {
         return inspectionResponseService.searchReports(findReportRequest);
     }
+
+    @GetMapping("/report/search/userid")
+    @Operation(summary = "Show reports list")
+    public List<ReportResponse>findAllReports(@RequestParam Integer userId) {
+        return inspectionResponseService.findAllReports(userId);
+    }
+
+//    @GetMapping("/report/last")
+//    @Operation(summary = "Show 5 last reports")
+//    public List<ReportResponse> getLastReports(@RequestParam Integer userId) {
+////        return inspectionResponseService.getLastReports(userId);
+//    }
+
 
 }

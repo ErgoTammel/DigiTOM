@@ -34,4 +34,8 @@ public class InspectionResponseService {
     public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
         return taskService.getOpenTasksByUserId(userId);
     }
+
+    public List<ReportResponse> findAllReports(Integer userId) {
+        return reportService.findAllReports(userId);
+    }
 }
