@@ -21,8 +21,8 @@ public class InspectionResponseController {
 
     @GetMapping("/get/list")
     @Operation(summary = "Get open tasks list")
-    public List<TaskOverviewResponse> getOpenTasks(@RequestParam Integer companyId, @RequestParam Boolean isDone){
-       return inspectionResponseService.getOpenTasks(companyId, isDone);
+    public List<TaskOverviewResponse> getOpenTasksBySiteId(@RequestParam Integer constructionSiteId){
+       return inspectionResponseService.getOpenTasksBySiteId(constructionSiteId);
     }
 
 }

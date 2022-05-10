@@ -19,7 +19,7 @@ public class InspectionResponseService {
         return taskResponseService.addTaskResponse(taskResponseRequest);
     }
 
-    public List<TaskOverviewResponse> getOpenTasks(Integer companyId, Boolean isDone) {
-        return taskService.getOpenTasks(companyId, isDone);
+    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {
+        return taskService.getOpenTasksBySiteId(constructionSiteId);
     }
 }
