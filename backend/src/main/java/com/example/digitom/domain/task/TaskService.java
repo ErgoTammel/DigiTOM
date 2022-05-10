@@ -1,9 +1,10 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.domain.companyuser.CompanyUserService;
+import com.example.digitom.service.constractionsitemanagement.CompanyNameResponse;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
-import com.example.digitom.service.inspectionresponse.TaskOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
@@ -77,5 +78,21 @@ public class TaskService {
         return responses;
     }
 
-//    List<CompanyNameResponse> userCompanies = companyUserService.getCompanyListByUserId(userId);
+    public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
+        List<CompanyNameResponse> userCompanies = companyUserService.getCompanyListByUserId(userId);
+        List<TaskOverviewResponse> tasks = new ArrayList<>();
+        for (CompanyNameResponse userCompany : userCompanies) {
+            List<Task> companyOpenTasks = taskRepository.findByCompany_IdAndIsDone(userCompany.getCompanyId(), false);
+            for (Task companyOpenTask : companyOpenTasks) {
+                TaskOverviewResponse taskResponse = new TaskOverviewResponse();
+                taskResponse.setTaskId(companyOpenTask.getId());
+                taskResponse.setConstructionSiteName(companyOpenTask.getReport().getConstructionSite().getName());
+                taskResponse.setDeadline(companyOpenTask.getDeadline());
+                taskResponse.setDescription(companyOpenTask.getDescription());
+                taskResponse.setCompanyName(companyOpenTask.getCompany().getName());
+                tasks.add(taskResponse);
+            }
+        }
+        return tasks;
+    }
 }

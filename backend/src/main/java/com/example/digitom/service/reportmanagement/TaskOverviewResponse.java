@@ -1,4 +1,4 @@
-package com.example.digitom.service.inspectionresponse;
+package com.example.digitom.service.reportmanagement;
 
 import lombok.Data;
 
