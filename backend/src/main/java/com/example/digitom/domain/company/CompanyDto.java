@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class CompanyDto implements Serializable {
-    private final String name;
-    private final Integer regNumber;
+    private String name;
+    private Integer regNumber;
+
 }

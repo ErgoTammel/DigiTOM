@@ -1,15 +1,16 @@
 package com.example.digitom.domain.task;
 
+import com.example.digitom.domain.companyuser.CompanyUserService;
+import com.example.digitom.service.constractionsitemanagement.CompanyNameResponse;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
-import com.example.digitom.service.inspectionresponse.TaskOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -20,6 +21,8 @@ public class TaskService {
     private TaskRepository taskRepository;
     @Resource
     private ValidationService validationService;
+    @Resource
+    private CompanyUserService companyUserService;
 
 
     public Integer addNewTask(TaskRequest taskRequest) {
@@ -61,16 +64,35 @@ public class TaskService {
     }
 
 
-    public List<TaskOverviewResponse> getOpenTasks(Integer companyId, Boolean isDone) {
-        List<Task> tasks = taskRepository.findByCompany_IdAndIsDone(companyId, false);
+    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {
+        List<Task> tasks = taskRepository.findOpenTasksBySiteId(constructionSiteId, false);
         List<TaskOverviewResponse> responses = new ArrayList<>();
         for (Task task : tasks) {
             TaskOverviewResponse taskResponse = new TaskOverviewResponse();
             taskResponse.setConstructionSiteName(task.getReport().getConstructionSite().getName());
             taskResponse.setDeadline(task.getDeadline());
             taskResponse.setDescription(task.getDescription());
+            taskResponse.setCompanyName(task.getCompany().getName());
             responses.add(taskResponse);
         }
         return responses;
+    }
+
+    public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
+        List<CompanyNameResponse> userCompanies = companyUserService.getCompanyListByUserId(userId);
+        List<TaskOverviewResponse> tasks = new ArrayList<>();
+        for (CompanyNameResponse userCompany : userCompanies) {
+            List<Task> companyOpenTasks = taskRepository.findByCompany_IdAndIsDone(userCompany.getCompanyId(), false);
+            for (Task companyOpenTask : companyOpenTasks) {
+                TaskOverviewResponse taskResponse = new TaskOverviewResponse();
+                taskResponse.setTaskId(companyOpenTask.getId());
+                taskResponse.setConstructionSiteName(companyOpenTask.getReport().getConstructionSite().getName());
+                taskResponse.setDeadline(companyOpenTask.getDeadline());
+                taskResponse.setDescription(companyOpenTask.getDescription());
+                taskResponse.setCompanyName(companyOpenTask.getCompany().getName());
+                tasks.add(taskResponse);
+            }
+        }
+        return tasks;
     }
 }

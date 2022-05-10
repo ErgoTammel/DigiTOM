@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c248ea2a-3aac-447e-a9e5-c9b4d7d41d26" name="Changes" comment="" />
+    <list default="true" id="c248ea2a-3aac-447e-a9e5-c9b4d7d41d26" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/company/CompanyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/company/CompanyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/companyuser/CompanyUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/companyuser/CompanyUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/task/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/task/TaskRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/task/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/domain/task/TaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/InspectionResponseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/InspectionResponseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/InspectionResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/InspectionResponseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/TaskOverviewResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/digitom/service/inspectionresponse/TaskOverviewResponse.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +47,7 @@
       <workItem from="1651074967082" duration="6000" />
       <workItem from="1651647590719" duration="22000" />
       <workItem from="1652002473556" duration="13000" />
+      <workItem from="1652162858154" duration="14000" />
     </task>
     <servers />
   </component>
