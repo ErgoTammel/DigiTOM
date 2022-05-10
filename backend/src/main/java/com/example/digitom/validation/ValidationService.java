@@ -13,11 +13,9 @@ public class ValidationService {
 
 
     public static final String EMAIL_ALREADY_TAKEN = "Email on kasutusel";
-    public static final String USER_DOES_NOT_EXISTS = "Kasutajanimi või parool on vale";
     public static final String NO_COMPANY_RESPONSIBLE = "Vastutav ettevõte puudub";
     public static final String NO_DESCRIPTION = "Kirjeldus puudub";
     public static final String DEADLINE_NOT_EXISTS = "Tähtaeg puudub";
-    public static final String TASKS_NOT_FOUND = "Korrastamisülesandeid ei leitud";
     public static final String FORM_NOT_FILLED = "Väli jäi täitmata";
 
 
