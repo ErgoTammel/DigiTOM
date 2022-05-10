@@ -14,18 +14,23 @@
     </thead>
     <tbody>
     <tr v-for="task in taskList">
+      <td>{{ task.constructionSiteName }}</td>
       <td>{{ task.description }}</td>
       <td>{{ task.companyName }}</td>
       <td>{{ task.deadline }}</td>
-      <td>{{ task.deadline }}</td>
     </tr>
     </tbody>
+  </div>
+  <div class="row" id="taskSubmitRow">
+    <button type="button" class="btn btn-dark btn-lg" v-on:click="returnMain">Tagasi</button>
   </div>
 </div>
 </div>
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "InspectorAllTasksView",
   data:function(){
@@ -35,12 +40,25 @@ export default {
   },
   methods:{
     getAllTasks: function(){
-      this.$http.get("/get/list", {
+      this.$http.get("/response/get/by/userid", {
         params:{
-
+          userId: sessionStorage.getItem("userId")
         }
       })
+      .then(response=>{
+        this.taskList=response.data;
+      })
+      .catch(error=>{
+        console.log(error.response.data)
+      })
+    },
+    returnMain:function(){
+      router.push("/main")
     }
+  },
+  mounted() {
+    this.getAllTasks();
+
   }
 }
 </script>
@@ -64,8 +82,33 @@ h2 {
   margin-top: 5%;
 }
 #taskTable{
-  width: 1000px;
+  width: 800px;
   margin-left: 6.2%;
   margin-top: 5%;
+  border: 2px solid black;
+}
+
+
+#taskTable tbody {
+  font-size: 0.7em;
+}
+
+#taskTable td {
+  border: 1px solid grey;
+}
+
+#taskTable th {
+  border: 1px solid grey;
+}
+#taskSubmitRow {
+  width: 54%;
+  margin-left: 70%;
+}
+button {
+  width: 35%;
+  margin-top: 5%;
+  margin-right: 3%;
+  height: 3em;
+  font-size: 1em;
 }
 </style>

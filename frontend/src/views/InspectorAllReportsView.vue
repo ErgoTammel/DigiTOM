@@ -22,14 +22,16 @@
         </tbody>
       </div>
       <div class="row" id="taskSubmitRow">
-        <button type="button" class="btn btn-dark btn-lg" id="cancelButton">Tühista</button>
-        <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewTask" id="saveButton">Salvesta</button>
+        <button type="button" class="btn btn-dark btn-lg" v-on:click="returnMain">Tagasi</button>
+        <button type="button" class="btn btn-primary btn-lg"v-on:click="newReport">Uus ülevaatus</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "InspectorAllReportsView",
   data:function(){
@@ -38,6 +40,12 @@ export default {
     }
   },
   methods:{
+    returnMain:function(){
+      router.push("/main")
+    },
+    newReport: function(){
+      router.push("/inspection/sites")
+    }
 
   }
 }
