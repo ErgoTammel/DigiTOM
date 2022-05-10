@@ -9,7 +9,7 @@
       <button type="button" class="btn btn-dark btn-lg" v-on:click="newInspection">Alusta uut objekti läbivaatust</button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-dark btn-lg">Kuva raportite otsing</button>
+      <button type="button" class="btn btn-dark btn-lg" v-on:click="allReports">Kuva raportite otsing</button>
     </div>
     <div class="col">
       <button type="button" class="btn btn-dark btn-lg" v-on:click="allTasks">Kuva kinnitamata korrastusülesanded</button>
@@ -56,6 +56,9 @@ export default {
     },
     allTasks:function (){
       router.push("/inspector/alltasks")
+    },
+    allReports:function(){
+      router.push("/inspector/allreports")
     }
   },
   mounted(){
