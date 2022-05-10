@@ -28,37 +28,37 @@ public class ConstructionSiteManagementController {
 
     @PostMapping("/new")
     @Operation(summary = "Register new construction site")
-    public Integer addNewConstructionSite (@RequestBody NewConstructionSiteRequest newConstructionSiteRequest) {
+    public Integer addNewConstructionSite(@RequestBody NewConstructionSiteRequest newConstructionSiteRequest) {
         return constructionSiteManagementService.addNewConstructionSite(newConstructionSiteRequest);
     }
 
-    @PostMapping ("/new/subcontractor")
+    @PostMapping("/new/subcontractor")
     @Operation(summary = "Add new subcontractor to the construction site")
-    public void addNewSubContractor (@RequestParam Integer companyId, @RequestParam Integer constructionSiteId) {
+    public void addNewSubContractor(@RequestParam Integer companyId, @RequestParam Integer constructionSiteId) {
         constructionSiteManagementService.addNewSubContractor(companyId, constructionSiteId);
     }
 
-    @GetMapping ("/all/subcontractor")
+    @GetMapping("/all/subcontractor")
     @Operation(summary = "Get the subcontractors list from construction site")
-    public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite (@RequestParam Integer constructionSiteId) {
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesFromSite(@RequestParam Integer constructionSiteId) {
         return constructionSiteManagementService.getAllCompaniesFromSite(constructionSiteId);
     }
 
-    @DeleteMapping ("/delete")
+    @DeleteMapping("/delete")
     @Operation(summary = "Delete subcontractor from the construction site by company and site IDs")
-    public void removeSubcontractorFromSiteByIds (@RequestParam Integer companyId, @RequestParam Integer siteId) {
+    public void removeSubcontractorFromSiteByIds(@RequestParam Integer companyId, @RequestParam Integer siteId) {
         constructionSiteManagementService.removeSubcontractorFromSiteByIds(companyId, siteId);
     }
 
-    @GetMapping ("/name")
+    @GetMapping("/name")
     @Operation(summary = "Get the header information for report")
-    public ReportConstructionSiteInfo getReportConstructionSiteInfo (@RequestParam Integer constructionSiteId, @RequestParam Integer reportId) {
+    public ReportConstructionSiteInfo getReportConstructionSiteInfo(@RequestParam Integer constructionSiteId, @RequestParam Integer reportId) {
         return constructionSiteManagementService.getReportConstructionSiteInfo(constructionSiteId, reportId);
     }
 
     @GetMapping("/all/company")
     @Operation(summary = "Get all companies with main constructor from construction site")
-    public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor (@RequestParam Integer constructionSiteId) {
+    public List<CompanyConstructionSiteListResponse> getAllCompaniesWithMainContractor(@RequestParam Integer constructionSiteId) {
         return constructionSiteManagementService.getAllCompaniesWithMainContractor(constructionSiteId);
     }
 

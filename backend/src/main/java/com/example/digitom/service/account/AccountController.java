@@ -30,5 +30,5 @@ public class AccountController {
         return accountService.getUserName(userId);
     }
 
-    }
+}
 

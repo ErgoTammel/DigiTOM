@@ -72,7 +72,7 @@ public class ConstructionSiteManagementService {
         ReportConstructionSiteInfo reportConstructionSiteInfo = new ReportConstructionSiteInfo();
         reportConstructionSiteInfo.setSiteName(constructionSiteService.findConstructionSiteById(siteId).getName());
         reportConstructionSiteInfo.setSiteAddress(constructionSiteService.findConstructionSiteById(siteId).getAddress());
-        reportConstructionSiteInfo.setCompanyName(companyConstructionSiteService.getMainContractor(siteId, true).getName());
+        reportConstructionSiteInfo.setCompanyName(companyConstructionSiteService.getMainContractor(siteId).getName());
         reportConstructionSiteInfo.setReportDate(reportService.getReportById(reportId).getDate());
         return reportConstructionSiteInfo;
     }

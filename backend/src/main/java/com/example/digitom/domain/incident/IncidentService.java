@@ -1,6 +1,5 @@
 package com.example.digitom.domain.incident;
 
-import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.IncidentRequest;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,6 @@ public class IncidentService {
 
     @Resource
     private IncidentRepository incidentRepository;
-    @Resource
-    private TaskService taskService;
-
 
     public Integer addNewIncident(IncidentRequest incidentRequest) {
         Incident incident = incidentMapper.incidentRequestToIncident(incidentRequest);
@@ -50,14 +46,10 @@ public class IncidentService {
         incidentRepository.deleteById(id);
     }
 
-    public Integer countTrueIncidents(Integer reportId, Boolean safe) {
-        List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
-        return incidents.size();
-    }
-
-    public Integer countFalseIncidents(Integer reportId, Boolean safe) {
+    public Integer countIncidents(Integer reportId, Boolean safe) {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
         return incidents.size();
     }
 }
+
 

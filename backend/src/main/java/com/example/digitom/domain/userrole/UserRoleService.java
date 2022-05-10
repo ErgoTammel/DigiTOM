@@ -22,12 +22,11 @@ public class UserRoleService {
         UserRole userRole = new UserRole();
         userRole.setRole(foundRole);
         userRole.setUser(user);
-
         userRoleRepository.save(userRole);
     }
 
     public UserRole findUserRoleByUserId(Integer id) {
-        return  userRoleRepository.findUserRoleByUserId(id);
+        return userRoleRepository.findUserRoleByUserId(id);
 
     }
 }

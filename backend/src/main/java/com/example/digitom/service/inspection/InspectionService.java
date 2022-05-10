@@ -32,9 +32,6 @@ public class InspectionService {
     private ReportPictureService reportPictureService;
     @Resource
     private ReportService reportService;
-    @Resource
-    private ValidationService validationService;
-
 
     public List<NewInspectionConstructionSiteResponse> getConstructionSites(Integer userId) {
         List<NewInspectionConstructionSiteResponse> responses = new ArrayList<>();
@@ -75,7 +72,6 @@ public class InspectionService {
 
     public List<RemoveFalseIncidentList> getRemoveFalseIncidentList(IncidentCounterRequest incidentCounterRequest) {
         List<Task> tasks = taskService.findByReportIdAndSafetyFieldIdAndSafe(incidentCounterRequest);
-//        validationService.incidentListExists(tasks);
         List<RemoveFalseIncidentList> responseList = new ArrayList<>();
         for (Task task : tasks) {
             RemoveFalseIncidentList removeFalseIncidentList = new RemoveFalseIncidentList();

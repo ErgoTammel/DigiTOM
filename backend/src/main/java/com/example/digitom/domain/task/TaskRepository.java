@@ -10,13 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Integer> {
-    @Query("select t from Task t where t.report.id = ?1")
-    List<Task> findTasksByReportId(Integer id);
-
-    @Transactional
-    @Modifying
-    @Query("delete from Task t where t.report = ?1")
-    void deleteTasksByReportId(Report report);
 
     @Query("select t from Task t where t.report.id = ?1")
     List<Task> findByReportId(Integer id);

@@ -9,9 +9,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select (count(u) > 0) from User u where upper(u.email) = upper(?1)")
     boolean existsByEmail(String email);
 
-    @Query("select u from User u where upper(u.email) = upper(?1)")
-    User findByEmail(String email);
-
     @Query("select u from User u where u.email = ?1 and u.password = ?2")
     Optional<User> findByEmailAndPassword(String email, String password);
 

@@ -30,7 +30,6 @@ public class AccountService {
     private CompanyUserService companyUserService;
 
 
-
     public void addNewAccount(RegistrationRequest registrationRequest) {
         registrationRequest.setEmail(registrationRequest.getEmail().toLowerCase());
         validationService.checkRegistrationFormCompletion(registrationRequest.getFirstName());

@@ -21,13 +21,4 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
     @Query("select r from Report r where r.constructionSite.id = ?1 order by r.date DESC")
     List<Report> findReportsByConstructionSiteId(Integer id);
 
-
-
-
-//    @Query("select r from Report r where r.constructionSite.id = ?1")
-//    List<Report> findReportsByConstructionSiteId(Integer id);
-
-
-
-
 }

@@ -13,9 +13,6 @@ public interface CompanyMapper {
 
     List<CompanyDto> toDtos(List<Company> companies);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateCompanyFromCompanyDto(CompanyDto companyDto, @MappingTarget Company company);
-
     @Mapping(target = "name", source = "companyName")
     @Mapping(target = "regNumber", source = "companyNumber")
     Company registrationRequestToCompany(RegistrationRequest registrationRequest);

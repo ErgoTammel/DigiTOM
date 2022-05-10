@@ -7,9 +7,7 @@ import com.example.digitom.domain.constructionsite.ConstructionSiteService;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
-import com.example.digitom.service.constractionsitemanagement.CompanyNameResponse;
 import com.example.digitom.service.inspection.ReportResultResponse;
-import com.example.digitom.service.reportmanagement.CompanyConstructionSiteResponse;
 import com.example.digitom.service.reportmanagement.FindReportRequest;
 import com.example.digitom.service.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -64,8 +61,8 @@ public class ReportService {
 
     public ReportResultResponse getReportResult(Integer reportId) {
         ReportResultResponse result = new ReportResultResponse();
-        result.setSafeSum(incidentService.countTrueIncidents(reportId, true));
-        result.setNotSafeSum(incidentService.countFalseIncidents(reportId, false));
+        result.setSafeSum(incidentService.countIncidents(reportId, true));
+        result.setNotSafeSum(incidentService.countIncidents(reportId, false));
         Integer x = result.getSafeSum();
         Integer y = result.getNotSafeSum();
         Double tomResult = (double) x / (x + y) * 100;
@@ -100,7 +97,7 @@ public class ReportService {
                 response.setTom(reportResponse.getTom());
                 reportResponses.add(response);
             }
-            }
+        }
         Comparator<ReportResponse> reverseComparator = (c1, c2) -> Math.toIntExact(c2.getDate().compareTo(c1.getDate()));
         reportResponses.sort(reverseComparator);
         return reportResponses;

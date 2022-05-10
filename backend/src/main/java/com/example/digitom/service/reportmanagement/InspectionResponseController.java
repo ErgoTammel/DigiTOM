@@ -21,13 +21,13 @@ public class InspectionResponseController {
 
     @GetMapping("/get/list")
     @Operation(summary = "Get open tasks list by site ID")
-    public List<TaskOverviewResponse> getOpenTasksBySiteId(@RequestParam Integer constructionSiteId){
-       return inspectionResponseService.getOpenTasksBySiteId(constructionSiteId);
+    public List<TaskOverviewResponse> getOpenTasksBySiteId(@RequestParam Integer constructionSiteId) {
+        return inspectionResponseService.getOpenTasksBySiteId(constructionSiteId);
     }
 
     @GetMapping("/get/by/userid")
     @Operation(summary = "Get open tasks list by user ID")
-    public List<TaskOverviewResponse> getOpenTasksByUserId(@RequestParam Integer userId){
+    public List<TaskOverviewResponse> getOpenTasksByUserId(@RequestParam Integer userId) {
         return inspectionResponseService.getOpenTasksByUserId(userId);
     }
 
@@ -39,7 +39,7 @@ public class InspectionResponseController {
 
     @GetMapping("/report/search/userid")
     @Operation(summary = "Show reports list")
-    public List<ReportResponse>findAllReports(@RequestParam Integer userId) {
+    public List<ReportResponse> findAllReports(@RequestParam Integer userId) {
         return inspectionResponseService.findAllReports(userId);
     }
 

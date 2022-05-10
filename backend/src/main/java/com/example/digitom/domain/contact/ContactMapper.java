@@ -13,10 +13,4 @@ public interface ContactMapper {
 
     Contact registrationRequestToContact(RegistrationRequest registrationRequest);
 
-//    @InheritInverseConfiguration(name = "toEntity")
-//    ContactDto toDto(Contact contact);
-//
-//    @InheritConfiguration(name = "contactDtoToContact")
-//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-//    void updateContactFromContactDto(ContactDto contactDto, @MappingTarget Contact contact);
 }

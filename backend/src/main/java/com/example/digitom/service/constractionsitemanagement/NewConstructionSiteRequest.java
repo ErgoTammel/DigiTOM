@@ -1,6 +1,5 @@
 package com.example.digitom.service.constractionsitemanagement;
 
-import com.example.digitom.domain.company.Company;
 import lombok.Data;
 
 @Data

@@ -11,8 +11,5 @@ public interface ConstructionSiteMapper {
 
     ConstructionSiteDto toDto(ConstructionSite constructionSite);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateConstructionSiteFromConstructionSiteDto(ConstructionSiteDto constructionSiteDto, @MappingTarget ConstructionSite constructionSite);
-
     ConstructionSite requestToConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest);
 }

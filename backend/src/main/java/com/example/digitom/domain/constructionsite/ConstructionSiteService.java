@@ -15,15 +15,6 @@ public class ConstructionSiteService {
     @Resource
     private ConstructionSiteMapper constructionSiteMapper;
 
-    public List<ConstructionSite> findAllConstructionSitesById(List<Integer> constructionSiteIDs) {
-        return constructionSiteRepository.findById(constructionSiteIDs);
-    }
-
-    public List<ConstructionSite> findAllConstructionSites() {
-        return constructionSiteRepository.findAll();
-    }
-
-
     public Integer addNewConstructionSite(NewConstructionSiteRequest newConstructionSiteRequest) {
         ConstructionSite constructionSite = constructionSiteMapper.requestToConstructionSite(newConstructionSiteRequest);
         constructionSite.setAddress(newConstructionSiteRequest.getSiteAddress());

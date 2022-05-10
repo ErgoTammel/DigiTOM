@@ -43,7 +43,6 @@ public class CompanyConstructionSiteService {
 
     public void addNewMainContractorConnection(NewConstructionSiteRequest newConstructionSiteRequest, Integer constructionSiteId) {
 
-        newConstructionSiteRequest.getMainContractorCompanyId();
         CompanyConstructionSite companyConstructionSite = new CompanyConstructionSite();
         Optional<ConstructionSite> foundSite = constructionSiteRepository.findById(constructionSiteId);
         companyConstructionSite.setConstructionSite(foundSite.get());
@@ -76,7 +75,7 @@ public class CompanyConstructionSiteService {
         companyConstructionSiteRepository.delete(companyConstructionSite);
     }
 
-    public Company getMainContractor(Integer siteId, Boolean mainContractor) {
+    public Company getMainContractor(Integer siteId) {
         return companyConstructionSiteRepository.findByConstructionSiteIdAndMainContractor(siteId, true).getCompany();
     }
 

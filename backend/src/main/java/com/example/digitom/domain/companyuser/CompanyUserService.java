@@ -1,7 +1,6 @@
 package com.example.digitom.domain.companyuser;
 
 import com.example.digitom.domain.company.Company;
-import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.service.constractionsitemanagement.CompanyContactResponse;

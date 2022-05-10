@@ -1,7 +1,6 @@
 package com.example.digitom.domain.taskresponsepicture;
 
 
-import com.example.digitom.service.image.ReportPictureRequest;
 import com.example.digitom.service.image.TaskPictureRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,6 @@ public class TaskResponsePictureController {
     @PostMapping("/add")
     @Operation(summary = "Add a new picture to the response")
     public void addTaskResponsePicture(@RequestBody TaskPictureRequest taskPictureRequest) {
-
         taskResponsePictureService.addNewTaskResponsePicture(taskPictureRequest);
     }
 
