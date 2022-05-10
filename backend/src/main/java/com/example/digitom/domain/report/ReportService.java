@@ -5,12 +5,14 @@ import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.ReportResultResponse;
+import com.example.digitom.service.reportmanagement.FindReportRequest;
+import com.example.digitom.service.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ReportService {
@@ -63,4 +65,9 @@ public class ReportService {
 
     }
 
+    public List<ReportResponse> searchReports(FindReportRequest findReportRequest) {
+
+
+        return null;
+    }
 }

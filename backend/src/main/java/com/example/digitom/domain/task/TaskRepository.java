@@ -33,8 +33,18 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Override
     void deleteById(Integer integer);
 
-    @Query("select t from Task t where t.company.id = ?1 and t.isDone = ?2")
+    @Query("select t from Task t where t.company.id = ?1 and t.isDone = ?2 order by t.deadline DESC")
     List<Task> findByCompany_IdAndIsDone(Integer id, Boolean isDone);
+
+
+    @Query("select t from Task t where t.report.constructionSite.id = ?1 and t.isDone = ?2")
+    List<Task> findOpenTasksBySiteId(Integer id, Boolean isDone);
+
+
+
+
+
+
 
 
 }

@@ -1,9 +1,11 @@
 package com.example.digitom.domain.companyuser;
 
 import com.example.digitom.domain.company.Company;
+import com.example.digitom.domain.company.CompanyDto;
 import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.service.constractionsitemanagement.CompanyContactResponse;
+import com.example.digitom.service.constractionsitemanagement.CompanyNameResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -52,4 +54,16 @@ public class CompanyUserService {
         return companyContacts;
     }
 
+    public List<CompanyNameResponse> getCompanyListByUserId(Integer userId) {
+        List<CompanyUser> companyUsers = companyUserRepository.findAllByUserId(userId);
+        List<CompanyNameResponse> companies = new ArrayList<>();
+        for (CompanyUser companyUser : companyUsers) {
+            CompanyNameResponse companyName = new CompanyNameResponse();
+            companyName.setCompanyId(companyUser.getCompany().getId());
+            companyName.setCompanyName(companyUser.getCompany().getName());
+            companies.add(companyName);
+        }
+        return companies;
+    }
 }
+
