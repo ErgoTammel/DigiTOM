@@ -7,6 +7,7 @@ import com.example.digitom.domain.contact.Contact;
 import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.user.User;
 import com.example.digitom.domain.user.UserService;
+import com.example.digitom.domain.userrole.UserRole;
 import com.example.digitom.domain.userrole.UserRoleService;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class AccountService {
     private ValidationService validationService;
     @Resource
     private CompanyUserService companyUserService;
+
 
 
     public void addNewAccount(RegistrationRequest registrationRequest) {
@@ -51,8 +53,10 @@ public class AccountService {
 
     public LoginResponse logIn(LoginRequest loginRequest) {
         User validUser = userService.getValidUser(loginRequest);
+        UserRole userRoleByUserId = userRoleService.findUserRoleByUserId(validUser.getId());
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setUserId(validUser.getId());
+        loginResponse.setRoleId(userRoleByUserId.getRole().getId());
         return loginResponse;
     }
 

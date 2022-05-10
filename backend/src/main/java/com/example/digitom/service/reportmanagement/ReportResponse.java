@@ -9,9 +9,6 @@ import java.time.LocalDate;
 public class ReportResponse {
     private Integer reportId;
     private String constructionSiteName;
-    private String mainContractorName;
     private LocalDate date;
     private BigDecimal tom;
-
-
 }

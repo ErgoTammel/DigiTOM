@@ -25,4 +25,9 @@ public class UserRoleService {
 
         userRoleRepository.save(userRole);
     }
+
+    public UserRole findUserRoleByUserId(Integer id) {
+        return  userRoleRepository.findUserRoleByUserId(id);
+
+    }
 }
