@@ -96,4 +96,8 @@ public class TaskService {
         return responses;
 
     }
+
+    public String getTaskDescription(Integer taskId) {
+        return taskRepository.findById(taskId).get().getDescription();
+    }
 }

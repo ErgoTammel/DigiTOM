@@ -49,4 +49,8 @@ public class InspectionResponseService {
         return taskResponseService.getTaskResponseInformation(taskId);
 
     }
+
+    public String getTaskDescription(Integer taskId) {
+        return taskService.getTaskDescription(taskId);
+    }
 }

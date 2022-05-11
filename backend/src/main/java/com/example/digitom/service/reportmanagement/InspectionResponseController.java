@@ -55,4 +55,10 @@ public class InspectionResponseController {
     public TaskResponseDto getTaskResponseInformation(@RequestParam Integer taskId) {
         return inspectionResponseService.getTaskResponseInformation(taskId);
     }
+
+    @GetMapping("/show/description")
+    @Operation(summary = "Show task description")
+    public String getTaskDescription(@RequestParam Integer taskId) {
+        return inspectionResponseService.getTaskDescription(taskId);
+    }
 }
