@@ -1,12 +1,14 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -14,9 +16,9 @@ import java.util.List;
 public interface TaskMapper {
 
     @Mapping(target = "companyName", source = "company.name")
-    ReportOverviewResponse taskToReportOverviewResponse (Task task);
+    ReportOverviewResponse taskToReportOverviewResponse(Task task);
 
-    List<ReportOverviewResponse> taskToReportOverviewResponses (List<Task> tasks);
+    List<ReportOverviewResponse> taskToReportOverviewResponses(List<Task> tasks);
 
     @Mapping(target = "report.id", source = "reportId")
     @Mapping(target = "incident.id", source = "incidentId")
@@ -25,12 +27,14 @@ public interface TaskMapper {
     Task taskRequestToTask(TaskRequest taskRequest);
 
     @Named("addDays")
-    default LocalDate addDays (Integer deadline) {
+    default LocalDate addDays(Integer deadline) {
         return LocalDate.now().plusDays(deadline);
     }
 
-
-
+    @Mapping(target = "taskId", source = "id")
+    @Mapping(target = "constructionSiteName", ignore = true)
+    @Mapping(target = "companyName", source = "company.name")
+    TaskOverviewResponse taskToResponse(Task task);
 
 
 }

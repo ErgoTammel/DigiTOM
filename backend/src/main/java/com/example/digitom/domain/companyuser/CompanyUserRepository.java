@@ -18,4 +18,6 @@ public interface CompanyUserRepository extends JpaRepository<CompanyUser, Intege
 
 
 
+
+
 }

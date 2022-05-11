@@ -1,7 +1,6 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.domain.companyuser.CompanyUserService;
-import com.example.digitom.service.constractionsitemanagement.CompanyNameResponse;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
 import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
@@ -79,20 +78,22 @@ public class TaskService {
     }
 
     public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
-        List<CompanyNameResponse> userCompanies = companyUserService.getCompanyListByUserId(userId);
-        List<TaskOverviewResponse> tasks = new ArrayList<>();
-        for (CompanyNameResponse userCompany : userCompanies) {
-            List<Task> companyOpenTasks = taskRepository.findByCompany_IdAndIsDone(userCompany.getCompanyId(), false);
-            for (Task companyOpenTask : companyOpenTasks) {
-                TaskOverviewResponse taskResponse = new TaskOverviewResponse();
-                taskResponse.setTaskId(companyOpenTask.getId());
-                taskResponse.setConstructionSiteName(companyOpenTask.getReport().getConstructionSite().getName());
-                taskResponse.setDeadline(companyOpenTask.getDeadline());
-                taskResponse.setDescription(companyOpenTask.getDescription());
-                taskResponse.setCompanyName(companyOpenTask.getCompany().getName());
-                tasks.add(taskResponse);
+
+        List<Integer> companyIds = companyUserService.getUserCompanyIdsByUserIds(userId);
+        List<TaskOverviewResponse> responses = new ArrayList<>();
+        for (Integer companyId : companyIds) {
+            List<Task> tasksByCompanyId = taskRepository.findByCompanyId(companyId, false);
+            for (Task task : tasksByCompanyId) {
+                TaskOverviewResponse taskOverviewResponse = new TaskOverviewResponse();
+                taskOverviewResponse.setConstructionSiteName(task.getReport().getConstructionSite().getName());
+                taskOverviewResponse.setTaskId(task.getId());
+                taskOverviewResponse.setCompanyName(task.getCompany().getName());
+                taskOverviewResponse.setDescription(task.getDescription());
+                taskOverviewResponse.setDeadline(task.getDeadline());
+                responses.add(taskOverviewResponse);
             }
         }
-        return tasks;
+        return responses;
+
     }
 }

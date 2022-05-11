@@ -33,6 +33,10 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("select t from Task t where t.report.constructionSite.id = ?1 and t.isDone = ?2")
     List<Task> findOpenTasksBySiteId(Integer id, Boolean isDone);
 
+    @Query("select t from Task t where t.company.id = ?1 and t.isDone = ?2 order by t.deadline")
+    List<Task> findByCompanyId(Integer id, Boolean isDone);
+
+
 
 
 
