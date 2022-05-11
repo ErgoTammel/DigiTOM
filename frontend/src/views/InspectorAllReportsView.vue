@@ -45,7 +45,10 @@ export default {
     },
     newReport: function(){
       router.push("/inspection/sites")
-    }
+    },
+    // allReports: function (){
+    //   this.$http.post("/response/task/search", {})
+    // }
 
   }
 }

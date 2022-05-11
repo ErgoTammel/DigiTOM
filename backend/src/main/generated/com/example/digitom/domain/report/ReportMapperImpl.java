@@ -2,14 +2,17 @@ package com.example.digitom.domain.report;
 
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.service.reportmanagement.FindReportRequest;
+import com.example.digitom.service.reportmanagement.ReportResponse;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-10T13:04:43+0300",
+    date = "2022-05-10T14:28:45+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -90,10 +93,39 @@ public class ReportMapperImpl implements ReportMapper {
         Report report = new Report();
 
         report.setConstructionSite( findReportRequestToConstructionSite( findReportRequest ) );
-        report.setId( findReportRequest.getId() );
         report.setDate( findReportRequest.getDate() );
 
         return report;
+    }
+
+    @Override
+    public ReportResponse reportToResponse(Report report) {
+        if ( report == null ) {
+            return null;
+        }
+
+        ReportResponse reportResponse = new ReportResponse();
+
+        reportResponse.setReportId( report.getId() );
+        reportResponse.setConstructionSiteName( reportConstructionSiteName( report ) );
+        reportResponse.setDate( report.getDate() );
+        reportResponse.setTom( report.getTom() );
+
+        return reportResponse;
+    }
+
+    @Override
+    public List<ReportResponse> reportToResponses(List<Report> reports) {
+        if ( reports == null ) {
+            return null;
+        }
+
+        List<ReportResponse> list = new ArrayList<ReportResponse>( reports.size() );
+        for ( Report report : reports ) {
+            list.add( reportToResponse( report ) );
+        }
+
+        return list;
     }
 
     protected ConstructionSite reportDtoToConstructionSite(ReportDto reportDto) {

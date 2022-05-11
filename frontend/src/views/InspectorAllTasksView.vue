@@ -6,10 +6,11 @@
   <div class="table table-light table-bordered table-responsive" id="taskTable">
     <thead class="thead-dark">
     <tr>
-      <th style="width: 20%">Objekt</th>
+      <th style="width: 15%">Objekt</th>
       <th style="width: 49%">Kirjeldus</th>
-      <th style="width: 20%">Vastutaja</th>
-      <th style="width: 120px">Tähtaeg</th>
+      <th style="width: 15%">Vastutaja</th>
+      <th style="width: 15%">Tähtaeg</th>
+      <th style="width: 120px"></th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
       <td>{{ task.description }}</td>
       <td>{{ task.companyName }}</td>
       <td>{{ task.deadline }}</td>
+      <td><i class="fa-regular fa-image"></i></td>
     </tr>
     </tbody>
   </div>
@@ -83,8 +85,7 @@ h2 {
 }
 #taskTable{
   width: 800px;
-  margin-left: 6.2%;
-  margin-top: 5%;
+  margin: 5% auto auto;
   border: 2px solid black;
 }
 
@@ -110,5 +111,8 @@ button {
   margin-right: 3%;
   height: 3em;
   font-size: 1em;
+}
+i{
+  font-size: 1.5em;
 }
 </style>
