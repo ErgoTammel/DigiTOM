@@ -27,6 +27,9 @@ public interface CompanyConstructionSiteRepository extends JpaRepository<Company
     @Query("select c from CompanyConstructionSite c where c.constructionSite.id = ?1 order by c.company.name")
     List<CompanyConstructionSite> findByConstructionSiteIdOrderByCompanyNameAsc(Integer id);
 
+    @Query("select c from CompanyConstructionSite c where c.constructionSite.id = ?1 and c.mainContractor = ?2")
+    CompanyConstructionSite findMainContractor(Integer id, Boolean mainContractor);
+
 
 
 

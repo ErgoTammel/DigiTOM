@@ -15,7 +15,7 @@
         <tbody>
         <tr v-for="report in reportList">
           <td>{{ report.date }}</td>
-          <td>{{ report.constructionSite }}</td>
+          <td>{{ report.constructionSiteName }}</td>
           <td>{{ report.mainContractor }}</td>
           <td>{{ report.tom }}</td>
         </tr>
@@ -46,10 +46,21 @@ export default {
     newReport: function(){
       router.push("/inspection/sites")
     },
-    // allReports: function (){
-    //   this.$http.post("/response/task/search", {})
-    // }
+    allReports: function (){
+      this.$http.get("/response/report/search/userid", {
+        params:{
+          userId:sessionStorage.getItem("userId")
+        }
+      })
+      .then(response=>{
+        this.reportList=response.data
+      })
+      .catch(error=>console.log(error.response.data))
+    }
 
+  },
+  mounted() {
+    this.allReports()
   }
 }
 </script>

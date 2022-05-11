@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-08T22:38:44+0300",
+    date = "2022-05-11T14:59:22+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -50,29 +50,6 @@ public class ConstructionSiteMapperImpl implements ConstructionSiteMapper {
         ConstructionSiteDto constructionSiteDto = new ConstructionSiteDto( id, name, address, latitude, longitude );
 
         return constructionSiteDto;
-    }
-
-    @Override
-    public void updateConstructionSiteFromConstructionSiteDto(ConstructionSiteDto constructionSiteDto, ConstructionSite constructionSite) {
-        if ( constructionSiteDto == null ) {
-            return;
-        }
-
-        if ( constructionSiteDto.getId() != null ) {
-            constructionSite.setId( constructionSiteDto.getId() );
-        }
-        if ( constructionSiteDto.getName() != null ) {
-            constructionSite.setName( constructionSiteDto.getName() );
-        }
-        if ( constructionSiteDto.getAddress() != null ) {
-            constructionSite.setAddress( constructionSiteDto.getAddress() );
-        }
-        if ( constructionSiteDto.getLatitude() != null ) {
-            constructionSite.setLatitude( constructionSiteDto.getLatitude() );
-        }
-        if ( constructionSiteDto.getLongitude() != null ) {
-            constructionSite.setLongitude( constructionSiteDto.getLongitude() );
-        }
     }
 
     @Override

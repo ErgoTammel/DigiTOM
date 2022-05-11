@@ -1,5 +1,6 @@
 package com.example.digitom.domain.report;
 
+import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSite;
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
@@ -89,12 +90,16 @@ public class ReportService {
         for (ConstructionSite constructionSite : constructionSites) {
             List<Report> reportsByConstructionSiteId = reportRepository.findReportsByConstructionSiteId(constructionSite.getId());
             List<ReportResponse> reportResponses1 = reportMapper.reportToResponses(reportsByConstructionSiteId);
+
+            CompanyConstructionSite mainContractor = companyConstructionSiteService.findMainContractor(constructionSite.getId());
+
             for (ReportResponse reportResponse : reportResponses1) {
                 ReportResponse response = new ReportResponse();
                 response.setReportId(reportResponse.getReportId());
                 response.setConstructionSiteName(reportResponse.getConstructionSiteName());
                 response.setDate(reportResponse.getDate());
                 response.setTom(reportResponse.getTom());
+                response.setMainContractorName(mainContractor.getCompany().getName());
                 reportResponses.add(response);
             }
         }

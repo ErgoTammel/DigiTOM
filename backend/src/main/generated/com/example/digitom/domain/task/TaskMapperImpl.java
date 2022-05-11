@@ -4,6 +4,7 @@ import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.report.Report;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-10T13:04:43+0300",
+    date = "2022-05-11T14:59:22+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -61,6 +62,22 @@ public class TaskMapperImpl implements TaskMapper {
         task.setDescription( taskRequest.getDescription() );
 
         return task;
+    }
+
+    @Override
+    public TaskOverviewResponse taskToResponse(Task task) {
+        if ( task == null ) {
+            return null;
+        }
+
+        TaskOverviewResponse taskOverviewResponse = new TaskOverviewResponse();
+
+        taskOverviewResponse.setTaskId( task.getId() );
+        taskOverviewResponse.setCompanyName( taskCompanyName( task ) );
+        taskOverviewResponse.setDeadline( task.getDeadline() );
+        taskOverviewResponse.setDescription( task.getDescription() );
+
+        return taskOverviewResponse;
     }
 
     private String taskCompanyName(Task task) {

@@ -83,5 +83,9 @@ public class CompanyConstructionSiteService {
         List<CompanyConstructionSite> companies = companyConstructionSiteRepository.findByConstructionSiteIdOrderByCompanyNameAsc(constructionSiteId);
         return companyConstructionSiteMapper.toCCSListResponses(companies);
     }
+
+    public CompanyConstructionSite findMainContractor(Integer id) {
+       return companyConstructionSiteRepository.findMainContractor(id, true);
+    }
 }
 

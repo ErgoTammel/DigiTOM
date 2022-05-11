@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-09T13:29:17+0300",
+    date = "2022-05-11T14:59:23+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
@@ -34,13 +34,10 @@ public class CompanyMapperImpl implements CompanyMapper {
             return null;
         }
 
-        String name = null;
-        Integer regNumber = null;
+        CompanyDto companyDto = new CompanyDto();
 
-        name = company.getName();
-        regNumber = company.getRegNumber();
-
-        CompanyDto companyDto = new CompanyDto( name, regNumber );
+        companyDto.setName( company.getName() );
+        companyDto.setRegNumber( company.getRegNumber() );
 
         return companyDto;
     }
@@ -57,20 +54,6 @@ public class CompanyMapperImpl implements CompanyMapper {
         }
 
         return list;
-    }
-
-    @Override
-    public void updateCompanyFromCompanyDto(CompanyDto companyDto, Company company) {
-        if ( companyDto == null ) {
-            return;
-        }
-
-        if ( companyDto.getName() != null ) {
-            company.setName( companyDto.getName() );
-        }
-        if ( companyDto.getRegNumber() != null ) {
-            company.setRegNumber( companyDto.getRegNumber() );
-        }
     }
 
     @Override

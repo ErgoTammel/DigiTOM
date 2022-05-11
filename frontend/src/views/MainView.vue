@@ -58,15 +58,15 @@
         </div>
 
         <div  data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document" >
+            <div class="modal-content" id="modalWindow">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <img :src=>
+                <img :src="taskPicture" class="img-fluid">
               </div>
             </div>
           </div>
@@ -202,6 +202,8 @@ h2 {
   margin:auto;
   margin-top: 5%;
   border: 2px solid black;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 
@@ -226,6 +228,9 @@ i{
 td button{
   border: 0;
   background-color: white;
+}
+#modalWindow{
+  border: 4px solid black;
 }
 
 </style>

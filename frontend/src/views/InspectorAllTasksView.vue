@@ -87,6 +87,8 @@ h2 {
   width: 800px;
   margin: 5% auto auto;
   border: 2px solid black;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 
