@@ -23,4 +23,10 @@ public class ImageController {
     public byte[] getTaskPicture(@RequestParam Integer taskId) {
        return imageService.getTaskPicture(taskId);
     }
+
+    @PostMapping("/response/add")
+    @Operation(summary = "Add a new picture to the response")
+    public void addTaskResponsePicture(@RequestBody TaskPictureRequest taskPictureRequest) {
+        imageService.addNewTaskResponsePicture(taskPictureRequest);
+    }
 }

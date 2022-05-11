@@ -18,4 +18,9 @@ public class TaskResponseService {
         taskResponseRepository.save(taskResponse);
         return taskResponse.getId();
     }
+
+    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+        TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
+        return taskResponseMapper.toDto(taskResponse);
+    }
 }

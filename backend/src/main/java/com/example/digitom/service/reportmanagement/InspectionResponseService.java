@@ -2,6 +2,8 @@ package com.example.digitom.service.reportmanagement;
 
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.task.TaskService;
+import com.example.digitom.domain.taskresponse.TaskResponseDto;
+import com.example.digitom.domain.taskresponse.TaskResponseRepository;
 import com.example.digitom.domain.taskresponse.TaskResponseService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class InspectionResponseService {
     private TaskService taskService;
     @Resource
     private ReportService reportService;
+
 
     public Integer addTaskResponse(TaskResponseRequest taskResponseRequest) {
         return taskResponseService.addTaskResponse(taskResponseRequest);
@@ -40,5 +43,10 @@ public class InspectionResponseService {
 
     public List<ReportResponse> getLastReports(Integer userId) {
        return reportService.getLastReports(userId);
+    }
+
+    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+        return taskResponseService.getTaskResponseInformation(taskId);
+
     }
 }

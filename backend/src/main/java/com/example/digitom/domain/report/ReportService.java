@@ -89,6 +89,8 @@ public class ReportService {
         for (ConstructionSite constructionSite : constructionSites) {
             List<Report> reportsByConstructionSiteId = reportRepository.findReportsByConstructionSiteId(constructionSite.getId());
             List<ReportResponse> reportResponses1 = reportMapper.reportToResponses(reportsByConstructionSiteId);
+
+
             for (ReportResponse reportResponse : reportResponses1) {
                 ReportResponse response = new ReportResponse();
                 response.setReportId(reportResponse.getReportId());
