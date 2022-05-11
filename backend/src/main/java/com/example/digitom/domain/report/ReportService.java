@@ -102,4 +102,9 @@ public class ReportService {
         reportResponses.sort(reverseComparator);
         return reportResponses;
     }
+
+    public List<ReportResponse> getLastReports(Integer userId) {
+        List<ReportResponse> allReports = findAllReports(userId);
+        return allReports.subList(0, 4);
+    }
 }

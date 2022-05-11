@@ -37,4 +37,8 @@ public class InspectionResponseService {
     public List<ReportResponse> findAllReports(Integer userId) {
         return reportService.findAllReports(userId);
     }
+
+    public List<ReportResponse> getLastReports(Integer userId) {
+       return reportService.getLastReports(userId);
+    }
 }

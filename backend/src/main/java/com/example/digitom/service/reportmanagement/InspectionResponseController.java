@@ -43,11 +43,9 @@ public class InspectionResponseController {
         return inspectionResponseService.findAllReports(userId);
     }
 
-//    @GetMapping("/report/last")
-//    @Operation(summary = "Show 5 last reports")
-//    public List<ReportResponse> getLastReports(@RequestParam Integer userId) {
-////        return inspectionResponseService.getLastReports(userId);
-//    }
-
-
+    @GetMapping("/report/last")
+    @Operation(summary = "Show 5 last reports")
+    public List<ReportResponse> getLastReports(@RequestParam Integer userId) {
+        return inspectionResponseService.getLastReports(userId);
+    }
 }
