@@ -20,7 +20,7 @@ public class ImageController {
 
     @GetMapping("/task")
     @Operation(summary = "Show task picture")
-    public byte[] getTaskPicture(@RequestBody Integer taskId) {
+    public byte[] getTaskPicture(@RequestParam Integer taskId) {
        return imageService.getTaskPicture(taskId);
     }
 }
