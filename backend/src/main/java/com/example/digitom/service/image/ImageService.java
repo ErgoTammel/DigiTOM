@@ -15,4 +15,10 @@ public class ImageService {
         reportPictureService.addNewReportPicture(reportPictureRequest);
     }
 
+    public byte[] getTaskPicture(Integer taskId) {
+        return reportPictureService.getTaskPicture(taskId);
+    }
 }
+
+
+

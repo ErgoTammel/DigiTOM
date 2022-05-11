@@ -1,10 +1,7 @@
 package com.example.digitom.service.image;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -21,4 +18,9 @@ public class ImageController {
         imageService.addNewReportPicture(reportPictureRequest);
     }
 
+    @GetMapping("/task")
+    @Operation(summary = "Show task picture")
+    public byte[] getTaskPicture(@RequestBody Integer taskId) {
+       return imageService.getTaskPicture(taskId);
+    }
 }

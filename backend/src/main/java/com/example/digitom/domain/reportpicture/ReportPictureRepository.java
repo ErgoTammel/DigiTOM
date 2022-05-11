@@ -12,5 +12,9 @@ public interface ReportPictureRepository extends JpaRepository<ReportPicture, In
     @Query("select r from ReportPicture r where r.task.id = ?1")
     ReportPicture findByTaskId(Integer id);
 
+    @Query("select r from ReportPicture r where r.task.id = ?1")
+    ReportPicture getByTaskId(Integer id);
+
+
 
 }

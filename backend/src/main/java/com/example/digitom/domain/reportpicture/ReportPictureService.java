@@ -30,4 +30,9 @@ public class ReportPictureService {
         ReportPicture picture = reportPictureRepository.findByTaskId(taskId);
         reportPictureRepository.delete(picture);
     }
+
+    public byte[] getTaskPicture(Integer taskId) {
+        ReportPicture picture = reportPictureRepository.getByTaskId(taskId);
+        return picture.getBase64();
+    }
 }
