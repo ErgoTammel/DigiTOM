@@ -41,6 +41,7 @@
             <th style="width: 15%">Vastutaja</th>
             <th style="width: 15%">Tähtaeg</th>
             <th style="width: 15%"></th>
+            <th style="width: 15%"></th>
           </tr>
           </thead>
           <tbody>
@@ -49,9 +50,26 @@
             <td>{{ task.description }}</td>
             <td>{{ task.companyName }}</td>
             <td>{{ task.deadline }}</td>
-            <td><i class="fa-regular fa-image"></i></td>
+            <td>  <button v-on:click="getTaskPicture(task.taskId)"  type="button" data-toggle="modal" data-target="#exampleModal">
+              <i class="fa-regular fa-image"></i></button></td>
+            <td><i class="fa-solid fa-arrow-right"></i></td>
           </tr>
           </tbody>
+        </div>
+
+        <div  data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img :src=>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -74,7 +92,8 @@ export default {
       },
       logInRequest: {},
       roleId: Number(sessionStorage.getItem("roleId")),
-      userTaskList:{}
+      userTaskList:{},
+      taskPicture:{}
     }
   },
   methods: {
@@ -110,6 +129,17 @@ export default {
           .catch(error=>{
             console.log(error.response.data)
           })
+    },
+    getTaskPicture:function(getTaskId){
+      this.$http.get("/image/task", {
+        params:{
+          taskId:getTaskId
+        }
+      })
+      .then(response=>{
+        this.taskPicture=response.data
+      })
+      .catch(error=>console.log(error.response.data))
     }
   },
   mounted() {
@@ -186,9 +216,16 @@ h2 {
 #taskTable th {
   border: 1px solid grey;
 }
+h2 i{
+  font-size: 1.2em;
+}
 i{
-  font-size: 1.7em;
+  font-size: 1.9em;
 }
 
+td button{
+  border: 0;
+  background-color: white;
+}
 
 </style>
