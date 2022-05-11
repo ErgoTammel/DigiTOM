@@ -128,6 +128,7 @@ export default {
       this.$http.post("/account/login",this.logInRequest)
           .then(response =>{
             sessionStorage.setItem("userId",response.data.userId);
+            sessionStorage.setItem("roleId", response.data.roleId)
             router.push("/main")
           })
           .catch(error => console.log(error.response.data))

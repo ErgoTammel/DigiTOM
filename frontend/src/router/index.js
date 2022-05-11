@@ -7,6 +7,7 @@ import NewConstructionSiteView from "@/views/NewConstructionSiteView";
 import NewReportView from "@/views/NewReportView";
 import ReportOverviewView from "@/views/ReportOverviewView";
 import InspectorAllTasksView from "@/views/InspectorAllTasksView";
+import InspectorAllReportsView from "@/views/InspectorAllReportsView";
 
 Vue.use(VueRouter)
 
@@ -42,9 +43,14 @@ const routes = [
         component: ReportOverviewView
     },
     {
-        path: 'inspector/alltasks',
+        path: '/inspector/alltasks',
         name: 'InspectorAllTasksView',
         component: InspectorAllTasksView
+    },
+    {
+        path: '/inspector/allreports',
+        name: 'InspectorAllReportsRoute',
+        component: InspectorAllReportsView
     }
 ]
 

@@ -1,25 +1,61 @@
 <template>
-<div>
-<div id="window">
-  <div id="windowHeader">
-    <h2><i class="fa-solid fa-user-shield"></i> Tere {{logInName.userFirstName}} {{logInName.userMiddleName}} {{logInName.userLastName}}! </h2>
-  </div>
-  <div class="row">
-    <div class="col">
-      <button type="button" class="btn btn-dark btn-lg" v-on:click="newInspection">Alusta uut objekti läbivaatust</button>
+  <div>
+    <div id="window">
+      <div v-if="roleId===2">
+        <div class="windowHeader">
+          <h2><i class="fa-solid fa-user-shield"></i> Tere {{ logInName.userFirstName }} {{ logInName.userMiddleName }}
+            {{ logInName.userLastName }}! </h2>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-dark btn-lg" v-on:click="newInspection">Alusta uut objekti
+              läbivaatust
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-dark btn-lg" v-on:click="allReports">Kuva raportite otsing</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-dark btn-lg" v-on:click="allTasks">Kuva kinnitamata
+              korrastusülesanded
+            </button>
+          </div>
+        </div>
+        <div class="tableTitle">
+          <h3>Viimati koostatud raportid</h3>
+        </div>
+      </div>
+      <div v-if="roleId===3">
+        <div class="windowHeader">
+          <h2><i class="fa-solid fa-user-shield"></i> Tere {{ logInName.userFirstName }} {{ logInName.userMiddleName }}
+            {{ logInName.userLastName }}! </h2>
+        </div>
+        <div class="tableTitle">
+          <h3>Sinu kinnitamata korrastamisülesanded</h3>
+        </div>
+        <div class="table table-light table-bordered table-responsive" id="taskTable">
+          <thead class="thead-dark">
+          <tr>
+            <th style="width: 15%">Objekt</th>
+            <th style="width: 49%">Kirjeldus</th>
+            <th style="width: 15%">Vastutaja</th>
+            <th style="width: 15%">Tähtaeg</th>
+            <th style="width: 15%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="task in userTaskList">
+            <td>{{ task.constructionSiteName }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.companyName }}</td>
+            <td>{{ task.deadline }}</td>
+            <td><i class="fa-regular fa-image"></i></td>
+          </tr>
+          </tbody>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <button type="button" class="btn btn-dark btn-lg">Kuva raportite otsing</button>
-    </div>
-    <div class="col">
-      <button type="button" class="btn btn-dark btn-lg" v-on:click="allTasks">Kuva kinnitamata korrastusülesanded</button>
-    </div>
   </div>
-  <div id="tableTitle">
-    <h3>Viimati koostatud raportid</h3>
-  </div>
-</div>
-</div>
 </template>
 
 <script>
@@ -28,38 +64,57 @@ import router from "@/router";
 
 export default {
   name: "InspectorMainView",
-  data:function(){
+  data: function () {
     return {
-      userId:sessionStorage.getItem("userId"),
-      logInName:{
-      userFirstName:null,
-      userMiddleName:null,
-      userLastName:null,
+      userId: sessionStorage.getItem("userId"),
+      logInName: {
+        userFirstName: null,
+        userMiddleName: null,
+        userLastName: null,
       },
-      logInRequest:{}
+      logInRequest: {},
+      roleId: Number(sessionStorage.getItem("roleId")),
+      userTaskList:{}
     }
   },
-  methods:{
-    getLogInName:function(){
-      this.$http.get("/account/login/name",{
-        params:{
-          userId:this.userId
+  methods: {
+    getLogInName: function () {
+      this.$http.get("/account/login/name", {
+        params: {
+          userId: this.userId
         }
       })
-      .then(response =>{
-        this.logInName=response.data
-      })
-      .catch(error => console.log(error.response.data))
+          .then(response => {
+            this.logInName = response.data
+          })
+          .catch(error => console.log(error.response.data))
     },
-    newInspection:function(){
+    newInspection: function () {
       router.push("/inspection/sites")
     },
-    allTasks:function (){
+    allTasks: function () {
       router.push("/inspector/alltasks")
+    },
+    allReports: function () {
+      router.push("/inspector/allreports")
+    },
+    getAllUserTasks: function(){
+      this.$http.get("/response/get/by/userid", {
+        params:{
+          userId: sessionStorage.getItem("userId")
+        }
+      })
+          .then(response=>{
+            this.userTaskList=response.data;
+          })
+          .catch(error=>{
+            console.log(error.response.data)
+          })
     }
   },
-  mounted(){
+  mounted() {
     this.getLogInName();
+    this.getAllUserTasks()
   }
 }
 </script>
@@ -77,18 +132,20 @@ export default {
   border: 2px solid black;
 }
 
-.col button{
+.col button {
   height: 20vh;
   width: 100%;
   font-family: 'Akshar', sans-serif;
   color: white;
   font-size: 1.7em;
 }
-.row{
+
+.row {
   width: 90%;
-  margin-top:5vh;
-  margin-left:5%;
+  margin-top: 5vh;
+  margin-left: 5%;
 }
+
 h2 {
   font-family: 'Akshar', sans-serif;
   color: white;
@@ -96,20 +153,42 @@ h2 {
   margin-left: 6.2%;
   margin-top: 5%;
 }
-#tableTitle{
+
+.tableTitle {
   border-bottom: black solid 4px;
   width: 80%;
   text-align: center;
   margin-top: 5vh;
   margin-left: 10%;
 }
-#tableTitle h3{
+
+.tableTitle h3 {
   font-family: 'Akshar', sans-serif;
   color: black;
   font-size: 2.4em;
 }
+#taskTable{
+  width: 750px;
+  margin:auto;
+  margin-top: 5%;
+  border: 2px solid black;
+}
 
 
+#taskTable tbody {
+  font-size: 0.75em;
+}
+
+#taskTable td {
+  border: 1px solid grey;
+}
+
+#taskTable th {
+  border: 1px solid grey;
+}
+i{
+  font-size: 1.7em;
+}
 
 
 </style>
