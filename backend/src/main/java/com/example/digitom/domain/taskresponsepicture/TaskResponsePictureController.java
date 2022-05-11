@@ -17,11 +17,4 @@ public class TaskResponsePictureController {
 
     @Resource
     private TaskResponsePictureService taskResponsePictureService;
-
-    @PostMapping("/add")
-    @Operation(summary = "Add a new picture to the response")
-    public void addTaskResponsePicture(@RequestBody TaskPictureRequest taskPictureRequest) {
-        taskResponsePictureService.addNewTaskResponsePicture(taskPictureRequest);
-    }
-
 }

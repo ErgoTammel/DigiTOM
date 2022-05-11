@@ -1,5 +1,6 @@
 package com.example.digitom.service.reportmanagement;
 
+import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +48,11 @@ public class InspectionResponseController {
     @Operation(summary = "Show 5 last reports")
     public List<ReportResponse> getLastReports(@RequestParam Integer userId) {
         return inspectionResponseService.getLastReports(userId);
+    }
+
+    @GetMapping("/task/response")
+    @Operation(summary = "Get task response information")
+    public TaskResponseDto getTaskResponseInformation(@RequestParam Integer taskId) {
+        return inspectionResponseService.getTaskResponseInformation(taskId);
     }
 }
