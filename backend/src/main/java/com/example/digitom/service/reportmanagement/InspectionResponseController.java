@@ -16,8 +16,8 @@ public class InspectionResponseController {
 
     @PostMapping("/add")
     @Operation(summary = "Add new task response")
-    public Integer addTaskResponse(@RequestBody TaskResponseRequest taskResponseRequest) {
-        return inspectionResponseService.addTaskResponse(taskResponseRequest);
+    public void addTaskResponse(@RequestBody TaskResponseRequest taskResponseRequest) {
+        inspectionResponseService.addTaskResponse(taskResponseRequest);
     }
 //
 //    @GetMapping("/get/list")

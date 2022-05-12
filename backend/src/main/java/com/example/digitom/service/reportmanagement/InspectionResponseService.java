@@ -20,8 +20,8 @@ public class InspectionResponseService {
     private ReportService reportService;
 
 
-    public Integer addTaskResponse(TaskResponseRequest taskResponseRequest) {
-        return taskResponseService.addTaskResponse(taskResponseRequest);
+    public void  addTaskResponse(TaskResponseRequest taskResponseRequest) {
+        taskResponseService.addTaskResponse(taskResponseRequest);
     }
 
 //    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {

@@ -8,6 +8,4 @@ import java.time.Instant;
 public class TaskResponseRequest {
     private Integer taskId;
     private String description;
-    private Instant time;
-
 }

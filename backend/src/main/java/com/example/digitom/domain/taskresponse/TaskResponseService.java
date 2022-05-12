@@ -5,6 +5,7 @@ import com.example.digitom.service.reportmanagement.TaskResponseRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Instant;
 
 @Service
 public class TaskResponseService {
@@ -16,10 +17,10 @@ public class TaskResponseService {
     @Resource
     private TaskResponsePictureService taskResponsePictureService;
 
-    public Integer addTaskResponse(TaskResponseRequest taskResponseRequest) {
+    public void addTaskResponse(TaskResponseRequest taskResponseRequest) {
         TaskResponse taskResponse = taskResponseMapper.requestToTaskResponse(taskResponseRequest);
+        taskResponse.setTime(Instant.now());
         taskResponseRepository.save(taskResponse);
-        return taskResponse.getId();
     }
 
     public TaskResponseDto getTaskResponseInformation(Integer taskId) {
