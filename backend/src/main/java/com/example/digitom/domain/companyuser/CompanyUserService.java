@@ -64,7 +64,7 @@ public class CompanyUserService {
         return companies;
     }
 
-    public List<Integer> getCompanyIdsByUserIds(Integer userId) {
+    public List<Integer> getCompanyIdsByUserId(Integer userId) {
         List<CompanyUser> companyUsers = companyUserRepository.findAllByUserId(userId);
         List<Integer> companyIds = new ArrayList<>();
         for (CompanyUser companyUser : companyUsers) {

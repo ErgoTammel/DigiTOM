@@ -68,7 +68,7 @@ public class TaskService {
 
     public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
 
-        List<Integer> companyIds = companyUserService.getCompanyIdsByUserIds(userId);
+        List<Integer> companyIds = companyUserService.getCompanyIdsByUserId(userId);
         List<TaskOverviewResponse> responses = new ArrayList<>();
         for (Integer companyId : companyIds) {
             List<Task> tasksByCompanyId = taskRepository.findByCompanyId(companyId, false);
