@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class TaskPictureRequest {
-    private Integer taskResponseId;
+    private Integer taskId;
     private String base64;
 }

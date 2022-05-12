@@ -1,6 +1,6 @@
 package com.example.digitom.domain.task;
 
-import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.service.account.inspection.ReportOverviewResponse;
 import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

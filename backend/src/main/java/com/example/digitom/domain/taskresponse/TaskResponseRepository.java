@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface TaskResponseRepository extends JpaRepository<TaskResponse, Integer> {
     @Query("select t from TaskResponse t where t.task.id = ?1")
     TaskResponse findTaskResponseByTaskId(Integer id);
+
+
 }

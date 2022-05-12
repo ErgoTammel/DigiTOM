@@ -1,4 +1,4 @@
-package com.example.digitom.service.inspection;
+package com.example.digitom.service.account.inspection;
 
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.service.image.ReportPictureRequest;

@@ -9,7 +9,7 @@ import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
-import com.example.digitom.service.inspection.ReportResultResponse;
+import com.example.digitom.service.account.inspection.ReportResultResponse;
 import com.example.digitom.service.reportmanagement.FindReportRequest;
 import com.example.digitom.service.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;

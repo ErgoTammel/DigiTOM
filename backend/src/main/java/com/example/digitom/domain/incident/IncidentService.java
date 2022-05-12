@@ -1,7 +1,7 @@
 package com.example.digitom.domain.incident;
 
-import com.example.digitom.service.inspection.IncidentCounterRequest;
-import com.example.digitom.service.inspection.IncidentRequest;
+import com.example.digitom.service.account.inspection.IncidentCounterRequest;
+import com.example.digitom.service.account.inspection.IncidentRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

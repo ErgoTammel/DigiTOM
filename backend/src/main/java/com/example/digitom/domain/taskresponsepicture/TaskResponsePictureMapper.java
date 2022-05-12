@@ -11,9 +11,6 @@ import java.nio.charset.StandardCharsets;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface TaskResponsePictureMapper {
 
-    @Mapping(target = "taskResponse.id", source = "taskResponseId")
-    @Mapping(target = "base64", source = "base64", qualifiedByName = "stringToByteArray")
-    TaskResponsePicture requestToTaskResponsePicture(TaskPictureRequest taskPictureRequest);
 
     @Named("stringToByteArray")
     static byte[] stringToByteArray(String base64) {
