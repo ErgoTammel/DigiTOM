@@ -7,8 +7,8 @@
     <thead class="thead-dark">
     <tr>
       <th style="width: 15%">Objekt</th>
+      <th style="width: 15%">Peatöövõtja</th>
       <th style="width: 49%">Kirjeldus</th>
-      <th style="width: 15%">Vastutaja</th>
       <th style="width: 15%">Tähtaeg</th>
       <th style="width: 120px"></th>
     </tr>
@@ -16,8 +16,8 @@
     <tbody>
     <tr v-for="task in taskList">
       <td>{{ task.constructionSiteName }}</td>
+      <td>{{ task.mainContractorName }}</td>
       <td>{{ task.description }}</td>
-      <td>{{ task.companyName }}</td>
       <td>{{ task.deadline }}</td>
       <td><i class="fa-regular fa-image"></i></td>
     </tr>

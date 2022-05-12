@@ -1,14 +1,13 @@
 package com.example.digitom.domain.task;
 
 import com.example.digitom.service.inspection.ReportOverviewResponse;
-import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
+import com.example.digitom.service.inspection.reportmanagement.TaskOverviewResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
