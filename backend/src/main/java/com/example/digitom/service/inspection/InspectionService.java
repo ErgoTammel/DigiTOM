@@ -11,7 +11,6 @@ import com.example.digitom.domain.task.Task;
 import com.example.digitom.domain.task.TaskRequest;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.image.ReportPictureRequest;
-import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -96,7 +96,9 @@ public class TaskService {
         return taskRepository.findTasksByReportId(id, false);
     }
 
-//    public void changeTaskStatus(Integer taskId) {
-//        taskRepository.
-//    }
+    public void changeTaskStatus(Integer taskId) {
+        Task task = taskRepository.findById(taskId).get();
+        task.setIsDone(true);
+        taskRepository.save(task);
+    }
 }

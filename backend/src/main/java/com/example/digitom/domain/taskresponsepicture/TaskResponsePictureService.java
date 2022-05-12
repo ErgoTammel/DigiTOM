@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 
 @Service
@@ -21,5 +22,10 @@ public class TaskResponsePictureService {
         TaskResponsePicture taskResponsePicture = taskResponsePictureMapper.requestToTaskResponsePicture(taskPictureRequest);
         taskResponsePicture.setBase64(base64);
         taskResponsePictureRepository.save(taskResponsePicture);
+    }
+
+    public byte[] findByTaskResponseId(Integer id) {
+        TaskResponsePicture taskResponsePicture = taskResponsePictureRepository.findByTaskResponse_Id(id).get();
+        return taskResponsePicture.getBase64();
     }
 }

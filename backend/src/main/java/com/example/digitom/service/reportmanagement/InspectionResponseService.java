@@ -46,7 +46,6 @@ public class InspectionResponseService {
 
     public TaskResponseDto getTaskResponseInformation(Integer taskId) {
         return taskResponseService.getTaskResponseInformation(taskId);
-
     }
 
     public String getTaskDescription(Integer taskId) {
@@ -57,7 +56,7 @@ public class InspectionResponseService {
        return reportService.getInspectorReports(inspectorId);
     }
 
-//    public void changeTaskStatus(Integer taskId) {
-//        taskService.changeTaskStatus(taskId);
-//    }
+    public void changeTaskStatus(Integer taskId) {
+        taskService.changeTaskStatus(taskId);
+    }
 }
