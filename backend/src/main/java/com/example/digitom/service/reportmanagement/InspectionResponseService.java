@@ -54,7 +54,7 @@ public class InspectionResponseService {
     }
 
     public List<ReportResponse> getInspectorLastReports(Integer inspectorId) {
-       return reportService.getInspectorLastReports(inspectorId);
+       return reportService.getInspectorReports(inspectorId);
     }
 
 //    public void changeTaskStatus(Integer taskId) {

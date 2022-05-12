@@ -117,7 +117,7 @@ public class ReportService {
         return allReports.subList(0, 5);
     }
 
-    public List<ReportResponse> getInspectorLastReports(Integer inspectorId) {
+    public List<ReportResponse> getInspectorReports(Integer inspectorId) {
         List<Report> inspectorReports = reportRepository.getInspectorReports(inspectorId);
         List<ReportResponse> responses = new ArrayList<>();
         for (Report inspectorReport : inspectorReports) {
@@ -132,5 +132,9 @@ public class ReportService {
             responses.add(response);
         }
         return responses;
+    }
+
+    public List<Report> getReportsByInspectorId(Integer userId) {
+        return reportRepository.getReportsByInspectorId(userId);
     }
 }

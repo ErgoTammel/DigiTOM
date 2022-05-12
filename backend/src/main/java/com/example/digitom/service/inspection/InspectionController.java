@@ -82,4 +82,11 @@ public class InspectionController {
         return inspectionService.getReportResult(reportId);
     }
 
+    @GetMapping("/inspector/tasks")
+    @Operation(summary = "Get tasks made by inspector")
+    public List<InspectorTasksResponse> getInspectorTasks(@RequestParam Integer userId) {
+    return inspectionService.getInspectorTasks(userId);
+
+    }
+
 }

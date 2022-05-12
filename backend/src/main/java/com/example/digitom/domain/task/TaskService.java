@@ -92,6 +92,10 @@ public class TaskService {
         return taskRepository.findById(taskId).get().getDescription();
     }
 
+    public List<Task> findTasksByReportId(Integer id) {
+        return taskRepository.findTasksByReportId(id, false);
+    }
+
 //    public void changeTaskStatus(Integer taskId) {
 //        taskRepository.
 //    }
