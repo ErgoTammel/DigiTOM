@@ -1,7 +1,7 @@
 package com.example.digitom.domain.report;
 
-import com.example.digitom.service.reportmanagement.FindReportRequest;
-import com.example.digitom.service.reportmanagement.ReportResponse;
+import com.example.digitom.service.inspection.reportmanagement.FindReportRequest;
+import com.example.digitom.service.inspection.reportmanagement.ReportResponse;
 import org.mapstruct.*;
 
 import java.util.List;

@@ -3,7 +3,7 @@
     <div id="logInWindow" v-if="loginScreen">
       <h2>Palun logige sisse või registreerige kasutaja!</h2>
       <div class="col">
-        <div class="row">
+        <div class="row" id="emailInput">
           <label for="email">Email:</label>
           <input type="text" class="form-control" v-model="logInRequest.email" placeholder="E-mail" id="email">
         </div>
@@ -138,7 +138,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 
 h2 {

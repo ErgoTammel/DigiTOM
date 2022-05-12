@@ -16,7 +16,7 @@
         <tr v-for="report in reportList">
           <td>{{ report.date }}</td>
           <td>{{ report.constructionSiteName }}</td>
-          <td>{{ report.mainContractor }}</td>
+          <td>{{ report.mainContractorName }}</td>
           <td>{{ report.tom }}</td>
         </tr>
         </tbody>
@@ -86,6 +86,21 @@ h2 {
 #reportTable{
   width:600px;
   margin: 5% auto auto;
+  border: 2px solid black;
+  max-height: 500px;
+  overflow-y: scroll;
+
+}
+#reportTable tbody {
+  font-size: 0.7em;
+}
+
+#reportTable td {
+  border: 1px solid grey;
+}
+
+#reportTable th {
+  border: 1px solid grey;
 }
 #taskSubmitRow {
   width: 54%;
@@ -98,4 +113,8 @@ button {
   height: 3em;
   font-size: 1em;
 }
+
+
+
+
 </style>

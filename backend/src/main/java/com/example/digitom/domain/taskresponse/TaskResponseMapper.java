@@ -1,6 +1,6 @@
 package com.example.digitom.domain.taskresponse;
 
-import com.example.digitom.service.reportmanagement.TaskResponseRequest;
+import com.example.digitom.service.inspection.reportmanagement.TaskResponseRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
