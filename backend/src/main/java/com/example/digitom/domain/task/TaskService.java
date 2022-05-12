@@ -5,7 +5,7 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
-import com.example.digitom.service.inspection.reportmanagement.TaskOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +68,7 @@ public class TaskService {
 
     public List<TaskOverviewResponse> getOpenTasksByUserId(Integer userId) {
 
-        List<Integer> companyIds = companyUserService.getCompanyIdsByUserIds(userId);
+        List<Integer> companyIds = companyUserService.getCompanyIdsByUserId(userId);
         List<TaskOverviewResponse> responses = new ArrayList<>();
         for (Integer companyId : companyIds) {
             List<Task> tasksByCompanyId = taskRepository.findByCompanyId(companyId, false);
@@ -90,6 +90,10 @@ public class TaskService {
 
     public String getTaskDescription(Integer taskId) {
         return taskRepository.findById(taskId).get().getDescription();
+    }
+
+    public List<Task> findTasksByReportId(Integer id) {
+        return taskRepository.findTasksByReportId(id, false);
     }
 
 //    public void changeTaskStatus(Integer taskId) {

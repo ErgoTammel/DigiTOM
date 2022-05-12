@@ -5,12 +5,13 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.constructionsite.ConstructionSiteService;
+import com.example.digitom.domain.contact.ContactService;
 import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.ReportResultResponse;
-import com.example.digitom.service.inspection.reportmanagement.FindReportRequest;
-import com.example.digitom.service.inspection.reportmanagement.ReportResponse;
+import com.example.digitom.service.reportmanagement.FindReportRequest;
+import com.example.digitom.service.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -39,13 +40,15 @@ public class ReportService {
     private CompanyUserService companyUserService;
     @Resource
     private CompanyConstructionSiteService companyConstructionSiteService;
+    @Resource
+    private ContactService contactService;
 
 
     public Integer addNewReport(Integer siteId, Integer userId) {
         Report report = new Report();
         report.setConstructionSite(constructionSiteService.findConstructionSiteById(siteId));
         report.setDate(LocalDate.now());
-        report.setInspectorid(userId);
+        report.setInspectorId(userId);
         reportRepository.save(report);
         return report.getId();
     }
@@ -112,5 +115,26 @@ public class ReportService {
     public List<ReportResponse> getLastReports(Integer userId) {
         List<ReportResponse> allReports = findAllReports(userId);
         return allReports.subList(0, 5);
+    }
+
+    public List<ReportResponse> getInspectorReports(Integer inspectorId) {
+        List<Report> inspectorReports = reportRepository.getInspectorReports(inspectorId);
+        List<ReportResponse> responses = new ArrayList<>();
+        for (Report inspectorReport : inspectorReports) {
+            ReportResponse response = new ReportResponse();
+            response.setReportId(inspectorReport.getId());
+            response.setMainContractorName(companyConstructionSiteService.findMainContractor(
+                    inspectorReport.getConstructionSite().getId()).getCompany().getName());
+            response.setConstructionSiteName(inspectorReport.getConstructionSite().getName());
+            response.setInspectorName(contactService.findName(inspectorId));
+            response.setDate(inspectorReport.getDate());
+            response.setTom(inspectorReport.getTom());
+            responses.add(response);
+        }
+        return responses;
+    }
+
+    public List<Report> getReportsByInspectorId(Integer userId) {
+        return reportRepository.getReportsByInspectorId(userId);
     }
 }

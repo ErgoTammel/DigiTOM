@@ -1,7 +1,7 @@
 package com.example.digitom.domain.report;
 
-import com.example.digitom.service.inspection.reportmanagement.FindReportRequest;
-import com.example.digitom.service.inspection.reportmanagement.ReportResponse;
+import com.example.digitom.service.reportmanagement.FindReportRequest;
+import com.example.digitom.service.reportmanagement.ReportResponse;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -14,6 +14,7 @@ public interface ReportMapper {
 
     @Mapping(target = "reportId", source = "id")
     @Mapping(target = "constructionSiteName", source = "constructionSite.name")
+    @Mapping(target = "inspectorName", ignore=true)
     ReportResponse reportToResponse(Report report);
 
     List<ReportResponse> reportToResponses(List<Report> reports);

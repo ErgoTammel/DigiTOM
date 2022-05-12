@@ -4,6 +4,7 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.domain.constructionsite.ConstructionSite;
 import com.example.digitom.domain.incident.IncidentService;
+import com.example.digitom.domain.report.Report;
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.Task;
@@ -100,5 +101,22 @@ public class InspectionService {
         return reportService.getReportResult(reportId);
     }
 
+    public List<InspectorTasksResponse> getInspectorTasks(Integer userId) {
+        List<Report> reports = reportService.getReportsByInspectorId(userId);
+        List<InspectorTasksResponse> responses = new ArrayList<>();
+        for (Report report : reports) {
+            List<Task> tasks = taskService.findTasksByReportId(report.getId());
+            for (Task task : tasks) {
+                InspectorTasksResponse response = new InspectorTasksResponse();
+                response.setTaskId(task.getId());
+                response.setConstructionSiteName(task.getReport().getConstructionSite().getName());
+                response.setDeadline(task.getDeadline());
+                response.setDescription(task.getDescription());
+                response.setCompanyName(task.getCompany().getName());
+                responses.add(response);
+            }
+        }
+        return responses;
+    }
 }
 

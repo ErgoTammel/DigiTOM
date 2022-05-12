@@ -1,4 +1,4 @@
-package com.example.digitom.service.inspection.reportmanagement;
+package com.example.digitom.service.reportmanagement;
 
 import lombok.Data;
 
@@ -10,6 +10,7 @@ public class ReportResponse {
     private Integer reportId;
     private String mainContractorName;
     private String constructionSiteName;
+    private String inspectorName;
     private LocalDate date;
     private BigDecimal tom;
 }

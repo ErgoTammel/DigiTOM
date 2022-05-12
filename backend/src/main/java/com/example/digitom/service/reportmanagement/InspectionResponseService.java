@@ -1,4 +1,4 @@
-package com.example.digitom.service.inspection.reportmanagement;
+package com.example.digitom.service.reportmanagement;
 
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.task.TaskService;
@@ -51,6 +51,10 @@ public class InspectionResponseService {
 
     public String getTaskDescription(Integer taskId) {
         return taskService.getTaskDescription(taskId);
+    }
+
+    public List<ReportResponse> getInspectorLastReports(Integer inspectorId) {
+       return reportService.getInspectorReports(inspectorId);
     }
 
 //    public void changeTaskStatus(Integer taskId) {

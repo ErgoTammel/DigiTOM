@@ -1,4 +1,4 @@
-package com.example.digitom.service.inspection.reportmanagement;
+package com.example.digitom.service.reportmanagement;
 
 import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -60,6 +60,12 @@ public class InspectionResponseController {
     @Operation(summary = "Show task description")
     public String getTaskDescription(@RequestParam Integer taskId) {
         return inspectionResponseService.getTaskDescription(taskId);
+    }
+
+    @GetMapping("/raport/last")
+    @Operation(summary = "Show last reports for inspector")
+    public List<ReportResponse> getInspectorLastReports(@RequestParam Integer inspectorId) {
+        return inspectionResponseService.getInspectorLastReports(inspectorId);
     }
 
 //    @PutMapping("/task/done")

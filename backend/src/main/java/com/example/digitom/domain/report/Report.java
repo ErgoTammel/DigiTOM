@@ -28,7 +28,7 @@ public class Report {
     @Column(name = "tom")
     private BigDecimal tom;
 
-    @Column(name = "inspectorid")
-    private Integer inspectorid;
+    @Column(name = "inspector_id")
+    private Integer inspectorId;
 
 }
