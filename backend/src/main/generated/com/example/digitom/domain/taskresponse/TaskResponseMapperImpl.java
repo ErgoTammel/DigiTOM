@@ -1,14 +1,14 @@
 package com.example.digitom.domain.taskresponse;
 
 import com.example.digitom.domain.task.Task;
-import com.example.digitom.service.inspection.reportmanagement.TaskResponseRequest;
+import com.example.digitom.service.reportmanagement.TaskResponseRequest;
 import java.time.Instant;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-12T11:51:52+0300",
+    date = "2022-05-12T13:54:43+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component

@@ -45,7 +45,11 @@ export default {
   data:function(){
     return{
       taskPicture:{},
-      newTaskResponseRequest:{}
+      newTaskResponseRequest:{
+        userId:sessionStorage.getItem("userId"),
+        description:""
+      },
+      pictureData:{}
     }
   },
   methods:{
@@ -84,11 +88,24 @@ export default {
     pushMain:function(){
       router.push("/main")
     },
-    sendTaskResponse:function(){
-      this.$http.post("/")
+    sendTaskDescription:function(){
+      this.$http.post("/response/add", this.newTaskResponseRequest)
+      .then()
+      .catch(error=>{
+        console.log(error.response.data)
+      })
     },
-    addNewTaskResponse:{
-
+    sendTaskResponsePicture:function (){
+     this.$http.post("/image/response/add",this.pictureData)
+      .then()
+      .catch(error=>{
+        console.log(error.response.data)
+      })
+    },
+    addNewTaskResponse:function(){
+      this.sendTaskDescription();
+      this.sendTaskResponsePicture();
+      router.push("/main")
     }
   }
 }

@@ -7,7 +7,7 @@
     <thead class="thead-dark">
     <tr>
       <th style="width: 15%">Objekt</th>
-      <th style="width: 15%">Peatöövõtja</th>
+      <th style="width: 15%">Vastutaja</th>
       <th style="width: 49%">Kirjeldus</th>
       <th style="width: 15%">Tähtaeg</th>
       <th style="width: 120px"></th>
@@ -16,12 +16,27 @@
     <tbody>
     <tr v-for="task in taskList">
       <td>{{ task.constructionSiteName }}</td>
-      <td>{{ task.mainContractorName }}</td>
+      <td>{{ task.companyName }}</td>
       <td>{{ task.description }}</td>
       <td>{{ task.deadline }}</td>
-      <td><i class="fa-regular fa-image"></i></td>
+      <td><button v-on:click="getTaskPicture(task.taskId)"  type="button" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa-regular fa-image"></i></button></td>
     </tr>
     </tbody>
+  </div>
+  <div  data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" >
+      <div class="modal-content" id="modalWindow">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img :src="taskPicture" class="img-fluid">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row" id="taskSubmitRow">
     <button type="button" class="btn btn-dark btn-lg" v-on:click="returnMain">Tagasi</button>
@@ -37,12 +52,13 @@ export default {
   name: "InspectorAllTasksView",
   data:function(){
     return {
-      taskList:{}
+      taskList:{},
+      taskPicture:{}
     }
   },
   methods:{
     getAllTasks: function(){
-      this.$http.get("/response/get/by/userid", {
+      this.$http.get("/inspection/inspector/tasks", {
         params:{
           userId: sessionStorage.getItem("userId")
         }
@@ -56,6 +72,17 @@ export default {
     },
     returnMain:function(){
       router.push("/main")
+    },
+    getTaskPicture:function(getTaskId){
+      this.$http.get("/image/task", {
+        params:{
+          taskId:getTaskId
+        }
+      })
+          .then(response=>{
+            this.taskPicture=response.data
+          })
+          .catch(error=>console.log(error.response.data))
     }
   },
   mounted() {
@@ -116,5 +143,9 @@ button {
 }
 i{
   font-size: 1.5em;
+}
+td button{
+  border: 0;
+  background-color: white;
 }
 </style>
