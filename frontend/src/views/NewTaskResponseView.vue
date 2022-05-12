@@ -46,7 +46,7 @@ export default {
     return{
       taskPicture:{},
       newTaskResponseRequest:{
-        userId:sessionStorage.getItem("userId"),
+        taskId:sessionStorage.getItem("taskId"),
         description:""
       },
       pictureData:{}
@@ -102,8 +102,8 @@ export default {
         console.log(error.response.data)
       })
     },
-    addNewTaskResponse:function(){
-      this.sendTaskDescription();
+    addNewTaskResponse:async function(){
+      await this.sendTaskDescription();
       this.sendTaskResponsePicture();
       router.push("/main")
     }
