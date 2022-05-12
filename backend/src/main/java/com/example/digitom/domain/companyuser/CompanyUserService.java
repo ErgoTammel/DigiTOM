@@ -43,7 +43,6 @@ public class CompanyUserService {
         for (CompanyUser companyUser : companyUsers) {
             CompanyContactResponse companyContactResponse = new CompanyContactResponse();
             Integer userId = companyUser.getUser().getId();
-
             companyContactResponse.setContactId(contactService.getUserName(userId).getId());
             companyContactResponse.setFirstName(contactService.getUserName(userId).getFirstName());
             companyContactResponse.setMiddleName(contactService.getUserName(userId).getMiddleName());
@@ -64,5 +63,16 @@ public class CompanyUserService {
         }
         return companies;
     }
+
+    public List<Integer> getCompanyIdsByUserIds(Integer userId) {
+        List<CompanyUser> companyUsers = companyUserRepository.findAllByUserId(userId);
+        List<Integer> companyIds = new ArrayList<>();
+        for (CompanyUser companyUser : companyUsers) {
+            companyIds.add(companyUser.getCompany().getId());
+        }
+        return companyIds;
+    }
+
+
 }
 

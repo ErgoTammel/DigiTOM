@@ -10,6 +10,6 @@ public class TaskOverviewResponse {
     private String constructionSiteName;
     private LocalDate deadline;
     private String description;
-    private String companyName;
+    private String mainContractorName;
 
 }

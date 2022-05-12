@@ -30,9 +30,4 @@ public interface CompanyConstructionSiteRepository extends JpaRepository<Company
     @Query("select c from CompanyConstructionSite c where c.constructionSite.id = ?1 and c.mainContractor = ?2")
     CompanyConstructionSite findMainContractor(Integer id, Boolean mainContractor);
 
-
-
-
-
-
 }

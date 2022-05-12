@@ -25,9 +25,9 @@ public class InspectionResponseService {
         return taskResponseService.addTaskResponse(taskResponseRequest);
     }
 
-    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {
-        return taskService.getOpenTasksBySiteId(constructionSiteId);
-    }
+//    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {
+//        return taskService.getOpenTasksBySiteId(constructionSiteId);
+//    }
 
     public List<ReportResponse> searchReports(FindReportRequest findReportRequest) {
         return reportService.searchReports(findReportRequest);
@@ -53,4 +53,8 @@ public class InspectionResponseService {
     public String getTaskDescription(Integer taskId) {
         return taskService.getTaskDescription(taskId);
     }
+
+//    public void changeTaskStatus(Integer taskId) {
+//        taskService.changeTaskStatus(taskId);
+//    }
 }

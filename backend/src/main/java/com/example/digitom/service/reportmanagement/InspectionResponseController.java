@@ -19,12 +19,12 @@ public class InspectionResponseController {
     public Integer addTaskResponse(@RequestBody TaskResponseRequest taskResponseRequest) {
         return inspectionResponseService.addTaskResponse(taskResponseRequest);
     }
-
-    @GetMapping("/get/list")
-    @Operation(summary = "Get open tasks list by site ID")
-    public List<TaskOverviewResponse> getOpenTasksBySiteId(@RequestParam Integer constructionSiteId) {
-        return inspectionResponseService.getOpenTasksBySiteId(constructionSiteId);
-    }
+//
+//    @GetMapping("/get/list")
+//    @Operation(summary = "Get open tasks list by site ID")
+//    public List<TaskOverviewResponse> getOpenTasksBySiteId(@RequestParam Integer constructionSiteId) {
+//        return inspectionResponseService.getOpenTasksBySiteId(constructionSiteId);
+//    }
 
     @GetMapping("/get/by/userid")
     @Operation(summary = "Get open tasks list by user ID")
@@ -61,4 +61,12 @@ public class InspectionResponseController {
     public String getTaskDescription(@RequestParam Integer taskId) {
         return inspectionResponseService.getTaskDescription(taskId);
     }
+
+//    @PutMapping("/task/done")
+//    @Operation(summary = "Mark task status as DONE")
+//    public void changeTaskStatus(@RequestParam Integer taskId) {
+//        inspectionResponseService.changeTaskStatus(taskId);
+//    }
+
+
 }

@@ -33,7 +33,6 @@ public interface TaskMapper {
 
     @Mapping(target = "taskId", source = "id")
     @Mapping(target = "constructionSiteName", ignore = true)
-    @Mapping(target = "companyName", source = "company.name")
     TaskOverviewResponse taskToResponse(Task task);
 
 
