@@ -20,8 +20,8 @@ public class InspectionResponseService {
     private ReportService reportService;
 
 
-    public Integer addTaskResponse(TaskResponseRequest taskResponseRequest) {
-        return taskResponseService.addTaskResponse(taskResponseRequest);
+    public void  addTaskResponse(TaskResponseRequest taskResponseRequest) {
+        taskResponseService.addTaskResponse(taskResponseRequest);
     }
 
 //    public List<TaskOverviewResponse> getOpenTasksBySiteId(Integer constructionSiteId) {
@@ -46,7 +46,6 @@ public class InspectionResponseService {
 
     public TaskResponseDto getTaskResponseInformation(Integer taskId) {
         return taskResponseService.getTaskResponseInformation(taskId);
-
     }
 
     public String getTaskDescription(Integer taskId) {
@@ -57,7 +56,7 @@ public class InspectionResponseService {
        return reportService.getInspectorReports(inspectorId);
     }
 
-//    public void changeTaskStatus(Integer taskId) {
-//        taskService.changeTaskStatus(taskId);
-//    }
+    public void changeTaskStatus(Integer taskId) {
+        taskService.changeTaskStatus(taskId);
+    }
 }

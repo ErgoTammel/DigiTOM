@@ -16,8 +16,8 @@ public class InspectionResponseController {
 
     @PostMapping("/add")
     @Operation(summary = "Add new task response")
-    public Integer addTaskResponse(@RequestBody TaskResponseRequest taskResponseRequest) {
-        return inspectionResponseService.addTaskResponse(taskResponseRequest);
+    public void addTaskResponse(@RequestBody TaskResponseRequest taskResponseRequest) {
+        inspectionResponseService.addTaskResponse(taskResponseRequest);
     }
 //
 //    @GetMapping("/get/list")
@@ -50,12 +50,6 @@ public class InspectionResponseController {
         return inspectionResponseService.getLastReports(userId);
     }
 
-    @GetMapping("/task/response")
-    @Operation(summary = "Get task response information")
-    public TaskResponseDto getTaskResponseInformation(@RequestParam Integer taskId) {
-        return inspectionResponseService.getTaskResponseInformation(taskId);
-    }
-
     @GetMapping("/show/description")
     @Operation(summary = "Show task description")
     public String getTaskDescription(@RequestParam Integer taskId) {
@@ -68,11 +62,17 @@ public class InspectionResponseController {
         return inspectionResponseService.getInspectorLastReports(inspectorId);
     }
 
-//    @PutMapping("/task/done")
-//    @Operation(summary = "Mark task status as DONE")
-//    public void changeTaskStatus(@RequestParam Integer taskId) {
-//        inspectionResponseService.changeTaskStatus(taskId);
-//    }
+    @GetMapping("/task/response")
+    @Operation(summary = "Get task response information")
+    public TaskResponseDto getTaskResponseInformation(@RequestParam Integer taskId) {
+        return inspectionResponseService.getTaskResponseInformation(taskId);
+    }
+
+    @PutMapping("/task/done")
+    @Operation(summary = "Mark task status as DONE")
+    public void changeTaskStatus(@RequestParam Integer taskId) {
+        inspectionResponseService.changeTaskStatus(taskId);
+    }
 
 
 }
