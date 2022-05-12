@@ -66,7 +66,7 @@
           <tr v-for="task in userTaskList">
             <td>{{ task.constructionSiteName }}</td>
             <td>{{ task.description }}</td>
-            <td>{{ task.companyName }}</td>
+            <td>{{ task.mainContractorName }}</td>
             <td>{{ task.deadline }}</td>
             <td>  <button v-on:click="getTaskPicture(task.taskId)"  type="button" data-toggle="modal" data-target="#exampleModal">
               <i class="fa-regular fa-image"></i></button></td>

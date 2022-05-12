@@ -85,7 +85,7 @@ export default {
       router.push("/main")
     },
     sendTaskResponse:function(){
-      this.$http.post()
+      this.$http.post("/")
     },
     addNewTaskResponse:{
 
