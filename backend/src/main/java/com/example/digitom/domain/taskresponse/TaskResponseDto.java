@@ -13,5 +13,6 @@ public class TaskResponseDto implements Serializable {
     private final Integer taskId;
     private final String description;
     private final Instant time;
+    private byte[] base64;
 
 }

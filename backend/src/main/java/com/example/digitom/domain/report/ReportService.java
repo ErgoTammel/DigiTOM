@@ -103,7 +103,7 @@ public class ReportService {
                 reportResponses.add(response);
             }
         }
-        Comparator<ReportResponse> reverseComparator = (c1, c2) -> Math.toIntExact(c2.getDate().compareTo(c1.getDate()));
+        Comparator<ReportResponse> reverseComparator = (c1, c2) -> Math.toIntExact(c2.getReportId().compareTo(c1.getReportId()));
         reportResponses.sort(reverseComparator);
         return reportResponses;
     }

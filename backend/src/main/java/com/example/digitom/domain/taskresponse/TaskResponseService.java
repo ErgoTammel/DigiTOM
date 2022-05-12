@@ -21,6 +21,7 @@ public class TaskResponseService {
 
     public TaskResponseDto getTaskResponseInformation(Integer taskId) {
         TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
+
         return taskResponseMapper.toDto(taskResponse);
     }
 }
