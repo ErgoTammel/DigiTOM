@@ -24,6 +24,24 @@
         <div class="tableTitle">
           <h3>Viimati koostatud raportid</h3>
         </div>
+        <div class="table table-light table-bordered table-responsive" id="reportTable">
+          <thead class="thead-dark">
+          <tr>
+            <th style="width: 30%">Kuupäev</th>
+            <th style="width: 30%">Objekt</th>
+            <th style="width: 30%">Peatöövõtja</th>
+            <th style="width: 30%">TOM</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="report in reportList">
+            <td>{{ report.date }}</td>
+            <td>{{ report.constructionSiteName }}</td>
+            <td>{{ report.mainContractorName }}</td>
+            <td>{{ report.tom }} %</td>
+          </tr>
+          </tbody>
+        </div>
       </div>
       <div v-if="roleId===3">
         <div class="windowHeader">
@@ -52,7 +70,7 @@
             <td>{{ task.deadline }}</td>
             <td>  <button v-on:click="getTaskPicture(task.taskId)"  type="button" data-toggle="modal" data-target="#exampleModal">
               <i class="fa-regular fa-image"></i></button></td>
-            <td><i class="fa-solid fa-arrow-right"></i></td>
+            <td><i class="fa-solid fa-arrow-right" v-on:click="newTaskResponse(task.taskId)"></i></td>
           </tr>
           </tbody>
         </div>
@@ -93,7 +111,8 @@ export default {
       logInRequest: {},
       roleId: Number(sessionStorage.getItem("roleId")),
       userTaskList:{},
-      taskPicture:{}
+      taskPicture:{},
+      reportList:{}
     }
   },
   methods: {
@@ -140,11 +159,29 @@ export default {
         this.taskPicture=response.data
       })
       .catch(error=>console.log(error.response.data))
+    },
+    getReportList:function(){
+      this.$http.get("/response/report/last",{
+        params:{
+          userId:sessionStorage.getItem("userId")
+        }
+      })
+      .then(response=>{
+this.reportList=response.data
+      })
+      .catch(error=>{
+        console.log(error.response.data)
+      })
+    },
+    newTaskResponse:function(id){
+      sessionStorage.setItem("taskId", id)
+      router.push("/taskresponse/new")
     }
   },
   mounted() {
     this.getLogInName();
     this.getAllUserTasks()
+    this.getReportList()
   }
 }
 </script>
@@ -231,6 +268,24 @@ td button{
 }
 #modalWindow{
   border: 4px solid black;
+}
+#reportTable{
+  width:600px;
+  margin: 3% auto auto;
+  border: 2px solid black;
+  max-height: 500px;
+
+}
+#reportTable tbody {
+  font-size: 0.7em;
+}
+
+#reportTable td {
+  border: 1px solid grey;
+}
+
+#reportTable th {
+  border: 1px solid grey;
 }
 
 </style>

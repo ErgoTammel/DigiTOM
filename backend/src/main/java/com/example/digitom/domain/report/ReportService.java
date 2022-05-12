@@ -9,8 +9,8 @@ import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.ReportResultResponse;
-import com.example.digitom.service.reportmanagement.FindReportRequest;
-import com.example.digitom.service.reportmanagement.ReportResponse;
+import com.example.digitom.service.inspection.reportmanagement.FindReportRequest;
+import com.example.digitom.service.inspection.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,10 +41,11 @@ public class ReportService {
     private CompanyConstructionSiteService companyConstructionSiteService;
 
 
-    public Integer addNewReport(Integer siteId) {
+    public Integer addNewReport(Integer siteId, Integer userId) {
         Report report = new Report();
         report.setConstructionSite(constructionSiteService.findConstructionSiteById(siteId));
         report.setDate(LocalDate.now());
+        report.setInspectorid(userId);
         reportRepository.save(report);
         return report.getId();
     }
@@ -103,13 +104,13 @@ public class ReportService {
                 reportResponses.add(response);
             }
         }
-        Comparator<ReportResponse> reverseComparator = (c1, c2) -> Math.toIntExact(c2.getDate().compareTo(c1.getDate()));
+        Comparator<ReportResponse> reverseComparator = (c1, c2) -> Math.toIntExact(c2.getReportId().compareTo(c1.getReportId()));
         reportResponses.sort(reverseComparator);
         return reportResponses;
     }
 
     public List<ReportResponse> getLastReports(Integer userId) {
         List<ReportResponse> allReports = findAllReports(userId);
-        return allReports.subList(0, 4);
+        return allReports.subList(0, 5);
     }
 }

@@ -25,7 +25,10 @@ public class Report {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "tom", precision = 5, scale = 2)
+    @Column(name = "tom")
     private BigDecimal tom;
+
+    @Column(name = "inspectorid")
+    private Integer inspectorid;
 
 }

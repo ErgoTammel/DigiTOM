@@ -8,6 +8,7 @@ import NewReportView from "@/views/NewReportView";
 import ReportOverviewView from "@/views/ReportOverviewView";
 import InspectorAllTasksView from "@/views/InspectorAllTasksView";
 import InspectorAllReportsView from "@/views/InspectorAllReportsView";
+import NewTaskResponseView from "@/views/NewTaskResponseView";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
         path: '/inspector/allreports',
         name: 'InspectorAllReportsRoute',
         component: InspectorAllReportsView
+    },
+    {
+        path: '/taskresponse/new',
+        name: 'NewTaskResponseRoute',
+        component: NewTaskResponseView
     }
 ]
 

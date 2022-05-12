@@ -219,7 +219,8 @@ export default {
     newReport: async function () {
       await this.$http.post("/report/add", null, {
         params: {
-          siteId: sessionStorage.getItem("constructionSiteId")
+          siteId: sessionStorage.getItem("constructionSiteId"),
+          userId:sessionStorage.getItem("userId")
         }
       })
           .then(response => {
@@ -322,9 +323,6 @@ export default {
         safe: isSafe
       })
           .then(response => {
-            console.log("OLEME SIIN")
-            console.log(response.data)
-
             switch (Number(safetyField)) {
               case 1:
                 if (isSafe) {

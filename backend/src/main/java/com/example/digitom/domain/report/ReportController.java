@@ -17,8 +17,8 @@ public class ReportController {
 
     @PostMapping("/add")
     @Operation(summary = "Add new report by construction site ID")
-    public Integer addNewReport(@RequestParam Integer siteId) {
-        return reportService.addNewReport(siteId);
+    public Integer addNewReport(@RequestParam Integer siteId, @RequestParam Integer userId) {
+        return reportService.addNewReport(siteId, userId);
     }
 
 }
