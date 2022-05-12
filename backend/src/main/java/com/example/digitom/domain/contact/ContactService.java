@@ -24,4 +24,9 @@ public class ContactService {
         return contactRepository.findByUserId(userId);
 
     }
+
+    public String findName(Integer id) {
+        Contact contact = contactRepository.findByUserId(id);
+        return contact.getFirstName() + " " + contact.getLastName();
+    }
 }
