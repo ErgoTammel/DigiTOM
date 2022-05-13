@@ -7,5 +7,9 @@ public interface TaskResponseRepository extends JpaRepository<TaskResponse, Inte
     @Query("select t from TaskResponse t where t.task.id = ?1")
     TaskResponse findTaskResponseByTaskId(Integer id);
 
+    @Query("select (count(t) > 0) from TaskResponse t where t.task.id = ?1")
+    boolean existsByTaskId(Integer id);
+
+
 
 }
