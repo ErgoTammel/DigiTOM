@@ -80,10 +80,10 @@ public class InspectionResponseController {
         inspectionResponseService.deleteTaskResponse(taskId);
     }
 
-    @GetMapping("/taskresponse")
-    @Operation(summary = "Get task response by task ID")
-    public byte[] getTaskResponse(@RequestParam Integer taskId) {
-       return inspectionResponseService.getTaskResponse(taskId);
+    @GetMapping("/taskresponse/image")
+    @Operation(summary = "Get task response picture by task ID")
+    public byte[] getTaskResponsePicture(@RequestParam Integer taskId) {
+       return inspectionResponseService.getTaskResponsePicture(taskId);
     }
 
 }

@@ -25,9 +25,8 @@
   <h2>Korrastusülesande vastus</h2>
   <h4 style="word-break: break-word; margin-right: 6.2%;">{{responseDescription}}</h4>
   <button class="pictureButton" v-on:click="getTaskResponsePicture()" type="button" data-toggle="modal"
-          data-target="#exampleModal">
+          data-target="#exampleModal2">
     <i class="fa-regular fa-image"></i></button>
-
   <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal2" tabindex="-1" role="dialog"
        aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -38,7 +37,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <img :src="taskPicture" class="img-fluid">
+          <img :src="taskResponsePicture" class="img-fluid">
         </div>
       </div>
     </div>
@@ -52,6 +51,7 @@ export default {
   data:function (){
     return{
       taskPicture:{},
+      taskResponsePicture:{},
       taskDescription:"",
       responseDescription:""
     }
@@ -78,7 +78,7 @@ export default {
           .catch(error => console.log(error.response.data))
     },
     getTaskResponse:function (){
-      this.$http.get("/task/response", {
+      this.$http.get("response/task/response", {
         params:{
           taskId:sessionStorage.getItem("taskId")
         }
@@ -88,9 +88,17 @@ export default {
       })
       .catch(error=>console.log(error.response.data))
     },
-    // getTaskResponsePicture:function (){
-    //   this.
-    // }
+    getTaskResponsePicture:function (){
+      this.$http.get("/response/taskresponse/image", {
+        params:{
+          taskId:sessionStorage.getItem("taskId")
+        }
+      })
+      .then(response=>{
+        this.taskResponsePicture = response.data;
+      })
+      .catch(error=>console.log(error.response.data))
+    }
   },
   mounted() {
     this.getTaskDescription();
