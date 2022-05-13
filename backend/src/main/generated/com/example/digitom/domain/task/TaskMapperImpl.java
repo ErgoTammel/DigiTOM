@@ -3,7 +3,7 @@ package com.example.digitom.domain.task;
 import com.example.digitom.domain.company.Company;
 import com.example.digitom.domain.incident.Incident;
 import com.example.digitom.domain.report.Report;
-import com.example.digitom.service.inspection.ReportOverviewResponse;
+import com.example.digitom.service.account.inspection.ReportOverviewResponse;
 import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-12T14:39:04+0300",
+    date = "2022-05-12T15:15:53+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
