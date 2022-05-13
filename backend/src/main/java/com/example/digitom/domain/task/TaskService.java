@@ -5,7 +5,7 @@ import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSit
 import com.example.digitom.domain.companyuser.CompanyUserService;
 import com.example.digitom.service.inspection.IncidentCounterRequest;
 import com.example.digitom.service.inspection.ReportOverviewResponse;
-import com.example.digitom.service.account.reportmanagement.TaskOverviewResponse;
+import com.example.digitom.service.reportmanagement.TaskOverviewResponse;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
