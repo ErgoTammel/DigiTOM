@@ -50,6 +50,10 @@ public class IncidentService {
         List<Incident> incidents = incidentRepository.findByReportIdAndSafe(reportId, safe);
         return incidents.size();
     }
+
+    public Boolean incidentsExistByReportId(Integer reportId) {
+        return incidentRepository.incidentsExistByReportId(reportId);
+    }
 }
 
 

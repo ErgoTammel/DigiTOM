@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
     <div id="firstNewConstructionSiteWindow" v-if="secondConstructionSite">
       <h2>Sisesta uue objekti andmed.</h2>
       <div class="col">
@@ -67,13 +70,15 @@ export default {
       allCompanyNames: {},
       newConstructionSiteRequest: {},
       selectedSubContractorId: 0,
-      subContractorsList: {}
-
+      subContractorsList: {},
+      errorMessage:"",
+      showError:false
     }
   },
   methods: {
     toggleSecondConstructionSite: function () {
       this.secondConstructionSite = !this.secondConstructionSite;
+      this.showError=false;
     },
     routeNewInspection: function () {
       router.push('/inspection/sites');
@@ -104,7 +109,8 @@ export default {
           constructionSiteId: sessionStorage.getItem("constructionSiteId")
         }
       }).then().catch(error => {
-        console.log(error.response.data)
+        this.errorMessage=error.response.data.title + error.response.data.detail;
+        this.showError=true;
       })
        await this.$http.get("/construction-site/all/subcontractor", {
         params: {
@@ -243,6 +249,9 @@ h3 i {
 #saveButtonRow button {
   margin-right: 1vw;
   margin-top: 0%;
+}
+#errorMessage {
+  text-align: center;
 }
 
 </style>

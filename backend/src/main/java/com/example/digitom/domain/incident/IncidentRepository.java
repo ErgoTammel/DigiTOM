@@ -18,6 +18,9 @@ public interface IncidentRepository extends JpaRepository<Incident, Integer> {
     @Query("select i from Incident i where i.report.id = ?1 and i.safe = ?2")
     List<Incident> findByReportIdAndSafe(Integer id, Boolean safe);
 
+    @Query("select (count(i) > 0) from Incident i where i.report.id = ?1")
+    boolean incidentsExistByReportId(Integer id);
+
 
 
 

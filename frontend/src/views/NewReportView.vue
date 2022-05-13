@@ -1,5 +1,8 @@
 <template>
   <div id="all">
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
     <div id="window" v-if="!newTaskWindow && !deleteTaskWindow">
       <h2 class="uppercase">Ülevaatus ehitusobjektil {{ constructionSiteInfo.siteName }} </h2>
       <h3><strong>Kuupäev:</strong> {{ constructionSiteInfo.reportDate }}</h3>
@@ -17,8 +20,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">1. Kukkumisohu vältimine, varinguoht, uppumisoht</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(1)"></i><h4
-                class="counter">{{ counter.field1.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(1)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(1)"></i>
+              <h4
+                  class="counter">{{ counter.field1.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(1)"></i><i class="fa-solid fa-minus"
@@ -30,8 +35,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">2. Tellingud, redelid, liikumisteed</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(2)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(2)"></i><h4
-                class="counter">{{ counter.field2.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(2)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(2)"></i>
+              <h4
+                  class="counter">{{ counter.field2.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(2)"></i><i class="fa-solid fa-minus"
@@ -43,8 +50,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">3. Ehitusmasinad tõsteseadmed ja käsitööriistad</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(3)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(3)"></i><h4
-                class="counter">{{ counter.field3.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(3)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(3)"></i>
+              <h4
+                  class="counter">{{ counter.field3.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(3)"></i><i class="fa-solid fa-minus"
@@ -56,8 +65,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">4. Elekter ja valgustus</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(4)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(4)"></i><h4
-                class="counter">{{ counter.field4.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(4)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(4)"></i>
+              <h4
+                  class="counter">{{ counter.field4.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(4)"></i><i class="fa-solid fa-minus"
@@ -69,8 +80,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">5. Üldine kord, olme- ja jäätmekäitlus</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(5)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(5)"></i><h4
-                class="counter">{{ counter.field5.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(5)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(5)"></i>
+              <h4
+                  class="counter">{{ counter.field5.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(5)"></i><i class="fa-solid fa-minus"
@@ -82,8 +95,10 @@
         <tr>
           <th scope="row"><h4 class="rowHeading">6. Ehitustöölised</h4></th>
           <td>
-            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(6)"></i><i class="fa-solid fa-minus" v-on:click="removeTrueIncident(6)"></i><h4
-                class="counter">{{ counter.field6.safe }}</h4></h4>
+            <h4><i class="fa-solid fa-plus" v-on:click="newPositiveIncident(6)"></i><i class="fa-solid fa-minus"
+                                                                                       v-on:click="removeTrueIncident(6)"></i>
+              <h4
+                  class="counter">{{ counter.field6.safe }}</h4></h4>
           </td>
           <td>
             <h4><i class="fa-solid fa-plus" v-on:click="newNegativeIncident(6)"></i><i class="fa-solid fa-minus"
@@ -96,7 +111,8 @@
       </table>
       <div class="submitRow">
         <button type="button" class="btn btn-danger btn-lg" v-on:click="discardReport">Tühista ülevaatus</button>
-        <button type="button" class="btn btn-primary btn-lg" v-on:click="pushReportOverview">Vaata üle ja kinnita</button>
+        <button type="button" class="btn btn-primary btn-lg" v-on:click="pushReportOverview">Vaata üle ja kinnita
+        </button>
       </div>
     </div>
     <div id="newTaskWindow" v-if="newTaskWindow">
@@ -135,7 +151,7 @@
         </div>
       </div>
       <div class="row" id="taskSubmitRow">
-        <button type="button" class="btn btn-dark btn-lg" id="cancelButton">Tühista</button>
+        <button type="button" class="btn btn-dark btn-lg" v-on:click="toggleNewTaskWindow" n id="cancelButton">Tühista</button>
         <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewTask" id="saveButton">Salvesta</button>
       </div>
     </div>
@@ -212,7 +228,9 @@ export default {
         }
       },
       newTaskSafetyField: 0,
-      removeTaskListResponse: {}
+      removeTaskListResponse: {},
+      errorMessage: "",
+      showError: false
     }
   },
   methods: {
@@ -220,7 +238,7 @@ export default {
       await this.$http.post("/report/add", null, {
         params: {
           siteId: sessionStorage.getItem("constructionSiteId"),
-          userId:sessionStorage.getItem("userId")
+          userId: sessionStorage.getItem("userId")
         }
       })
           .then(response => {
@@ -253,7 +271,6 @@ export default {
       this.toggleNewTaskWindow()
 
 
-
     },
     newPositiveIncident: async function (safetyField) {
       await this.$http.post("/inspection/incident/new", {
@@ -267,6 +284,7 @@ export default {
     },
     toggleNewTaskWindow: function () {
       this.newTaskWindow = !this.newTaskWindow;
+      this.showError = false;
     },
     getAllSiteCompanies: function () {
       this.$http.get("/construction-site/all/company", {
@@ -289,10 +307,14 @@ export default {
           .then(response => {
             sessionStorage.setItem("taskId", response.data)
             this.updateCounter(this.newTaskSafetyField, false);
+            this.addNewReportPicture();
+            this.toggleNewTaskWindow();
           })
-          .catch(error => console.log(error.response.data))
-      this.addNewReportPicture();
-      this.toggleNewTaskWindow();
+          .catch(error => {
+            this.errorMessage = error.response.data.title + error.response.data.detail;
+            this.showError = true;
+          })
+
 
     },
     addNewReportPicture: function () {
@@ -366,14 +388,15 @@ export default {
                   this.counter.field6.notSafe = response.data;
                 }
                 break;
-                default:
-                  alert("ERROR ")
+              default:
+                alert("ERROR ")
             }
           })
           .catch(error => console.log(error.response.data))
     },
     toggleDeleteTaskWindow: function () {
       this.deleteTaskWindow = !this.deleteTaskWindow;
+      this.errorMessage = false;
     },
     updateDeleteTaskWindow: function (safetyField) {
       this.$http.post("/inspection/incident/false", {
@@ -405,8 +428,8 @@ export default {
 
 
     },
-    discardReport: function () {
-      this.$http.delete("/inspection/report", {
+    discardReport: async function () {
+     await this.$http.delete("/inspection/report", {
         params: {
           reportId: sessionStorage.getItem("reportId")
         }
@@ -421,25 +444,34 @@ export default {
       router.push('/main');
     },
     removeTrueIncident: async function (safetyField) {
-      await this.$http.post("/inspection/counter/incident/delete",{
-            reportId: sessionStorage.getItem("reportId"),
-            safetyFieldId: safetyField,
-            safe: true
-          })
+      await this.$http.post("/inspection/counter/incident/delete", {
+        reportId: sessionStorage.getItem("reportId"),
+        safetyFieldId: safetyField,
+        safe: true
+      })
           .then()
-          .catch(error=>{
+          .catch(error => {
             console.log(error.response.data)
           })
-     this.updateCounter(safetyField, true);
+      this.updateCounter(safetyField, true);
 
     },
-    pushReportOverview:function (){
-
-      router.push('/report/overview')
+    pushReportOverview: function () {
+      this.$http.get("/inspection/checkifvalid", {
+        params: {
+          reportId: sessionStorage.getItem("reportId")
+        }
+      })
+      .then(response=>{
+        router.push('/report/overview')
+      }).catch(error=>{
+        this.errorMessage=error.response.data.title + error.response.data.detail;
+        this.showError=true;
+      })
     }
   },
-  mounted() {
-    this.getConstructionSiteName();
+  async mounted() {
+   await this.getConstructionSiteName();
     this.newReport();
   }
 }
@@ -635,5 +667,8 @@ select {
   width: 40%;
 }
 
+#errorMessage {
+  text-align: center;
+}
 
 </style>

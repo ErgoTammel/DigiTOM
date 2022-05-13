@@ -117,5 +117,10 @@ public class InspectionService {
         }
         return responses;
     }
+
+    public void isReportValid(Integer reportId) {
+        Boolean exists = incidentService.incidentsExistByReportId(reportId);
+        reportService.isReportValid(exists);
+    }
 }
 

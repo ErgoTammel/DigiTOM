@@ -88,5 +88,9 @@ public class InspectionController {
     return inspectionService.getInspectorTasks(userId);
 
     }
-
+    @GetMapping("/checkifvalid")
+    @Operation(summary="Checks If report has any incidents. ")
+    public void isReportValid(@RequestParam Integer reportId){
+        inspectionService.isReportValid(reportId);
+    }
 }

@@ -12,6 +12,7 @@ import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.ReportResultResponse;
 import com.example.digitom.service.reportmanagement.FindReportRequest;
 import com.example.digitom.service.reportmanagement.ReportResponse;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,6 +43,8 @@ public class ReportService {
     private CompanyConstructionSiteService companyConstructionSiteService;
     @Resource
     private ContactService contactService;
+    @Resource
+    private ValidationService validationService;
 
 
     public Integer addNewReport(Integer siteId, Integer userId) {
@@ -152,4 +155,7 @@ public class ReportService {
         return BigDecimal.valueOf((double) safeSum / (safeSum + notSafeSum) * 100);
     }
 
+    public void isReportValid(Boolean exists) {
+        validationService.isReportValid(exists);
+    }
 }
