@@ -1,5 +1,6 @@
 package com.example.digitom.domain.taskresponse;
 
+import com.example.digitom.domain.taskresponsepicture.TaskResponsePicture;
 import com.example.digitom.service.reportmanagement.TaskResponseRequest;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,8 @@ public class TaskResponseService {
         return taskResponseRepository.findTaskResponseByTaskId(taskId);
     }
 
-    public void deleteTaskResponse (Integer responseId ) {
-        TaskResponse taskResponse = taskResponseRepository.findById(responseId).get();
+    public void deleteTaskResponse (Integer taskId ) {
+        TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
         taskResponseRepository.delete(taskResponse);
     }
 

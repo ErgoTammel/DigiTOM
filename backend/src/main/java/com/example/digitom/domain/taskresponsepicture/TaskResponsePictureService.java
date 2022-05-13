@@ -35,5 +35,11 @@ public class TaskResponsePictureService {
         TaskResponsePicture taskResponsePicture = taskResponsePictureRepository.findByTaskId(taskId);
         return taskResponsePicture.getBase64();
     }
+
+    public void deleteTaskResponsePicture(Integer taskId) {
+        TaskResponse taskResponse = taskResponseService.findTaskResponseByTaskId(taskId);
+        TaskResponsePicture picture = taskResponsePictureRepository.findByTaskResponseId(taskResponse.getId());
+        taskResponsePictureRepository.delete(picture);
+    }
 }
 

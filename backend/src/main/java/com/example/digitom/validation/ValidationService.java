@@ -29,7 +29,7 @@ public class ValidationService {
 
     public void userExist(Optional<User> user) {
         if (user.isEmpty()) {
-            throw new BusinessException("Viga sisenemisel", "Sisesta õiged andmed või registreeri konto");
+            throw new BusinessException("Viga sisse logimisel! ", "Sisesta õiged andmed või registreeri konto.");
         }
     }
 

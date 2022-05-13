@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
     <div id="logInWindow" v-if="loginScreen">
       <h2>Palun logige sisse või registreerige kasutaja!</h2>
       <div class="col">
@@ -9,12 +12,14 @@
         </div>
         <div class="row">
           <label for="Password">Password:</label>
-          <input type="password" class="form-control" v-model="logInRequest.password" placeholder="Password" id="Password">
+          <input type="password" class="form-control" v-model="logInRequest.password" placeholder="Password"
+                 id="Password">
         </div>
       </div>
       <div class="row">
         <div class="col" id="loginButton">
-          <button v-on:click="logIn" type="button" class="btn btn-primary btn-lg">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogi
+          <button v-on:click="logIn" type="button" class="btn btn-primary btn-lg">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogi
             sisse&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           </button>
           <button type="button" class="btn btn-dark btn-lg" v-on:click="toggleLogInWindow">Registreeri kasutaja
@@ -101,37 +106,47 @@ export default {
     return {
       loginScreen: true,
       registerRequest: {},
-      logInRequest:{
-        email:"",
-        password:""
-      }
+      logInRequest: {
+        email: "",
+        password: ""
+      },
+      errorMessage: "",
+      showError: false
     }
   },
   methods: {
     toggleLogInWindow: function () {
       if (this.loginScreen) {
         this.loginScreen = false;
+        this.showError = false;
       } else {
         this.loginScreen = true;
         window.scrollTo(0, 0);
+        this.showError = false;
       }
     },
     addNewAccount: function () {
-      this.$http.post("/account/register",this.registerRequest)
+      this.$http.post("/account/register", this.registerRequest)
           .then(response => {
             console.log(response.status);
             this.toggleLogInWindow();
           })
-          .catch(error => alert(error.response.data.toString))
+          .catch(error => {
+            this.errorMessage = error.response.data.title + error.response.data.detail
+            this.showError = true;
+          })
     },
-    logIn:function(){
-      this.$http.post("/account/login",this.logInRequest)
-          .then(response =>{
-            sessionStorage.setItem("userId",response.data.userId);
+    logIn: function () {
+      this.$http.post("/account/login", this.logInRequest)
+          .then(response => {
+            sessionStorage.setItem("userId", response.data.userId);
             sessionStorage.setItem("roleId", response.data.roleId)
             router.push("/main")
           })
-          .catch(error => console.log(error.response.data))
+          .catch(error => {
+            this.errorMessage = error.response.data.title + error.response.data.detail
+            this.showError = true;
+          })
     }
   }
 }
@@ -194,5 +209,8 @@ button {
   width: 70%;
 }
 
+#errorMessage {
+  text-align: center;
+}
 
 </style>

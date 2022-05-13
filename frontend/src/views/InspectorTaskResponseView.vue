@@ -42,10 +42,16 @@
       </div>
     </div>
   </div>
+  <div class="submitRow">
+  <button type="button" class="btn btn-danger btn-lg" v-on:click="declineResponse">Keeldu</button>
+  <button type="button" class="btn btn-primary btn-lg" v-on:click="acceptResponse">Kinnita</button>
+  </div>
 </div>
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "InspectorTaskResponseView",
   data:function (){
@@ -98,7 +104,31 @@ export default {
         this.taskResponsePicture = response.data;
       })
       .catch(error=>console.log(error.response.data))
+    },
+    acceptResponse:function(){
+      this.$http.put("/response/task/done",null, {
+          params:{
+            taskId:sessionStorage.getItem("taskId")
+          }
+      }).then()
+      .catch(error=>{
+        console.log(error.response.data)
+      })
+      router.push("/inspector/alltasks")
+    },
+    declineResponse:function(){
+      this.$http.delete("/response/delete", {
+        params:{
+          taskId:sessionStorage.getItem("taskId")
+        }
+      })
+      .then()
+      .catch(error=>{
+        console.log(error.response.data)
+      })
+      router.push("/inspector/alltasks")
     }
+
   },
   mounted() {
     this.getTaskDescription();

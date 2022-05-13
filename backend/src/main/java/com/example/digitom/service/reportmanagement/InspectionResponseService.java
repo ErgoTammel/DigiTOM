@@ -64,8 +64,9 @@ public class InspectionResponseService {
         taskService.changeTaskStatus(taskId);
     }
 
-    public void deleteTaskResponse(Integer responseId) {
-        taskResponseService.deleteTaskResponse(responseId);
+    public void deleteTaskResponse(Integer taskId) {
+        taskResponsePictureService.deleteTaskResponsePicture(taskId);
+        taskResponseService.deleteTaskResponse(taskId);
     }
 
     public byte[] getTaskResponsePicture(Integer taskId) {
