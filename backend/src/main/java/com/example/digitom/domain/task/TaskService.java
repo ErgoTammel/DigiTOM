@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -84,6 +85,8 @@ public class TaskService {
                 responses.add(taskOverviewResponse);
             }
         }
+        Comparator<TaskOverviewResponse> sortedResponses = (c1, c2) -> Math.toIntExact(c2.getTaskId().compareTo(c1.getTaskId()));
+        responses.sort(sortedResponses);
         return responses;
 
     }

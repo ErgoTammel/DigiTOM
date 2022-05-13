@@ -34,4 +34,10 @@ public class TaskResponseService {
         TaskResponse taskResponse = taskResponseRepository.findById(responseId).get();
         taskResponseRepository.delete(taskResponse);
     }
+
+
+    public Boolean existsByTaskId(Integer taskId) {
+       return taskResponseRepository.existsByTaskId(taskId);
+
+    }
 }
