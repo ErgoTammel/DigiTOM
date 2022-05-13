@@ -30,4 +30,10 @@ public class TaskResponsePictureService {
         TaskResponsePicture taskResponsePicture = taskResponsePictureRepository.findByTaskResponse_Id(id).get();
         return taskResponsePicture.getBase64();
     }
+
+    public byte[] getTaskResponse(Integer taskId) {
+        TaskResponsePicture taskResponsePicture = taskResponsePictureRepository.findByTaskId(taskId);
+        return taskResponsePicture.getBase64();
+    }
 }
+

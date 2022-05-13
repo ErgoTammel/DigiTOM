@@ -4,6 +4,8 @@ import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import com.example.digitom.domain.taskresponse.TaskResponseService;
+import com.example.digitom.domain.taskresponsepicture.TaskResponsePicture;
+import com.example.digitom.domain.taskresponsepicture.TaskResponsePictureService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,9 +20,11 @@ public class InspectionResponseService {
     private TaskService taskService;
     @Resource
     private ReportService reportService;
+    @Resource
+    private TaskResponsePictureService taskResponsePictureService;
 
 
-    public void  addTaskResponse(TaskResponseRequest taskResponseRequest) {
+    public void addTaskResponse(TaskResponseRequest taskResponseRequest) {
         taskResponseService.addTaskResponse(taskResponseRequest);
     }
 
@@ -41,7 +45,7 @@ public class InspectionResponseService {
     }
 
     public List<ReportResponse> getLastReports(Integer userId) {
-       return reportService.getLastReports(userId);
+        return reportService.getLastReports(userId);
     }
 
     public TaskResponseDto getTaskResponseInformation(Integer taskId) {
@@ -53,10 +57,18 @@ public class InspectionResponseService {
     }
 
     public List<ReportResponse> getInspectorLastReports(Integer inspectorId) {
-       return reportService.getInspectorReports(inspectorId);
+        return reportService.getInspectorReports(inspectorId);
     }
 
     public void changeTaskStatus(Integer taskId) {
         taskService.changeTaskStatus(taskId);
+    }
+
+    public void deleteTaskResponse(Integer responseId) {
+        taskResponseService.deleteTaskResponse(responseId);
+    }
+
+    public byte[] getTaskResponse(Integer taskId) {
+        return taskResponsePictureService.getTaskResponse(taskId);
     }
 }

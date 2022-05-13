@@ -29,4 +29,9 @@ public class TaskResponseService {
     public TaskResponse findTaskResponseByTaskId(Integer taskId) {
         return taskResponseRepository.findTaskResponseByTaskId(taskId);
     }
+
+    public void deleteTaskResponse (Integer responseId ) {
+        TaskResponse taskResponse = taskResponseRepository.findById(responseId).get();
+        taskResponseRepository.delete(taskResponse);
+    }
 }
