@@ -1,4 +1,4 @@
-package com.example.digitom.service.reportmanagement;
+package com.example.digitom.service.account.reportmanagement;
 
 import lombok.Data;
 

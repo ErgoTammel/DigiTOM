@@ -1,10 +1,9 @@
-package com.example.digitom.service.reportmanagement;
+package com.example.digitom.service.account.reportmanagement;
 
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import com.example.digitom.domain.taskresponse.TaskResponseService;
-import com.example.digitom.domain.taskresponsepicture.TaskResponsePicture;
 import com.example.digitom.domain.taskresponsepicture.TaskResponsePictureService;
 import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;

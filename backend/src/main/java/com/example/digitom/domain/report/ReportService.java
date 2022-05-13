@@ -10,8 +10,8 @@ import com.example.digitom.domain.incident.IncidentService;
 import com.example.digitom.domain.reportpicture.ReportPictureService;
 import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.service.inspection.ReportResultResponse;
-import com.example.digitom.service.reportmanagement.FindReportRequest;
-import com.example.digitom.service.reportmanagement.ReportResponse;
+import com.example.digitom.service.account.reportmanagement.FindReportRequest;
+import com.example.digitom.service.account.reportmanagement.ReportResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -64,19 +64,14 @@ public class ReportService {
         reportRepository.deleteById(reportId);
     }
 
-    public ReportResultResponse getReportResult(Integer reportId) {
-        ReportResultResponse result = new ReportResultResponse();
-        result.setSafeSum(incidentService.countIncidents(reportId, true));
-        result.setNotSafeSum(incidentService.countIncidents(reportId, false));
-        Integer x = result.getSafeSum();
-        Integer y = result.getNotSafeSum();
-        Double tomResult = (double) x / (x + y) * 100;
-        result.setTom(BigDecimal.valueOf(tomResult));
-        BigDecimal resultTom = result.getTom();
-        Report report = reportRepository.findById(reportId).get();
-        report.setTom(resultTom);
-        reportRepository.save(report);
-        return result;
+    public ReportResultResponse getReportResponse(Integer reportId) {
+        ReportResultResponse response = new ReportResultResponse();
+        response.setSafeSum(incidentService.countIncidents(reportId, true));
+        response.setNotSafeSum(incidentService.countIncidents(reportId, false));
+        BigDecimal tomResult = calculateAndUpdateReport(reportId, response);
+        response.setTom(tomResult);
+        return response;
+
 
     }
 
@@ -137,4 +132,24 @@ public class ReportService {
     public List<Report> getReportsByInspectorId(Integer userId) {
         return reportRepository.getReportsByInspectorId(userId);
     }
+
+
+    private BigDecimal calculateAndUpdateReport(Integer reportId, ReportResultResponse result) {
+        BigDecimal tomResult = calculateTomResult(result);
+        updateReportTomResult(reportId, tomResult);
+        return tomResult;
+    }
+
+    private void updateReportTomResult(Integer reportId, BigDecimal tomResult) {
+        Report report = reportRepository.findById(reportId).get();
+        report.setTom(tomResult);
+        reportRepository.save(report);
+    }
+
+    private BigDecimal calculateTomResult(ReportResultResponse result) {
+        Integer safeSum = result.getSafeSum();
+        Integer notSafeSum = result.getNotSafeSum();
+        return BigDecimal.valueOf((double) safeSum / (safeSum + notSafeSum) * 100);
+    }
+
 }

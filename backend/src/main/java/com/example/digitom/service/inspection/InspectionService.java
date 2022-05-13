@@ -97,7 +97,7 @@ public class InspectionService {
     }
 
     public ReportResultResponse getReportResult(Integer reportId) {
-        return reportService.getReportResult(reportId);
+        return reportService.getReportResponse(reportId);
     }
 
     public List<InspectorTasksResponse> getInspectorTasks(Integer userId) {
