@@ -39,6 +39,11 @@ public class AccountService {
         validationService.checkRegistrationFormCompletion(registrationRequest.getCompanyNumber());
         validationService.checkRegistrationFormCompletion(registrationRequest.getPhoneNumber());
         validationService.checkRegistrationFormCompletion(registrationRequest.getEmail());
+        String email = registrationRequest.getEmail();
+        boolean contains = email.contains("@");
+        validationService.checkEmailValidity(contains);
+        boolean containsDot = email.contains(".");
+        validationService.checkEmailValidity(containsDot);
         validationService.checkRegistrationFormCompletion(registrationRequest.getPassword());
         validationService.checkRegistrationFormCompletion(registrationRequest.getRoleName());
         Boolean exists = userService.existsByEmail(registrationRequest.getEmail());
