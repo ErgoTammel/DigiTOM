@@ -1,4 +1,4 @@
-package com.example.digitom.service.account.inspection;
+package com.example.digitom.service.inspection;
 
 import com.example.digitom.domain.companyconstructionsite.CompanyConstructionSiteService;
 import com.example.digitom.domain.companyuser.CompanyUserService;

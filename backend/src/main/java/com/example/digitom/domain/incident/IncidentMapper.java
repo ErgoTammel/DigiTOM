@@ -1,6 +1,6 @@
 package com.example.digitom.domain.incident;
 
-import com.example.digitom.service.account.inspection.IncidentRequest;
+import com.example.digitom.service.inspection.IncidentRequest;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
