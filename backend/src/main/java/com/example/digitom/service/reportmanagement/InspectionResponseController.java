@@ -74,5 +74,16 @@ public class InspectionResponseController {
         inspectionResponseService.changeTaskStatus(taskId);
     }
 
+    @DeleteMapping("/delete")
+    @Operation(summary = "Delete task response")
+    public void deleteTaskResponse (@RequestParam Integer taskId) {
+        inspectionResponseService.deleteTaskResponse(taskId);
+    }
+
+    @GetMapping("/taskresponse")
+    @Operation(summary = "Get task response by task ID")
+    public byte[] getTaskResponse(@RequestParam Integer taskId) {
+       return inspectionResponseService.getTaskResponse(taskId);
+    }
 
 }

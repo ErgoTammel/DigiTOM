@@ -17,6 +17,7 @@ public class ValidationService {
     public static final String NO_DESCRIPTION = "Kirjeldus puudub";
     public static final String DEADLINE_NOT_EXISTS = "Tähtaeg puudub";
     public static final String FORM_NOT_FILLED = "Väli jäi täitmata";
+    public static final String EMAIL_NOT_VALID = "Email on ebakorrektne";
 
 
     public void emailAlreadyExists(String email, Boolean exists) {
@@ -60,5 +61,12 @@ public class ValidationService {
             throw new DataNotFoundException(FORM_NOT_FILLED, "Palun täida kõik väljad!");
         }
     }
+
+    public void checkEmailValidity(Boolean contains) {
+        if (!contains) {
+            throw new DataNotFoundException(EMAIL_NOT_VALID, "Sisesta õige email!");
+        }
+    }
+
 
 }
