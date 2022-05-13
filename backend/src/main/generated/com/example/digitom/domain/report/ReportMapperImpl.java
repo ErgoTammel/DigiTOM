@@ -1,8 +1,8 @@
 package com.example.digitom.domain.report;
 
 import com.example.digitom.domain.constructionsite.ConstructionSite;
-import com.example.digitom.service.inspection.reportmanagement.FindReportRequest;
-import com.example.digitom.service.inspection.reportmanagement.ReportResponse;
+import com.example.digitom.service.reportmanagement.FindReportRequest;
+import com.example.digitom.service.reportmanagement.ReportResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-12T11:51:52+0300",
+    date = "2022-05-12T15:15:53+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.14.1 (Amazon.com Inc.)"
 )
 @Component
