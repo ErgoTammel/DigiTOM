@@ -1,4 +1,4 @@
-package com.example.digitom.service.account.reportmanagement;
+package com.example.digitom.service.reportmanagement;
 
 import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import io.swagger.v3.oas.annotations.Operation;

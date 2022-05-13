@@ -1,7 +1,6 @@
 package com.example.digitom.domain.taskresponse;
 
-import com.example.digitom.domain.taskresponsepicture.TaskResponsePicture;
-import com.example.digitom.service.reportmanagement.TaskResponseRequest;
+import com.example.digitom.service.account.reportmanagement.TaskResponseRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

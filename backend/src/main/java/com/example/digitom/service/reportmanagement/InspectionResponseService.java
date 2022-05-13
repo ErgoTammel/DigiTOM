@@ -1,4 +1,4 @@
-package com.example.digitom.service.account.reportmanagement;
+package com.example.digitom.service.reportmanagement;
 
 import com.example.digitom.domain.report.ReportService;
 import com.example.digitom.domain.task.TaskService;
