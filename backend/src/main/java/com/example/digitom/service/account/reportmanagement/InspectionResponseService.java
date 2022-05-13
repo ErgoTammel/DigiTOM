@@ -5,7 +5,6 @@ import com.example.digitom.domain.task.TaskService;
 import com.example.digitom.domain.taskresponse.TaskResponseDto;
 import com.example.digitom.domain.taskresponse.TaskResponseService;
 import com.example.digitom.domain.taskresponsepicture.TaskResponsePictureService;
-import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,8 +21,6 @@ public class InspectionResponseService {
     private ReportService reportService;
     @Resource
     private TaskResponsePictureService taskResponsePictureService;
-    @Resource
-    private ValidationService validationService;
 
 
     public void addTaskResponse(TaskResponseRequest taskResponseRequest) {
@@ -50,7 +47,7 @@ public class InspectionResponseService {
         return reportService.getLastReports(userId);
     }
 
-    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+    public String getTaskResponseInformation(Integer taskId) {
         return taskResponseService.getTaskResponseInformation(taskId);
     }
 
@@ -66,13 +63,12 @@ public class InspectionResponseService {
         taskService.changeTaskStatus(taskId);
     }
 
-    public void deleteTaskResponse(Integer responseId) {
-        taskResponseService.deleteTaskResponse(responseId);
+    public void deleteTaskResponse(Integer taskId) {
+        taskResponsePictureService.deleteTaskResponsePicture(taskId);
+        taskResponseService.deleteTaskResponse(taskId);
     }
 
-    public byte[] getTaskResponse(Integer taskId) {
-        Boolean responseExists = taskResponseService.existsByTaskId(taskId);
-        validationService.taskResponseExists(responseExists);
-        return taskResponsePictureService.getTaskResponse(taskId);
+    public byte[] getTaskResponsePicture(Integer taskId) {
+        return taskResponsePictureService.getTaskResponsePicture(taskId);
     }
 }

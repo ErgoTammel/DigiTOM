@@ -11,6 +11,9 @@ public interface TaskResponsePictureRepository extends JpaRepository<TaskRespons
     @Query("select t from TaskResponsePicture t where t.taskResponse.task.id = ?1")
     TaskResponsePicture findByTaskId(Integer id);
 
+    @Query("select t from TaskResponsePicture t where t.taskResponse.id = ?1")
+    TaskResponsePicture findByTaskResponseId(Integer id);
+
 
 
 

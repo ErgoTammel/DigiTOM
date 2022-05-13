@@ -1,6 +1,7 @@
 package com.example.digitom.domain.taskresponse;
 
-import com.example.digitom.service.account.reportmanagement.TaskResponseRequest;
+import com.example.digitom.domain.taskresponsepicture.TaskResponsePicture;
+import com.example.digitom.service.reportmanagement.TaskResponseRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,18 +21,17 @@ public class TaskResponseService {
         taskResponseRepository.save(taskResponse);
     }
 
-    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+    public String getTaskResponseInformation(Integer taskId) {
         TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
-        TaskResponseDto taskResponseDto = taskResponseMapper.toDto(taskResponse);
-        return taskResponseDto;
+        return taskResponse.getDescription();
     }
 
     public TaskResponse findTaskResponseByTaskId(Integer taskId) {
         return taskResponseRepository.findTaskResponseByTaskId(taskId);
     }
 
-    public void deleteTaskResponse (Integer responseId ) {
-        TaskResponse taskResponse = taskResponseRepository.findById(responseId).get();
+    public void deleteTaskResponse (Integer taskId ) {
+        TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
         taskResponseRepository.delete(taskResponse);
     }
 
