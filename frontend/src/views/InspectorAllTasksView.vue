@@ -11,6 +11,7 @@
       <th style="width: 49%">Kirjeldus</th>
       <th style="width: 15%">Tähtaeg</th>
       <th style="width: 120px"></th>
+      <th style="width: 120px"></th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
       <td>{{ task.deadline }}</td>
       <td><button v-on:click="getTaskPicture(task.taskId)"  type="button" data-toggle="modal" data-target="#exampleModal">
         <i class="fa-regular fa-image"></i></button></td>
+      <td><i id="arrow" class="fa-solid fa-arrow-right" v-on:click="viewTaskResponse(task.taskId)"></i></td>
     </tr>
     </tbody>
   </div>
@@ -83,6 +85,10 @@ export default {
             this.taskPicture=response.data
           })
           .catch(error=>console.log(error.response.data))
+    },
+    viewTaskResponse:function(id){
+      sessionStorage.setItem("taskId", id)
+      router.push("/inspector/alltasks/view")
     }
   },
   mounted() {
@@ -147,5 +153,8 @@ i{
 td button{
   border: 0;
   background-color: white;
+}
+#arrow{
+  margin-top: 1.5vh;
 }
 </style>

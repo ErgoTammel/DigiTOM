@@ -20,10 +20,9 @@ public class TaskResponseService {
         taskResponseRepository.save(taskResponse);
     }
 
-    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+    public String getTaskResponseInformation(Integer taskId) {
         TaskResponse taskResponse = taskResponseRepository.findTaskResponseByTaskId(taskId);
-        TaskResponseDto taskResponseDto = taskResponseMapper.toDto(taskResponse);
-        return taskResponseDto;
+        return taskResponse.getDescription();
     }
 
     public TaskResponse findTaskResponseByTaskId(Integer taskId) {

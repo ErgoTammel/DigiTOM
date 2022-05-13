@@ -64,7 +64,7 @@ public class InspectionResponseController {
 
     @GetMapping("/task/response")
     @Operation(summary = "Get task response information")
-    public TaskResponseDto getTaskResponseInformation(@RequestParam Integer taskId) {
+    public String getTaskResponseInformation(@RequestParam Integer taskId) {
         return inspectionResponseService.getTaskResponseInformation(taskId);
     }
 

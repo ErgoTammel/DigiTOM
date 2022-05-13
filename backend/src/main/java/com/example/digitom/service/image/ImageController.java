@@ -29,4 +29,5 @@ public class ImageController {
     public void addTaskResponsePicture(@RequestBody TaskPictureRequest taskPictureRequest) {
         imageService.addNewTaskResponsePicture(taskPictureRequest);
     }
+
 }

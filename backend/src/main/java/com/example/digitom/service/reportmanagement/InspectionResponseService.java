@@ -44,7 +44,7 @@ public class InspectionResponseService {
        return reportService.getLastReports(userId);
     }
 
-    public TaskResponseDto getTaskResponseInformation(Integer taskId) {
+    public String getTaskResponseInformation(Integer taskId) {
         return taskResponseService.getTaskResponseInformation(taskId);
     }
 
