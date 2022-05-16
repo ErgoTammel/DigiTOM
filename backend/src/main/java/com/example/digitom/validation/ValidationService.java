@@ -81,4 +81,16 @@ public class ValidationService {
             throw new BusinessException("Sinu ülevaatus on tühi! ", " Edasi liikumiseks lisa kontrollpunktid!");
         }
     }
+
+    public void isTaskResponseValid(Boolean isEmpty) {
+        if(isEmpty){
+            throw new BusinessException("Sinu vastus on tühi! ", "Edasi liikumiseks sisesta vastus!");
+        }
+    }
+
+    public void ifTaskResponseNotExists(Boolean exists) {
+        if(exists){
+            throw new BusinessException("Vastus on juba antud! ", "Oota inspektori kinnitust.");
+        }
+    }
 }

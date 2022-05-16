@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
+    <h3 id="logOut" v-on:click="logOut" >Logi välja</h3>
     <div id="window">
       <div v-if="roleId===2">
         <div class="windowHeader">
@@ -13,7 +17,7 @@
             </button>
           </div>
           <div class="col">
-            <button type="button" class="btn btn-dark btn-lg" v-on:click="allReports">Kuva raportite otsing</button>
+            <button type="button" class="btn btn-dark btn-lg" v-on:click="allReports">Kuva kõik raportid</button>
           </div>
           <div class="col">
             <button type="button" class="btn btn-dark btn-lg" v-on:click="allTasks">Kuva kinnitamata
@@ -56,7 +60,7 @@
           <tr>
             <th style="width: 15%">Objekt</th>
             <th style="width: 49%">Kirjeldus</th>
-            <th style="width: 15%">Vastutaja</th>
+            <th style="width: 15%">Peatöövõtja</th>
             <th style="width: 15%">Tähtaeg</th>
             <th style="width: 15%"></th>
             <th style="width: 15%"></th>
@@ -116,7 +120,9 @@ export default {
       roleId: Number(sessionStorage.getItem("roleId")),
       userTaskList: {},
       taskPicture: {},
-      reportList: {}
+      reportList: {},
+      showError:false,
+      errorMessage:""
     }
   },
   methods: {
@@ -160,9 +166,13 @@ export default {
         }
       })
           .then(response => {
+            this.showError=false;
             this.taskPicture = response.data
           })
-          .catch(error => console.log(error.response.data))
+          .catch(error => {
+            this.showError=false;
+            console.log(error.response.data)
+          })
     },
     getReportList: function () {
       this.$http.get("/response/report/last", {
@@ -178,8 +188,25 @@ export default {
           })
     },
     newTaskResponse: function (id) {
-      sessionStorage.setItem("taskId", id)
-      router.push("/taskresponse/new")
+      this.$http.get("/response/notexists",{
+        params:{
+          taskId:id
+        }
+      })
+      .then(response=>{
+        this.showError=false;
+        sessionStorage.setItem("taskId", id)
+        router.push("/taskresponse/new")
+      })
+      .catch(error=>{
+        this.errorMessage = error.response.data.title + error.response.data.detail
+        this.showError=true;
+      })
+    },
+    logOut:function(){
+      this.showError=false;
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   mounted() {
@@ -301,6 +328,17 @@ td button {
 
 #reportTable th {
   border: 1px solid grey;
+}
+#logOut{
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding:5px;
+  font-size: 1.2em;
+  border: 2px solid black;
+}
+#errorMessage {
+  text-align: center;
 }
 
 </style>

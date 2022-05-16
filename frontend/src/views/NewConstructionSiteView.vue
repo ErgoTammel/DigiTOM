@@ -3,6 +3,7 @@
     <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
       {{ errorMessage }}
     </div>
+    <h3 id="logOut" v-on:click="logOut">Logi välja</h3>
     <div id="firstNewConstructionSiteWindow" v-if="secondConstructionSite">
       <h2>Sisesta uue objekti andmed.</h2>
       <div class="col">
@@ -138,6 +139,10 @@ export default {
         this.subContractorsList = response.data;
       }).catch(error => console.log(error.response.data))
 
+    },
+    logOut:function(){
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   async mounted() {
@@ -252,6 +257,14 @@ h3 i {
 }
 #errorMessage {
   text-align: center;
+}
+#logOut{
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding:5px;
+  font-size: 1.2em;
+  border: 2px solid black;
 }
 
 </style>

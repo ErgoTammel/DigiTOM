@@ -1,5 +1,9 @@
 <template>
-<div>
+  <div>
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
+  <h3 id="logOut" v-on:click="logOut" >Logi välja</h3>
 <div id="window">
 <h2>Kõik kinnitamata korrastusülesanded</h2>
 
@@ -43,8 +47,8 @@
   <div class="row" id="taskSubmitRow">
     <button type="button" class="btn btn-dark btn-lg" v-on:click="returnMain">Tagasi</button>
   </div>
-</div>
-</div>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -55,7 +59,9 @@ export default {
   data:function(){
     return {
       taskList:{},
-      taskPicture:{}
+      taskPicture:{},
+      errorMessage:"",
+      showError:false
     }
   },
   methods:{
@@ -74,6 +80,7 @@ export default {
     },
     returnMain:function(){
       router.push("/main")
+      this.showError = false;
     },
     getTaskPicture:function(getTaskId){
       this.$http.get("/image/task", {
@@ -85,10 +92,27 @@ export default {
             this.taskPicture=response.data
           })
           .catch(error=>console.log(error.response.data))
+      this.showError = false;
     },
     viewTaskResponse:function(id){
-      sessionStorage.setItem("taskId", id)
-      router.push("/inspector/alltasks/view")
+      this.$http.get("/response/task/exists",{
+        params:{
+          taskId:id
+        }
+      }).then(response=>{
+        sessionStorage.setItem("taskId", id)
+        router.push("/inspector/alltasks/view")
+        this.showError = false;
+      })
+      .catch(error=>{
+        this.errorMessage = error.response.data.title + error.response.data.detail
+        this.showError = true;
+      })
+    },
+    logOut:function(){
+      this.showError = false;
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   mounted() {
@@ -137,7 +161,7 @@ h2 {
   border: 1px solid grey;
 }
 #taskSubmitRow {
-  width: 54%;
+  width: 40%;
   margin-left: 70%;
 }
 button {
@@ -157,4 +181,17 @@ td button{
 #arrow{
   margin-top: 1.5vh;
 }
+#logOut{
+
+  float: right !important;
+  margin-top: 3vh !important;
+  margin-right: 3vw !important;
+  padding:5px !important;
+  font-size: 1.2em !important;
+  border: 2px solid black !important;
+}
+#errorMessage {
+  text-align: center;
+}
+
 </style>

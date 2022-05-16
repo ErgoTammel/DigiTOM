@@ -1,6 +1,7 @@
 package com.example.digitom.domain.taskresponse;
 
 import com.example.digitom.service.reportmanagement.TaskResponseRequest;
+import com.example.digitom.validation.ValidationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,6 +14,8 @@ public class TaskResponseService {
     private TaskResponseMapper taskResponseMapper;
     @Resource
     private TaskResponseRepository taskResponseRepository;
+    @Resource
+    private ValidationService validationService;
 
     public void addTaskResponse(TaskResponseRequest taskResponseRequest) {
         TaskResponse taskResponse = taskResponseMapper.requestToTaskResponse(taskResponseRequest);
@@ -38,5 +41,20 @@ public class TaskResponseService {
     public Boolean existsByTaskId(Integer taskId) {
        return taskResponseRepository.existsByTaskId(taskId);
 
+    }
+
+    public void taskResponseExists(Integer taskId) {
+        Boolean exists = taskResponseRepository.existsByTaskId(taskId);
+        validationService.taskResponseExists(exists);
+    }
+
+    public void isTaskResponseValid(String description) {
+        Boolean isEmpty = description.isEmpty();
+        validationService.isTaskResponseValid(isEmpty);
+    }
+
+    public void ifTaskResponseNotExists(Integer taskId) {
+        Boolean exists = taskResponseRepository.existsByTaskId(taskId);
+        validationService.ifTaskResponseNotExists(exists);
     }
 }

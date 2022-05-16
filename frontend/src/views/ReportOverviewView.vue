@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 id="logOut" v-on:click="logOut">Logi välja</h3>
     <div class="window">
       <h2 class="uppercase">Ülevaatus ehitusobjektil {{ constructionSiteInfo.siteName }} </h2>
       <h3><strong>Kuupäev:</strong> {{ constructionSiteInfo.reportDate }}</h3>
@@ -91,6 +92,10 @@ export default {
       sessionStorage.removeItem("constructionSiteId");
       sessionStorage.removeItem("incidentId");
       router.push('/main')
+    },
+    logOut:function(){
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   mounted() {
@@ -168,5 +173,13 @@ h3 {
 .submitRow {
   margin-top: 5vh;
   padding-left: 39vw;
+}
+#logOut{
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding:5px;
+  font-size: 1.2em;
+  border: 2px solid black;
 }
 </style>

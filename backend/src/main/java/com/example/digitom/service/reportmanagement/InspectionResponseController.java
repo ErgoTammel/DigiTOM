@@ -76,14 +76,31 @@ public class InspectionResponseController {
 
     @DeleteMapping("/delete")
     @Operation(summary = "Delete task response")
-    public void deleteTaskResponse (@RequestParam Integer taskId) {
+    public void deleteTaskResponse(@RequestParam Integer taskId) {
         inspectionResponseService.deleteTaskResponse(taskId);
     }
 
     @GetMapping("/taskresponse/image")
     @Operation(summary = "Get task response picture by task ID")
     public byte[] getTaskResponsePicture(@RequestParam Integer taskId) {
-       return inspectionResponseService.getTaskResponsePicture(taskId);
+        return inspectionResponseService.getTaskResponsePicture(taskId);
     }
 
+    @GetMapping("/task/exists")
+    @Operation(summary = "Check if task response exists")
+    public void taskResponseExists(@RequestParam Integer taskId) {
+        inspectionResponseService.taskResponseExists(taskId);
+    }
+
+    @GetMapping("/task/valid")
+    @Operation(summary = "Check if task response is valid.")
+    public void isTaskResponseValid(String description) {
+        inspectionResponseService.isTaskResponseValid(description);
+    }
+
+    @GetMapping("/notexists")
+    @Operation(summary = "Checks if there is no task response.")
+    public void ifTaskResponseNotExists(@RequestParam Integer taskId){
+        inspectionResponseService.ifTaskResponseNotExists(taskId);
+    }
 }

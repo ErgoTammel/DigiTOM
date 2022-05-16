@@ -71,4 +71,16 @@ public class InspectionResponseService {
     public byte[] getTaskResponsePicture(Integer taskId) {
         return taskResponsePictureService.getTaskResponsePicture(taskId);
     }
+
+    public void taskResponseExists(Integer taskId) {
+        taskResponseService.taskResponseExists(taskId);
+    }
+
+    public void isTaskResponseValid(String description) {
+        taskResponseService.isTaskResponseValid(description);
+    }
+
+    public void ifTaskResponseNotExists(Integer taskId) {
+        taskResponseService.ifTaskResponseNotExists(taskId);
+    }
 }

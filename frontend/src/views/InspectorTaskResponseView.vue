@@ -1,52 +1,55 @@
 <template>
-<div id="window">
-  <h2>Korrastusülesanne</h2>
+  <div>
+    <h3 id="logOut" v-on:click="logOut">Logi välja</h3>
+    <div id="window">
+      <h2>Korrastusülesanne</h2>
 
-  <h4 style="word-break: break-word; margin-right: 6.2%;">{{taskDescription}}</h4>
-  <button class="pictureButton" v-on:click="getTaskPicture()" type="button" data-toggle="modal"
-          data-target="#exampleModal">
-    <i class="fa-regular fa-image"></i></button>
+      <h4 style="word-break: break-word; margin-right: 6.2%;">{{ taskDescription }}</h4>
+      <button class="pictureButton" v-on:click="getTaskPicture()" type="button" data-toggle="modal"
+              data-target="#exampleModal">
+        <i class="fa-regular fa-image"></i></button>
 
-  <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog"
-       aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content" id="modalWindow">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" id="modalWindow">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img :src="taskPicture" class="img-fluid">
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          <img :src="taskPicture" class="img-fluid">
+      </div>
+      <h2>Korrastusülesande vastus</h2>
+      <h4 style="word-break: break-word; margin-right: 6.2%;">{{ responseDescription }}</h4>
+      <button class="pictureButton" v-on:click="getTaskResponsePicture()" type="button" data-toggle="modal"
+              data-target="#exampleModal2">
+        <i class="fa-regular fa-image"></i></button>
+      <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal2" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" id="modalWindow2">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img :src="taskResponsePicture" class="img-fluid">
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="submitRow">
+        <button type="button" class="btn btn-danger btn-lg" v-on:click="declineResponse">Keeldu</button>
+        <button type="button" class="btn btn-primary btn-lg" v-on:click="acceptResponse">Kinnita</button>
       </div>
     </div>
   </div>
-  <h2>Korrastusülesande vastus</h2>
-  <h4 style="word-break: break-word; margin-right: 6.2%;">{{responseDescription}}</h4>
-  <button class="pictureButton" v-on:click="getTaskResponsePicture()" type="button" data-toggle="modal"
-          data-target="#exampleModal2">
-    <i class="fa-regular fa-image"></i></button>
-  <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal2" tabindex="-1" role="dialog"
-       aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content" id="modalWindow2">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img :src="taskResponsePicture" class="img-fluid">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="submitRow">
-  <button type="button" class="btn btn-danger btn-lg" v-on:click="declineResponse">Keeldu</button>
-  <button type="button" class="btn btn-primary btn-lg" v-on:click="acceptResponse">Kinnita</button>
-  </div>
-</div>
 </template>
 
 <script>
@@ -54,15 +57,15 @@ import router from "@/router";
 
 export default {
   name: "InspectorTaskResponseView",
-  data:function (){
-    return{
-      taskPicture:{},
-      taskResponsePicture:{},
-      taskDescription:"",
-      responseDescription:""
+  data: function () {
+    return {
+      taskPicture: {},
+      taskResponsePicture: {},
+      taskDescription: "",
+      responseDescription: ""
     }
   },
-  methods:{
+  methods: {
     getTaskDescription: function () {
       this.$http.get("/response/show/description", {
         params: {
@@ -83,50 +86,54 @@ export default {
           })
           .catch(error => console.log(error.response.data))
     },
-    getTaskResponse:function (){
+    getTaskResponse: function () {
       this.$http.get("response/task/response", {
-        params:{
-          taskId:sessionStorage.getItem("taskId")
+        params: {
+          taskId: sessionStorage.getItem("taskId")
         }
       })
-      .then(response=>{
-        this.responseDescription=response.data;
-      })
-      .catch(error=>console.log(error.response.data))
+          .then(response => {
+            this.responseDescription = response.data;
+          })
+          .catch(error => console.log(error.response.data))
     },
-    getTaskResponsePicture:function (){
+    getTaskResponsePicture: function () {
       this.$http.get("/response/taskresponse/image", {
-        params:{
-          taskId:sessionStorage.getItem("taskId")
+        params: {
+          taskId: sessionStorage.getItem("taskId")
         }
       })
-      .then(response=>{
-        this.taskResponsePicture = response.data;
-      })
-      .catch(error=>console.log(error.response.data))
+          .then(response => {
+            this.taskResponsePicture = response.data;
+          })
+          .catch(error => console.log(error.response.data))
     },
-    acceptResponse:function(){
-      this.$http.put("/response/task/done",null, {
-          params:{
-            taskId:sessionStorage.getItem("taskId")
-          }
+    acceptResponse: function () {
+      this.$http.put("/response/task/done", null, {
+        params: {
+          taskId: sessionStorage.getItem("taskId")
+        }
       }).then()
-      .catch(error=>{
-        console.log(error.response.data)
-      })
+          .catch(error => {
+            console.log(error.response.data)
+          })
       router.push("/inspector/alltasks")
     },
-    declineResponse:function(){
+    declineResponse: function () {
       this.$http.delete("/response/delete", {
-        params:{
-          taskId:sessionStorage.getItem("taskId")
+        params: {
+          taskId: sessionStorage.getItem("taskId")
         }
       })
-      .then()
-      .catch(error=>{
-        console.log(error.response.data)
-      })
+          .then()
+          .catch(error => {
+            console.log(error.response.data)
+          })
       router.push("/inspector/alltasks")
+    },
+    logOut: function () {
+      router.push("/");
+      sessionStorage.clear();
     }
 
   },
@@ -148,6 +155,7 @@ export default {
   transform: translate(-50%, 0);
   border: 2px solid black;
 }
+
 h2 {
   font-family: 'Akshar', sans-serif;
   color: white;
@@ -171,7 +179,8 @@ h4 {
   margin-left: 6.2%;
   margin-top: 2%;
 }
-i{
+
+i {
   font-size: 2em;
   margin-left: 7vh;
 }
@@ -211,5 +220,14 @@ label {
   margin-right: 3%;
   height: 3em;
   font-size: 1em;
+}
+
+#logOut {
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding: 5px;
+  font-size: 1.2em;
+  border: 2px solid black;
 }
 </style>

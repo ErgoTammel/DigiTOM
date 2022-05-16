@@ -1,5 +1,6 @@
 <template>
 <div>
+  <h3 id="logOut" v-on:click="logOut">Logi välja</h3>
   <div  id="window">
     <div id="windowHeader">
       <h2>Vali inspekteeritav ehitusobjekt või loo uus.</h2>
@@ -43,6 +44,10 @@ export default {
     newReport:function(id){
         sessionStorage.setItem("constructionSiteId", id)
         router.push('/report/new')
+    },
+    logOut:function(){
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   mounted() {
@@ -82,7 +87,14 @@ h2 {
   margin:2.6%;
   font-size: 1.7em;
 }
-
+#logOut{
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding:5px;
+  font-size: 1.2em;
+  border: 2px solid black;
+}
 
 
 </style>

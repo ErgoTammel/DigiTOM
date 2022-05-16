@@ -3,6 +3,7 @@
     <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
       {{ errorMessage }}
     </div>
+    <h3 id="logOut" v-on:click="logOut">Logi välja</h3>
     <div id="window" v-if="!newTaskWindow && !deleteTaskWindow">
       <h2 class="uppercase">Ülevaatus ehitusobjektil {{ constructionSiteInfo.siteName }} </h2>
       <h3><strong>Kuupäev:</strong> {{ constructionSiteInfo.reportDate }}</h3>
@@ -468,6 +469,10 @@ export default {
         this.errorMessage=error.response.data.title + error.response.data.detail;
         this.showError=true;
       })
+    },
+    logOut:function(){
+      router.push("/");
+      sessionStorage.clear();
     }
   },
   async mounted() {
@@ -670,5 +675,12 @@ select {
 #errorMessage {
   text-align: center;
 }
-
+#logOut{
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding:5px;
+  font-size: 1.2em;
+  border: 2px solid black;
+}
 </style>

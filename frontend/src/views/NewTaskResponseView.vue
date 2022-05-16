@@ -1,43 +1,48 @@
 <template>
-  <div id="window">
-    <h2>Korrastusülesanne</h2>
+  <div>
+    <div id="errorMessage" class="alert alert-danger" role="alert" v-if="showError">
+      {{ errorMessage }}
+    </div>
+    <div id="window">
+      <h2>Korrastusülesanne</h2>
 
-    <h4 style="word-break: break-word; margin-right: 6.2%;">{{ taskDescription }}</h4>
-    <button id="pictureButton" v-on:click="getTaskPicture()" type="button" data-toggle="modal"
-            data-target="#exampleModal">
-      <i class="fa-regular fa-image"></i></button>
+      <h4 style="word-break: break-word; margin-right: 6.2%;">{{ taskDescription }}</h4>
+      <button id="pictureButton" v-on:click="getTaskPicture()" type="button" data-toggle="modal"
+              data-target="#exampleModal">
+        <i class="fa-regular fa-image"></i></button>
 
-    <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content" id="modalWindow">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img :src="taskPicture" class="img-fluid">
+      <div data-backdrop="false" class="modal fade" data-focus="true" id="exampleModal" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" id="modalWindow">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img :src="taskPicture" class="img-fluid">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <h2>Sisesta korrastusülesande vastus</h2>
-    <div class="col">
-      <div class="row">
-        <label for="responseDescription"> Vastuse kirjeldus</label>
-        <textarea class="form-control" placeholder="Vastuse kirjeldus" id="responseDescription"
-                  v-model="newTaskResponseRequest.description"></textarea>
+      <h2>Sisesta korrastusülesande vastus</h2>
+      <div class="col">
+        <div class="row">
+          <label for="responseDescription"> Vastuse kirjeldus</label>
+          <textarea class="form-control" placeholder="Vastuse kirjeldus" id="responseDescription"
+                    v-model="newTaskResponseRequest.description"></textarea>
+        </div>
+        <div class="row">
+          <label for="taskImage">Sisesta korrastusest pilt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <input type="file" @change="handleImage" accept="image/x-png,image/jpeg" id="taskImage">
+        </div>
       </div>
-      <div class="row">
-        <label for="taskImage">Sisesta korrastusest pilt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="file" @change="handleImage" accept="image/x-png,image/jpeg" id="taskImage">
+      <div class="submitRow">
+        <button type="button" class="btn btn-secondary btn-lg" v-on:click="pushMain">Tagasi</button>
+        <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewTaskResponse">Kinnita</button>
       </div>
-    </div>
-    <div class="submitRow">
-      <button type="button" class="btn btn-secondary btn-lg" v-on:click="pushMain">Tagasi</button>
-      <button type="button" class="btn btn-primary btn-lg" v-on:click="addNewTaskResponse">Kinnita</button>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -54,7 +59,9 @@ export default {
         taskId: sessionStorage.getItem("taskId"),
         description: ""
       },
-      pictureData: {}
+      pictureData: {},
+      errorMessage:"",
+      showError:false
     }
   },
   methods: {
@@ -84,6 +91,7 @@ export default {
       reader.readAsDataURL(fileObject);
     },
     pushMain: function () {
+      this.showError=false;
       router.push("/main")
     },
     sendTaskDescription: function () {
@@ -103,10 +111,23 @@ export default {
             console.log(error.response.data)
           })
     },
-    addNewTaskResponse: async function () {
-      await this.sendTaskDescription();
-      this.sendTaskResponsePicture();
-      router.push("/main")
+    addNewTaskResponse: function () {
+      this.$http.get("/response/task/valid", {
+        params:{
+          description:this.newTaskResponseRequest.description
+        }
+      })
+      .then(async response => {
+        this.showError=false;
+        await this.sendTaskDescription();
+        this.sendTaskResponsePicture();
+        router.push("/main")
+      })
+      .catch(error=>{
+        this.errorMessage = error.response.data.title + error.response.data.detail
+        this.showError=true
+      })
+
     },
     getTaskDescription: function () {
       this.$http.get("/response/show/description", {
@@ -159,7 +180,8 @@ h4 {
   margin-left: 6.2%;
   margin-top: 2%;
 }
-i{
+
+i {
   font-size: 2em;
   margin-left: 7vh;
 }
@@ -201,4 +223,15 @@ label {
   font-size: 1em;
 }
 
+#logOut {
+  float: right;
+  margin-top: 3vh;
+  margin-right: 3vw;
+  padding: 5px;
+  font-size: 1.2em;
+  border: 2px solid black;
+}
+#errorMessage {
+  text-align: center;
+}
 </style>
